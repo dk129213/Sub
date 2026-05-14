@@ -511,35 +511,26 @@ function Visit({ t }) {
           </div>
 
           <div className="visit-map reveal">
-            <div className="map-canvas">
-              <svg viewBox="0 0 600 600" preserveAspectRatio="none" aria-hidden="true">
-                <defs>
-                  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(245,240,232,0.1)" strokeWidth="0.5"/>
-                  </pattern>
-                </defs>
-                <rect width="600" height="600" fill="url(#grid)" />
-                <path d="M 0 320 Q 150 280, 280 310 T 600 290 L 600 600 L 0 600 Z" fill="rgba(201,169,97,0.06)" stroke="rgba(201,169,97,0.4)" strokeWidth="1" />
-                <path d="M 80 200 Q 200 180, 320 220 T 540 240" fill="none" stroke="rgba(245,240,232,0.15)" strokeWidth="1" />
-                <path d="M 60 380 L 340 360 L 380 280 L 540 300" fill="none" stroke="rgba(245,240,232,0.18)" strokeWidth="1" strokeDasharray="3 4" />
-              </svg>
-              <div className="map-pin" aria-hidden="true"></div>
-            </div>
+            <iframe
+              className="map-frame"
+              src="https://maps.google.com/maps?q=%C5%A0etali%C5%A1te+dr.+Franje+Tu%C4%91mana+2A%2C+20207+%C5%BDupa+Dubrova%C4%8Dka&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              title="Sub Gourmet — Šetalište dr. Franje Tuđmana 2A, Župa Dubrovačka"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
             <div className="map-overlay-top">
-              <div className="mono" style={{color: 'rgba(245,240,232,0.55)'}}>
+              <div className="mono" style={{color: 'rgba(245,240,232,0.85)'}}>
                 <span style={{color: 'var(--gold)'}}>●</span> {t.visit.mapBay}
               </div>
-              <div className="map-place">{t.visit.mapPlaceA}<br/><em>{t.visit.mapPlaceEm}</em></div>
             </div>
-            <div className="map-overlay-bottom">
-              <div>
-                <div className="map-coords">K CENTAR · SUB CITY</div>
-                <div className="map-coords" style={{marginTop: 6}}>SREBRENO · {t.htmlLang === 'hr' ? 'HRVATSKA' : 'CROATIA'}</div>
-              </div>
-              <a href="https://maps.google.com/?q=Šetalište+dr.+Franje+Tuđmana+2A+Župa+Dubrovačka" target="_blank" rel="noreferrer" className="map-directions">
-                {t.visit.mapDirections} <span style={{fontSize: 14}}>↗</span>
-              </a>
-            </div>
+            <a
+              href="https://maps.google.com/?q=Šetalište+dr.+Franje+Tuđmana+2A+Župa+Dubrovačka"
+              target="_blank"
+              rel="noreferrer"
+              className="map-directions map-directions-float"
+            >
+              {t.visit.mapDirections} <span style={{fontSize: 14}}>↗</span>
+            </a>
           </div>
         </div>
       </div>

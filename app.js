@@ -712,77 +712,33 @@ function Visit({
     className: "value"
   }, "\u20AC10 \u2013 \u20AC15"))), /*#__PURE__*/React.createElement("div", {
     className: "visit-map reveal"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "map-canvas"
-  }, /*#__PURE__*/React.createElement("svg", {
-    viewBox: "0 0 600 600",
-    preserveAspectRatio: "none",
-    "aria-hidden": "true"
-  }, /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("pattern", {
-    id: "grid",
-    width: "40",
-    height: "40",
-    patternUnits: "userSpaceOnUse"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M 40 0 L 0 0 0 40",
-    fill: "none",
-    stroke: "rgba(245,240,232,0.1)",
-    strokeWidth: "0.5"
-  }))), /*#__PURE__*/React.createElement("rect", {
-    width: "600",
-    height: "600",
-    fill: "url(#grid)"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M 0 320 Q 150 280, 280 310 T 600 290 L 600 600 L 0 600 Z",
-    fill: "rgba(201,169,97,0.06)",
-    stroke: "rgba(201,169,97,0.4)",
-    strokeWidth: "1"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M 80 200 Q 200 180, 320 220 T 540 240",
-    fill: "none",
-    stroke: "rgba(245,240,232,0.15)",
-    strokeWidth: "1"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M 60 380 L 340 360 L 380 280 L 540 300",
-    fill: "none",
-    stroke: "rgba(245,240,232,0.18)",
-    strokeWidth: "1",
-    strokeDasharray: "3 4"
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "map-pin",
-    "aria-hidden": "true"
-  })), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("iframe", {
+    className: "map-frame",
+    src: "https://maps.google.com/maps?q=%C5%A0etali%C5%A1te+dr.+Franje+Tu%C4%91mana+2A%2C+20207+%C5%BDupa+Dubrova%C4%8Dka&t=&z=16&ie=UTF8&iwloc=&output=embed",
+    title: "Sub Gourmet \u2014 \u0160etali\u0161te dr. Franje Tu\u0111mana 2A, \u017Dupa Dubrova\u010Dka",
+    loading: "lazy",
+    referrerPolicy: "no-referrer-when-downgrade"
+  }), /*#__PURE__*/React.createElement("div", {
     className: "map-overlay-top"
   }, /*#__PURE__*/React.createElement("div", {
     className: "mono",
     style: {
-      color: 'rgba(245,240,232,0.55)'
+      color: 'rgba(245,240,232,0.85)'
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       color: 'var(--gold)'
     }
-  }, "\u25CF"), " ", t.visit.mapBay), /*#__PURE__*/React.createElement("div", {
-    className: "map-place"
-  }, t.visit.mapPlaceA, /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("em", null, t.visit.mapPlaceEm))), /*#__PURE__*/React.createElement("div", {
-    className: "map-overlay-bottom"
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    className: "map-coords"
-  }, "K CENTAR \xB7 SUB CITY"), /*#__PURE__*/React.createElement("div", {
-    className: "map-coords",
-    style: {
-      marginTop: 6
-    }
-  }, "SREBRENO \xB7 ", t.htmlLang === 'hr' ? 'HRVATSKA' : 'CROATIA')), /*#__PURE__*/React.createElement("a", {
+  }, "\u25CF"), " ", t.visit.mapBay)), /*#__PURE__*/React.createElement("a", {
     href: "https://maps.google.com/?q=\u0160etali\u0161te+dr.+Franje+Tu\u0111mana+2A+\u017Dupa+Dubrova\u010Dka",
     target: "_blank",
     rel: "noreferrer",
-    className: "map-directions"
+    className: "map-directions map-directions-float"
   }, t.visit.mapDirections, " ", /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 14
     }
-  }, "\u2197")))))));
+  }, "\u2197"))))));
 }
 function Footer({
   t

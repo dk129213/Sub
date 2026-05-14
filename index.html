@@ -458,41 +458,31 @@
 
   .visit-map {
     background: var(--charcoal); color: var(--ink);
-    padding: 40px; min-height: 540px;
-    display: flex; flex-direction: column; justify-content: space-between;
+    min-height: 540px;
     position: relative; overflow: hidden;
     border: 1px solid var(--rule);
   }
-  .map-canvas {
+  .map-frame {
     position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse at 30% 70%, rgba(201,169,97,0.18), transparent 50%),
-      linear-gradient(135deg, #1F1C19 0%, #2A2622 100%);
+    width: 100%; height: 100%;
+    border: 0; display: block;
+    filter: grayscale(0.25) brightness(0.92) contrast(1.05);
   }
-  .map-canvas svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.35; }
-  .map-pin {
-    position: absolute; left: 58%; top: 48%;
-    width: 16px; height: 16px;
-    background: var(--gold); border-radius: 50%;
-    box-shadow: 0 0 0 8px rgba(201,169,97,0.2), 0 0 0 18px rgba(201,169,97,0.08);
-    animation: pinPulse 2.4s ease-in-out infinite;
+  .map-overlay-top {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 2;
+    padding: 20px 24px;
+    background: linear-gradient(to bottom, rgba(20,17,14,0.85), rgba(20,17,14,0));
+    pointer-events: none;
   }
-  @keyframes pinPulse {
-    0%, 100% { box-shadow: 0 0 0 8px rgba(201,169,97,0.2), 0 0 0 18px rgba(201,169,97,0.08); }
-    50% { box-shadow: 0 0 0 12px rgba(201,169,97,0.28), 0 0 0 26px rgba(201,169,97,0.0); }
-  }
-  .map-overlay-top, .map-overlay-bottom { position: relative; z-index: 2; }
-  .map-overlay-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; }
-  .map-coords { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: rgba(237,227,210,0.5); }
-  .map-place {
-    font-family: 'Cormorant Garamond', serif; font-size: 28px; font-style: italic;
-    color: var(--ink); margin-top: 6px;
+  .map-directions-float {
+    position: absolute; right: 16px; bottom: 16px; z-index: 2;
   }
   .map-directions {
     background: var(--gold); color: var(--charcoal);
     padding: 12px 20px; font-size: 11px; letter-spacing: 0.14em;
     text-transform: uppercase; font-weight: 500;
     display: inline-flex; align-items: center; gap: 10px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.35);
     transition: all 0.2s;
   }
   .map-directions:hover { background: var(--ink); }
