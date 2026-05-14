@@ -383,10 +383,8 @@ function About({ t }) {
 function MenuSection({ showSignatureStars, layout, lang, t }) {
   const [active, setActive] = useState('breakfast');
   const current = MENU.find(m => m.id === active);
-  // Bilingual menu treatment: heading & items always show BOTH languages.
-  // Primary language follows the active UI language.
+  // Single-language menu: names, headings, and descriptions follow the active UI language.
   const primaryLang = lang === 'hr' ? 'hr' : 'en';
-  const secondaryLang = lang === 'hr' ? 'en' : 'hr';
   const itemDesc = (item) => lang === 'hr' ? (item.descHr || item.desc) : item.desc;
   const sectionNote = (m) => lang === 'hr' ? (m.noteHr || m.note) : m.note;
   const sectionHours = (m) => lang === 'hr' ? (m.hoursHr || m.hours) : m.hours;
@@ -408,7 +406,7 @@ function MenuSection({ showSignatureStars, layout, lang, t }) {
         </div>
 
         <div className="menu-section-meta reveal">
-          <h3>{current[primaryLang]} <em>{current[secondaryLang]}</em></h3>
+          <h3>{current[primaryLang]}</h3>
           <div className="hours">
             {current.hours ? <><span className="gold">{t.menu.hoursLabel}</span> · {sectionHours(current)}</> : sectionNote(current)}
           </div>
@@ -420,7 +418,6 @@ function MenuSection({ showSignatureStars, layout, lang, t }) {
               <div>
                 <div className="menu-item-name">
                   {item[primaryLang]}
-                  <span className="en">{item[secondaryLang]}</span>
                 </div>
                 {item.desc && <div className="menu-item-desc">{itemDesc(item)}</div>}
               </div>
