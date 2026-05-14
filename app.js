@@ -27,7 +27,7 @@ const TRANSLATIONS = {
       today: 'Today',
       todayValue: 'Open until 9 PM',
       reviewed: 'Reviewed',
-      reviewedValue: '257 reviews',
+      reviewedValue: '16 reviews',
       perPerson: 'Per person',
       scroll: 'Scroll'
     },
@@ -44,7 +44,7 @@ const TRANSLATIONS = {
       stat2Num: '94%',
       stat2Lbl: 'Locally sourced',
       stat3Num: '4.5★',
-      stat3Lbl: '257 reviews',
+      stat3Lbl: '16 reviews',
       stampEst: 'Established',
       stampSince: 'Since 2014',
       imgAlt: 'Outdoor terrace at Sub Gourmet'
@@ -63,20 +63,22 @@ const TRANSLATIONS = {
       eyebrow: 'The Room & The Plate',
       h2a: 'Where the ',
       h2em: 'Adriatic',
-      h2b: ' meets the table.'
+      h2b: ' meets the table.',
+      showMore: 'Show all photos'
     },
     visit: {
       eyebrow: 'Find Us',
       h2a: 'A short walk from the sea, ',
       h2em: 'a long stay at the table.',
       address: 'Address',
-      addressLine1: 'Šetalište dr. Franje Tuđmana 2a',
-      addressLine2: '20207 Srebreno, Croatia',
-      addressLocated: 'Located in K Centar Sub City',
+      addressLine1: 'Šetalište dr. Franje Tuđmana 2A',
+      addressLine2: '20207 Župa Dubrovačka, Croatia',
+      addressLocated: 'Restaurant in Sub City shopping center, 1st floor',
       hours: 'Hours',
       hoursValue: 'Open daily · until 9 PM',
       hoursSmall: 'Breakfast served 09:00 – 11:30',
       phone: 'Phone',
+      whatsapp: 'WhatsApp',
       atTable: 'At the Table',
       tagOutdoor: 'Outdoor seating',
       tagCocktails: 'Great cocktails',
@@ -120,7 +122,7 @@ const TRANSLATIONS = {
       today: 'Danas',
       todayValue: 'Otvoreno do 21h',
       reviewed: 'Ocjenjeno',
-      reviewedValue: '257 recenzija',
+      reviewedValue: '16 recenzija',
       perPerson: 'Po osobi',
       scroll: 'Pomakni'
     },
@@ -137,7 +139,7 @@ const TRANSLATIONS = {
       stat2Num: '94%',
       stat2Lbl: 'Lokalnog porijekla',
       stat3Num: '4.5★',
-      stat3Lbl: '257 recenzija',
+      stat3Lbl: '16 recenzija',
       stampEst: 'Osnovano',
       stampSince: 'Od 2014.',
       imgAlt: 'Vanjska terasa Sub Gourmeta'
@@ -156,20 +158,22 @@ const TRANSLATIONS = {
       eyebrow: 'Prostor i tanjur',
       h2a: 'Gdje se ',
       h2em: 'Jadran',
-      h2b: ' susreće sa stolom.'
+      h2b: ' susreće sa stolom.',
+      showMore: 'Pogledaj sve fotografije'
     },
     visit: {
       eyebrow: 'Pronađite nas',
       h2a: 'Kratko od mora, ',
       h2em: 'dugo za stolom.',
       address: 'Adresa',
-      addressLine1: 'Šetalište dr. Franje Tuđmana 2a',
-      addressLine2: '20207 Srebreno, Hrvatska',
-      addressLocated: 'U K Centru Sub City',
+      addressLine1: 'Šetalište dr. Franje Tuđmana 2A',
+      addressLine2: '20207 Župa Dubrovačka, Hrvatska',
+      addressLocated: 'Restoran u trgovačkom centru Sub City, 1. kat',
       hours: 'Radno vrijeme',
       hoursValue: 'Otvoreno svaki dan · do 21h',
       hoursSmall: 'Doručak posluženo 09:00 – 11:30',
       phone: 'Telefon',
+      whatsapp: 'WhatsApp',
       atTable: 'Za stolom',
       tagOutdoor: 'Vanjska terasa',
       tagCocktails: 'Odlični kokteli',
@@ -456,14 +460,13 @@ function MenuSection({
     className: "menu-callout reveal"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "serif"
-  }, t.menu.calloutA, /*#__PURE__*/React.createElement("em", null, t.menu.calloutEm)), /*#__PURE__*/React.createElement("p", null, t.menu.calloutBody)), /*#__PURE__*/React.createElement("a", {
-    href: "#visit",
-    className: "btn btn-primary"
-  }, t.menu.calloutCta, " ", /*#__PURE__*/React.createElement("span", {
-    className: "arrow"
-  })))));
+  }, t.menu.calloutA, /*#__PURE__*/React.createElement("em", null, t.menu.calloutEm)), /*#__PURE__*/React.createElement("p", null, t.menu.calloutBody)))));
 }
-const GALLERY = [{
+
+// Gallery: 26 photos total. First 9 shown by default; rest revealed by "Show all photos".
+const GALLERY = [
+// Initial 9 (16 grid cells across 4 rows)
+{
   src: 'images/p3.jpg',
   cls: 'big',
   alt: 'Sub Gourmet interior'
@@ -472,11 +475,11 @@ const GALLERY = [{
   cls: 'tall',
   alt: 'House plate'
 }, {
-  src: 'images/f3.jpg',
+  src: 'images/f1.jpg',
   cls: '',
   alt: 'House plate'
 }, {
-  src: 'images/f9.jpg',
+  src: 'images/f3.jpg',
   cls: '',
   alt: 'House plate'
 }, {
@@ -499,10 +502,83 @@ const GALLERY = [{
   src: 'images/f17.jpg',
   cls: 'wide',
   alt: 'House plate'
+},
+// Revealed by "Show all photos"
+{
+  src: 'images/p1.jpg',
+  cls: 'wide',
+  alt: 'Sub Gourmet dining room'
+}, {
+  src: 'images/p2.jpg',
+  cls: 'wide',
+  alt: 'Sub Gourmet seating'
+}, {
+  src: 'images/f2.jpg',
+  cls: '',
+  alt: 'House plate'
+}, {
+  src: 'images/f6.jpg',
+  cls: 'wide',
+  alt: 'House plate'
+}, {
+  src: 'images/f7.jpg',
+  cls: 'tall',
+  alt: 'House plate'
+}, {
+  src: 'images/f9.jpg',
+  cls: '',
+  alt: 'House plate'
+}, {
+  src: 'images/f11.jpg',
+  cls: 'tall',
+  alt: 'House plate'
+}, {
+  src: 'images/f12.jpg',
+  cls: 'wide',
+  alt: 'House plate'
+}, {
+  src: 'images/f13.jpg',
+  cls: '',
+  alt: 'House plate'
+}, {
+  src: 'images/f14.jpg',
+  cls: 'wide',
+  alt: 'House plate'
+}, {
+  src: 'images/f16.jpg',
+  cls: 'tall',
+  alt: 'House plate'
+}, {
+  src: 'images/f18.jpg',
+  cls: '',
+  alt: 'House plate'
+}, {
+  src: 'images/f19.jpg',
+  cls: 'wide',
+  alt: 'House plate'
+}, {
+  src: 'images/f20.jpg',
+  cls: '',
+  alt: 'House plate'
+}, {
+  src: 'images/f21.jpg',
+  cls: '',
+  alt: 'House plate'
+}, {
+  src: 'images/f22.jpg',
+  cls: 'wide',
+  alt: 'House plate'
+}, {
+  src: 'images/f23.jpg',
+  cls: '',
+  alt: 'House plate'
 }];
+const GALLERY_INITIAL = 9;
 function Gallery({
   t
 }) {
+  const [expanded, setExpanded] = useState(false);
+  const visible = expanded ? GALLERY : GALLERY.slice(0, GALLERY_INITIAL);
   return /*#__PURE__*/React.createElement("section", {
     className: "gallery dark",
     id: "gallery"
@@ -516,15 +592,23 @@ function Gallery({
     className: "line"
   }), /*#__PURE__*/React.createElement("span", null, t.gallery.eyebrow)), /*#__PURE__*/React.createElement("h2", null, t.gallery.h2a, /*#__PURE__*/React.createElement("em", null, t.gallery.h2em), t.gallery.h2b)), /*#__PURE__*/React.createElement("div", {
     className: "gallery-grid reveal"
-  }, GALLERY.map((img, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
+  }, visible.map((img, i) => /*#__PURE__*/React.createElement("div", {
+    key: img.src,
     className: 'gallery-item ' + img.cls
   }, /*#__PURE__*/React.createElement("img", {
     src: img.src,
     alt: img.alt,
     loading: "lazy",
     decoding: "async"
-  }))))));
+  })))), !expanded && /*#__PURE__*/React.createElement("div", {
+    className: "gallery-more reveal"
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "btn btn-primary",
+    onClick: () => setExpanded(true)
+  }, t.gallery.showMore, " ", /*#__PURE__*/React.createElement("span", {
+    className: "arrow"
+  })))));
 }
 function Visit({
   t
@@ -564,9 +648,19 @@ function Visit({
     className: "visit-block"
   }, /*#__PURE__*/React.createElement("span", {
     className: "label"
-  }, t.visit.phone), /*#__PURE__*/React.createElement("span", {
-    className: "value"
+  }, t.visit.phone), /*#__PURE__*/React.createElement("a", {
+    className: "value",
+    href: "tel:+38520642111"
   }, "+385 20 642 111")), /*#__PURE__*/React.createElement("div", {
+    className: "visit-block"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "label"
+  }, t.visit.whatsapp), /*#__PURE__*/React.createElement("a", {
+    className: "value",
+    href: "https://wa.me/385914009999",
+    target: "_blank",
+    rel: "noreferrer"
+  }, "+385 91 400 9999")), /*#__PURE__*/React.createElement("div", {
     className: "visit-block"
   }, /*#__PURE__*/React.createElement("span", {
     className: "label"
@@ -650,7 +744,7 @@ function Visit({
       marginTop: 6
     }
   }, "SREBRENO \xB7 ", t.htmlLang === 'hr' ? 'HRVATSKA' : 'CROATIA')), /*#__PURE__*/React.createElement("a", {
-    href: "https://maps.google.com/?q=\u0160etali\u0161te+dr.+Franje+Tu\u0111mana+2a+Srebreno",
+    href: "https://maps.google.com/?q=\u0160etali\u0161te+dr.+Franje+Tu\u0111mana+2A+\u017Dupa+Dubrova\u010Dka",
     target: "_blank",
     rel: "noreferrer",
     className: "map-directions"
@@ -686,8 +780,12 @@ function Footer({
   }, /*#__PURE__*/React.createElement("h5", null, t.footer.contact), /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
     href: "tel:+38520642111"
   }, "+385 20 642 111")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
-    href: "mailto:hello@subgourmet.hr"
-  }, "hello@subgourmet.hr")), /*#__PURE__*/React.createElement("li", null, "\u0160etali\u0161te dr. Franje Tu\u0111mana 2a"), /*#__PURE__*/React.createElement("li", null, "20207 Srebreno, ", t.htmlLang === 'hr' ? 'Hrvatska' : 'Croatia'))), /*#__PURE__*/React.createElement("div", {
+    href: "https://wa.me/385914009999",
+    target: "_blank",
+    rel: "noreferrer"
+  }, "+385 91 400 9999 (WhatsApp)")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: "mailto:info.subcaffe@gmail.com"
+  }, "info.subcaffe@gmail.com")), /*#__PURE__*/React.createElement("li", null, "\u0160etali\u0161te dr. Franje Tu\u0111mana 2A"), /*#__PURE__*/React.createElement("li", null, "20207 \u017Dupa Dubrova\u010Dka, ", t.htmlLang === 'hr' ? 'Hrvatska' : 'Croatia'))), /*#__PURE__*/React.createElement("div", {
     className: "foot-col"
   }, /*#__PURE__*/React.createElement("h5", null, t.footer.follow), /*#__PURE__*/React.createElement("div", {
     className: "foot-social"
