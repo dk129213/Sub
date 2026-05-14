@@ -16,7 +16,6 @@ const TRANSLATIONS = {
       menu: 'Menu',
       gallery: 'Gallery',
       visit: 'Visit',
-      reserve: 'Reserve',
       menuAria: 'Menu'
     },
     hero: {
@@ -25,7 +24,6 @@ const TRANSLATIONS = {
       h1Bot: ['Gourm', 'e', 't'],
       tag: 'Mediterranean flavors, Adriatic soul, where the coast meets the table, slowly, the way it should.',
       viewMenu: 'View Menu',
-      reserveTable: 'Reserve a Table',
       today: 'Today',
       todayValue: 'Open until 9 PM',
       reviewed: 'Reviewed',
@@ -78,7 +76,7 @@ const TRANSLATIONS = {
       hours: 'Hours',
       hoursValue: 'Open daily · until 9 PM',
       hoursSmall: 'Breakfast served 09:00 – 11:30',
-      reservations: 'Reservations',
+      phone: 'Phone',
       atTable: 'At the Table',
       tagOutdoor: 'Outdoor seating',
       tagCocktails: 'Great cocktails',
@@ -101,32 +99,6 @@ const TRANSLATIONS = {
       follow: 'Follow',
       copyright: '© 2026 Sub Gourmet · Srebreno, Croatia',
       designed: 'Designed with care on the Adriatic'
-    },
-    modal: {
-      titleA: 'Reserve ',
-      titleEm: 'your table',
-      sub: "Let us know when, and we'll have the bread warm and the wine ready.",
-      name: 'Name',
-      namePh: 'Your name',
-      phone: 'Phone',
-      phonePh: '+385 ...',
-      date: 'Date',
-      time: 'Time',
-      guests: 'Guests',
-      guest: 'guest',
-      guestsPlural: 'guests',
-      seating: 'Seating',
-      seatAny: 'No preference',
-      seatOutdoor: 'Outdoor terrace',
-      seatIndoor: 'Indoor',
-      notes: 'Notes',
-      notesPh: 'Birthday, allergies, anything we should know...',
-      submit: 'Request table',
-      cancel: 'Cancel',
-      doneTitleA: 'Hvala, ',
-      doneTitleEm: 'see you soon.',
-      doneConfirm: (g, d, t) => `We'll confirm your table for ${g} guests on ${d || 'the requested date'} at ${t} by phone shortly.`,
-      close: 'Close'
     }
   },
   hr: {
@@ -137,7 +109,6 @@ const TRANSLATIONS = {
       menu: 'Meni',
       gallery: 'Galerija',
       visit: 'Posjetite nas',
-      reserve: 'Rezervirajte',
       menuAria: 'Meni'
     },
     hero: {
@@ -146,7 +117,6 @@ const TRANSLATIONS = {
       h1Bot: ['Gourm', 'e', 't'],
       tag: 'Mediteranski okusi, jadranska duša, gdje se obala susreće sa stolom, polako, onako kako treba.',
       viewMenu: 'Pogledajte meni',
-      reserveTable: 'Rezervirajte stol',
       today: 'Danas',
       todayValue: 'Otvoreno do 21h',
       reviewed: 'Ocjenjeno',
@@ -199,7 +169,7 @@ const TRANSLATIONS = {
       hours: 'Radno vrijeme',
       hoursValue: 'Otvoreno svaki dan · do 21h',
       hoursSmall: 'Doručak posluženo 09:00 – 11:30',
-      reservations: 'Rezervacije',
+      phone: 'Telefon',
       atTable: 'Za stolom',
       tagOutdoor: 'Vanjska terasa',
       tagCocktails: 'Odlični kokteli',
@@ -222,32 +192,6 @@ const TRANSLATIONS = {
       follow: 'Pratite nas',
       copyright: '© 2026 Sub Gourmet · Srebreno, Hrvatska',
       designed: 'Stvoreno s ljubavlju na Jadranu'
-    },
-    modal: {
-      titleA: 'Rezervirajte ',
-      titleEm: 'svoj stol',
-      sub: 'Recite nam kada, i kruh će biti topao a vino spremno.',
-      name: 'Ime',
-      namePh: 'Vaše ime',
-      phone: 'Telefon',
-      phonePh: '+385 ...',
-      date: 'Datum',
-      time: 'Vrijeme',
-      guests: 'Gosti',
-      guest: 'gost',
-      guestsPlural: 'gostiju',
-      seating: 'Mjesto',
-      seatAny: 'Bez preferencije',
-      seatOutdoor: 'Vanjska terasa',
-      seatIndoor: 'Unutra',
-      notes: 'Napomene',
-      notesPh: 'Rođendan, alergije, nešto što bismo trebali znati...',
-      submit: 'Zatraži stol',
-      cancel: 'Odustani',
-      doneTitleA: 'Hvala, ',
-      doneTitleEm: 'vidimo se uskoro.',
-      doneConfirm: (g, d, t) => `Potvrdit ćemo vaš stol za ${g} gostiju ${d || 'traženi datum'} u ${t} telefonom uskoro.`,
-      close: 'Zatvori'
     }
   }
 };
@@ -306,7 +250,6 @@ function LangToggle({
   }, "HR"));
 }
 function Nav({
-  onReserve,
   scrolled,
   dark,
   lang,
@@ -336,10 +279,7 @@ function Nav({
   }, /*#__PURE__*/React.createElement(LangToggle, {
     lang: lang,
     setLang: setLang
-  }), /*#__PURE__*/React.createElement("button", {
-    className: "nav-cta",
-    onClick: onReserve
-  }, t.nav.reserve)), /*#__PURE__*/React.createElement("button", {
+  })), /*#__PURE__*/React.createElement("button", {
     className: "nav-burger",
     "aria-label": t.nav.menuAria,
     onClick: () => {
@@ -350,7 +290,6 @@ function Nav({
   }, /*#__PURE__*/React.createElement("span", null), /*#__PURE__*/React.createElement("span", null), /*#__PURE__*/React.createElement("span", null)));
 }
 function Hero({
-  onReserve,
   t
 }) {
   const [a, b, c] = t.hero.h1Bot;
@@ -378,11 +317,6 @@ function Hero({
     href: "#menu",
     className: "btn btn-primary"
   }, t.hero.viewMenu, " ", /*#__PURE__*/React.createElement("span", {
-    className: "arrow"
-  })), /*#__PURE__*/React.createElement("button", {
-    className: "btn btn-ghost",
-    onClick: onReserve
-  }, t.hero.reserveTable, " ", /*#__PURE__*/React.createElement("span", {
     className: "arrow"
   }))), /*#__PURE__*/React.createElement("div", {
     className: "hero-meta"
@@ -630,7 +564,7 @@ function Visit({
     className: "visit-block"
   }, /*#__PURE__*/React.createElement("span", {
     className: "label"
-  }, t.visit.reservations), /*#__PURE__*/React.createElement("span", {
+  }, t.visit.phone), /*#__PURE__*/React.createElement("span", {
     className: "value"
   }, "+385 20 642 111")), /*#__PURE__*/React.createElement("div", {
     className: "visit-block"
@@ -806,130 +740,7 @@ function Footer({
     className: "foot-bottom"
   }, /*#__PURE__*/React.createElement("span", null, t.footer.copyright), /*#__PURE__*/React.createElement("span", null, t.footer.designed))));
 }
-function ReservationModal({
-  open,
-  onClose,
-  t
-}) {
-  const [step, setStep] = useState('form');
-  const [data, setData] = useState({
-    name: '',
-    phone: '',
-    date: '',
-    time: '19:00',
-    guests: '2',
-    notes: ''
-  });
-  useEffect(() => {
-    if (!open) {
-      setTimeout(() => setStep('form'), 400);
-    }
-  }, [open]);
-  const submit = e => {
-    e.preventDefault();
-    setStep('done');
-  };
-  return /*#__PURE__*/React.createElement("div", {
-    className: 'modal-backdrop' + (open ? ' open' : ''),
-    onClick: onClose
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "modal",
-    onClick: e => e.stopPropagation()
-  }, step === 'form' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h3", null, t.modal.titleA, /*#__PURE__*/React.createElement("em", null, t.modal.titleEm)), /*#__PURE__*/React.createElement("p", {
-    className: "modal-sub"
-  }, t.modal.sub), /*#__PURE__*/React.createElement("form", {
-    className: "modal-form",
-    onSubmit: submit
-  }, /*#__PURE__*/React.createElement("label", null, t.modal.name, /*#__PURE__*/React.createElement("input", {
-    type: "text",
-    required: true,
-    value: data.name,
-    onChange: e => setData({
-      ...data,
-      name: e.target.value
-    }),
-    placeholder: t.modal.namePh
-  })), /*#__PURE__*/React.createElement("label", null, t.modal.phone, /*#__PURE__*/React.createElement("input", {
-    type: "tel",
-    required: true,
-    value: data.phone,
-    onChange: e => setData({
-      ...data,
-      phone: e.target.value
-    }),
-    placeholder: t.modal.phonePh
-  })), /*#__PURE__*/React.createElement("label", null, t.modal.date, /*#__PURE__*/React.createElement("input", {
-    type: "date",
-    required: true,
-    value: data.date,
-    onChange: e => setData({
-      ...data,
-      date: e.target.value
-    })
-  })), /*#__PURE__*/React.createElement("label", null, t.modal.time, /*#__PURE__*/React.createElement("select", {
-    value: data.time,
-    onChange: e => setData({
-      ...data,
-      time: e.target.value
-    })
-  }, ['12:00', '13:00', '14:00', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30'].map(tv => /*#__PURE__*/React.createElement("option", {
-    key: tv,
-    value: tv
-  }, tv)))), /*#__PURE__*/React.createElement("label", null, t.modal.guests, /*#__PURE__*/React.createElement("select", {
-    value: data.guests,
-    onChange: e => setData({
-      ...data,
-      guests: e.target.value
-    })
-  }, ['1', '2', '3', '4', '5', '6', '7', '8+'].map(g => /*#__PURE__*/React.createElement("option", {
-    key: g,
-    value: g
-  }, g, " ", g === '1' ? t.modal.guest : t.modal.guestsPlural)))), /*#__PURE__*/React.createElement("label", null, t.modal.seating, /*#__PURE__*/React.createElement("select", {
-    defaultValue: "any"
-  }, /*#__PURE__*/React.createElement("option", {
-    value: "any"
-  }, t.modal.seatAny), /*#__PURE__*/React.createElement("option", null, t.modal.seatOutdoor), /*#__PURE__*/React.createElement("option", null, t.modal.seatIndoor))), /*#__PURE__*/React.createElement("label", {
-    className: "full"
-  }, t.modal.notes, /*#__PURE__*/React.createElement("textarea", {
-    rows: "2",
-    value: data.notes,
-    onChange: e => setData({
-      ...data,
-      notes: e.target.value
-    }),
-    placeholder: t.modal.notesPh
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "modal-actions full"
-  }, /*#__PURE__*/React.createElement("button", {
-    type: "submit",
-    className: "btn btn-dark"
-  }, t.modal.submit, " ", /*#__PURE__*/React.createElement("span", {
-    className: "arrow"
-  })), /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    className: "modal-close",
-    onClick: onClose
-  }, t.modal.cancel)))), step === 'done' && /*#__PURE__*/React.createElement("div", {
-    className: "modal-success"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "check"
-  }, "\u2713"), /*#__PURE__*/React.createElement("h3", null, t.modal.doneTitleA, /*#__PURE__*/React.createElement("em", null, t.modal.doneTitleEm)), /*#__PURE__*/React.createElement("p", {
-    className: "modal-sub",
-    style: {
-      marginTop: 12
-    }
-  }, t.modal.doneConfirm(data.guests, data.date, data.time)), /*#__PURE__*/React.createElement("div", {
-    className: "modal-actions",
-    style: {
-      justifyContent: 'center'
-    }
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "btn btn-dark",
-    onClick: onClose
-  }, t.modal.close)))));
-}
 function App() {
-  const [modalOpen, setModalOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [overDark, setOverDark] = useState(true);
   const [lang, setLang] = useLang();
@@ -967,14 +778,12 @@ function App() {
     return () => io.disconnect();
   });
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Nav, {
-    onReserve: () => setModalOpen(true),
     scrolled: scrolled,
     dark: overDark,
     lang: lang,
     setLang: setLang,
     t: t
   }), /*#__PURE__*/React.createElement(Hero, {
-    onReserve: () => setModalOpen(true),
     t: t
   }), /*#__PURE__*/React.createElement(About, {
     t: t
@@ -986,10 +795,6 @@ function App() {
   }), /*#__PURE__*/React.createElement(Visit, {
     t: t
   }), /*#__PURE__*/React.createElement(Footer, {
-    t: t
-  }), /*#__PURE__*/React.createElement(ReservationModal, {
-    open: modalOpen,
-    onClose: () => setModalOpen(false),
     t: t
   }));
 }

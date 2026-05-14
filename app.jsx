@@ -10,14 +10,13 @@ const TRANSLATIONS = {
   en: {
     htmlLang: 'en',
     pageTitle: 'Sub Gourmet · Mediterranean flavors, Adriatic soul',
-    nav: { about: 'About', menu: 'Menu', gallery: 'Gallery', visit: 'Visit', reserve: 'Reserve', menuAria: 'Menu' },
+    nav: { about: 'About', menu: 'Menu', gallery: 'Gallery', visit: 'Visit', menuAria: 'Menu' },
     hero: {
       eyebrow: 'Srebreno · Dubrovnik Riviera',
       h1Top: 'Sub',
       h1Bot: ['Gourm', 'e', 't'],
       tag: 'Mediterranean flavors, Adriatic soul, where the coast meets the table, slowly, the way it should.',
       viewMenu: 'View Menu',
-      reserveTable: 'Reserve a Table',
       today: 'Today',
       todayValue: 'Open until 9 PM',
       reviewed: 'Reviewed',
@@ -66,7 +65,7 @@ const TRANSLATIONS = {
       hours: 'Hours',
       hoursValue: 'Open daily · until 9 PM',
       hoursSmall: 'Breakfast served 09:00 – 11:30',
-      reservations: 'Reservations',
+      phone: 'Phone',
       atTable: 'At the Table',
       tagOutdoor: 'Outdoor seating',
       tagCocktails: 'Great cocktails',
@@ -87,37 +86,17 @@ const TRANSLATIONS = {
       copyright: '© 2026 Sub Gourmet · Srebreno, Croatia',
       designed: 'Designed with care on the Adriatic',
     },
-    modal: {
-      titleA: 'Reserve ', titleEm: 'your table',
-      sub: "Let us know when, and we'll have the bread warm and the wine ready.",
-      name: 'Name', namePh: 'Your name',
-      phone: 'Phone', phonePh: '+385 ...',
-      date: 'Date',
-      time: 'Time',
-      guests: 'Guests',
-      guest: 'guest', guestsPlural: 'guests',
-      seating: 'Seating',
-      seatAny: 'No preference', seatOutdoor: 'Outdoor terrace', seatIndoor: 'Indoor',
-      notes: 'Notes',
-      notesPh: 'Birthday, allergies, anything we should know...',
-      submit: 'Request table',
-      cancel: 'Cancel',
-      doneTitleA: 'Hvala, ', doneTitleEm: 'see you soon.',
-      doneConfirm: (g, d, t) => `We'll confirm your table for ${g} guests on ${d || 'the requested date'} at ${t} by phone shortly.`,
-      close: 'Close',
-    },
   },
   hr: {
     htmlLang: 'hr',
     pageTitle: 'Sub Gourmet · Mediteranski okusi, jadranska duša',
-    nav: { about: 'O nama', menu: 'Meni', gallery: 'Galerija', visit: 'Posjetite nas', reserve: 'Rezervirajte', menuAria: 'Meni' },
+    nav: { about: 'O nama', menu: 'Meni', gallery: 'Galerija', visit: 'Posjetite nas', menuAria: 'Meni' },
     hero: {
       eyebrow: 'Srebreno · Dubrovačka rivijera',
       h1Top: 'Sub',
       h1Bot: ['Gourm', 'e', 't'],
       tag: 'Mediteranski okusi, jadranska duša, gdje se obala susreće sa stolom, polako, onako kako treba.',
       viewMenu: 'Pogledajte meni',
-      reserveTable: 'Rezervirajte stol',
       today: 'Danas',
       todayValue: 'Otvoreno do 21h',
       reviewed: 'Ocjenjeno',
@@ -166,7 +145,7 @@ const TRANSLATIONS = {
       hours: 'Radno vrijeme',
       hoursValue: 'Otvoreno svaki dan · do 21h',
       hoursSmall: 'Doručak posluženo 09:00 – 11:30',
-      reservations: 'Rezervacije',
+      phone: 'Telefon',
       atTable: 'Za stolom',
       tagOutdoor: 'Vanjska terasa',
       tagCocktails: 'Odlični kokteli',
@@ -186,25 +165,6 @@ const TRANSLATIONS = {
       follow: 'Pratite nas',
       copyright: '© 2026 Sub Gourmet · Srebreno, Hrvatska',
       designed: 'Stvoreno s ljubavlju na Jadranu',
-    },
-    modal: {
-      titleA: 'Rezervirajte ', titleEm: 'svoj stol',
-      sub: 'Recite nam kada, i kruh će biti topao a vino spremno.',
-      name: 'Ime', namePh: 'Vaše ime',
-      phone: 'Telefon', phonePh: '+385 ...',
-      date: 'Datum',
-      time: 'Vrijeme',
-      guests: 'Gosti',
-      guest: 'gost', guestsPlural: 'gostiju',
-      seating: 'Mjesto',
-      seatAny: 'Bez preferencije', seatOutdoor: 'Vanjska terasa', seatIndoor: 'Unutra',
-      notes: 'Napomene',
-      notesPh: 'Rođendan, alergije, nešto što bismo trebali znati...',
-      submit: 'Zatraži stol',
-      cancel: 'Odustani',
-      doneTitleA: 'Hvala, ', doneTitleEm: 'vidimo se uskoro.',
-      doneConfirm: (g, d, t) => `Potvrdit ćemo vaš stol za ${g} gostiju ${d || 'traženi datum'} u ${t} telefonom uskoro.`,
-      close: 'Zatvori',
     },
   },
 };
@@ -259,7 +219,7 @@ function LangToggle({ lang, setLang }) {
   );
 }
 
-function Nav({ onReserve, scrolled, dark, lang, setLang, t }) {
+function Nav({ scrolled, dark, lang, setLang, t }) {
   const cls = ['nav'];
   if (scrolled) cls.push('scrolled');
   if (dark && !scrolled) cls.push('dark-bg');
@@ -274,7 +234,6 @@ function Nav({ onReserve, scrolled, dark, lang, setLang, t }) {
       </div>
       <div className="nav-right">
         <LangToggle lang={lang} setLang={setLang} />
-        <button className="nav-cta" onClick={onReserve}>{t.nav.reserve}</button>
       </div>
       <button className="nav-burger" aria-label={t.nav.menuAria} onClick={() => {
         document.querySelector('#menu').scrollIntoView({behavior:'smooth'});
@@ -285,7 +244,7 @@ function Nav({ onReserve, scrolled, dark, lang, setLang, t }) {
   );
 }
 
-function Hero({ onReserve, t }) {
+function Hero({ t }) {
   const [a, b, c] = t.hero.h1Bot;
   return (
     <section className="hero" id="top">
@@ -300,7 +259,6 @@ function Hero({ onReserve, t }) {
           <p className="hero-tag">{t.hero.tag}</p>
           <div className="hero-ctas">
             <a href="#menu" className="btn btn-primary">{t.hero.viewMenu} <span className="arrow"></span></a>
-            <button className="btn btn-ghost" onClick={onReserve}>{t.hero.reserveTable} <span className="arrow"></span></button>
           </div>
           <div className="hero-meta">
             <div className="hero-meta-item">
@@ -479,7 +437,7 @@ function Visit({ t }) {
               <span className="value small">{t.visit.hoursSmall}</span>
             </div>
             <div className="visit-block">
-              <span className="label">{t.visit.reservations}</span>
+              <span className="label">{t.visit.phone}</span>
               <span className="value">+385 20 642 111</span>
             </div>
             <div className="visit-block">
@@ -583,80 +541,7 @@ function Footer({ t }) {
   );
 }
 
-function ReservationModal({ open, onClose, t }) {
-  const [step, setStep] = useState('form');
-  const [data, setData] = useState({ name: '', phone: '', date: '', time: '19:00', guests: '2', notes: '' });
-
-  useEffect(() => {
-    if (!open) { setTimeout(() => setStep('form'), 400); }
-  }, [open]);
-
-  const submit = (e) => {
-    e.preventDefault();
-    setStep('done');
-  };
-
-  return (
-    <div className={'modal-backdrop' + (open ? ' open' : '')} onClick={onClose}>
-      <div className="modal" onClick={e => e.stopPropagation()}>
-        {step === 'form' && (
-          <>
-            <h3>{t.modal.titleA}<em>{t.modal.titleEm}</em></h3>
-            <p className="modal-sub">{t.modal.sub}</p>
-            <form className="modal-form" onSubmit={submit}>
-              <label>{t.modal.name}
-                <input type="text" required value={data.name} onChange={e => setData({...data, name: e.target.value})} placeholder={t.modal.namePh} />
-              </label>
-              <label>{t.modal.phone}
-                <input type="tel" required value={data.phone} onChange={e => setData({...data, phone: e.target.value})} placeholder={t.modal.phonePh} />
-              </label>
-              <label>{t.modal.date}
-                <input type="date" required value={data.date} onChange={e => setData({...data, date: e.target.value})} />
-              </label>
-              <label>{t.modal.time}
-                <select value={data.time} onChange={e => setData({...data, time: e.target.value})}>
-                  {['12:00','13:00','14:00','18:00','18:30','19:00','19:30','20:00','20:30'].map(tv => <option key={tv} value={tv}>{tv}</option>)}
-                </select>
-              </label>
-              <label>{t.modal.guests}
-                <select value={data.guests} onChange={e => setData({...data, guests: e.target.value})}>
-                  {['1','2','3','4','5','6','7','8+'].map(g => <option key={g} value={g}>{g} {g==='1'? t.modal.guest : t.modal.guestsPlural}</option>)}
-                </select>
-              </label>
-              <label>{t.modal.seating}
-                <select defaultValue="any">
-                  <option value="any">{t.modal.seatAny}</option>
-                  <option>{t.modal.seatOutdoor}</option>
-                  <option>{t.modal.seatIndoor}</option>
-                </select>
-              </label>
-              <label className="full">{t.modal.notes}
-                <textarea rows="2" value={data.notes} onChange={e => setData({...data, notes: e.target.value})} placeholder={t.modal.notesPh}></textarea>
-              </label>
-              <div className="modal-actions full">
-                <button type="submit" className="btn btn-dark">{t.modal.submit} <span className="arrow"></span></button>
-                <button type="button" className="modal-close" onClick={onClose}>{t.modal.cancel}</button>
-              </div>
-            </form>
-          </>
-        )}
-        {step === 'done' && (
-          <div className="modal-success">
-            <div className="check">✓</div>
-            <h3>{t.modal.doneTitleA}<em>{t.modal.doneTitleEm}</em></h3>
-            <p className="modal-sub" style={{marginTop: 12}}>{t.modal.doneConfirm(data.guests, data.date, data.time)}</p>
-            <div className="modal-actions" style={{justifyContent: 'center'}}>
-              <button className="btn btn-dark" onClick={onClose}>{t.modal.close}</button>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
 function App() {
-  const [modalOpen, setModalOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [overDark, setOverDark] = useState(true);
   const [lang, setLang] = useLang();
@@ -693,14 +578,13 @@ function App() {
 
   return (
     <>
-      <Nav onReserve={() => setModalOpen(true)} scrolled={scrolled} dark={overDark} lang={lang} setLang={setLang} t={t} />
-      <Hero onReserve={() => setModalOpen(true)} t={t} />
+      <Nav scrolled={scrolled} dark={overDark} lang={lang} setLang={setLang} t={t} />
+      <Hero t={t} />
       <About t={t} />
       <MenuSection lang={lang} t={t} />
       <Gallery t={t} />
       <Visit t={t} />
       <Footer t={t} />
-      <ReservationModal open={modalOpen} onClose={() => setModalOpen(false)} t={t} />
     </>
   );
 }

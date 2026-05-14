@@ -92,15 +92,6 @@
   }
   .nav-links a:hover { opacity: 1; }
 
-  .nav-cta {
-    padding: 10px 20px;
-    border: 1px solid currentColor;
-    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 500;
-    transition: all 0.25s ease;
-  }
-  .nav.dark-bg .nav-cta:hover { background: var(--gold); color: var(--charcoal); border-color: var(--gold); }
-  .nav.scrolled .nav-cta:hover { background: var(--gold); color: var(--charcoal); border-color: var(--gold); }
-
   .nav-burger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
   .nav-burger span { display: block; width: 22px; height: 1.5px; background: currentColor; }
 
@@ -191,13 +182,6 @@
   }
   .btn-primary { background: var(--gold); color: var(--charcoal); border-color: var(--gold); }
   .btn-primary:hover { background: transparent; color: var(--gold); }
-  .btn-ghost { background: transparent; color: var(--ink); border-color: rgba(237, 227, 210, 0.4); }
-  .btn-ghost:hover { background: var(--ink); color: var(--charcoal); border-color: var(--ink); }
-  .btn-dark { background: var(--gold); color: var(--charcoal); border-color: var(--gold); }
-  .btn-dark:hover { background: transparent; color: var(--gold); }
-  .btn-outline-dark { background: transparent; color: var(--ink); border-color: var(--ink); }
-  .btn-outline-dark:hover { background: var(--ink); color: var(--charcoal); }
-
   .btn .arrow { width: 18px; height: 1px; background: currentColor; position: relative; transition: width 0.25s; }
   .btn .arrow::after {
     content: ''; position: absolute; right: 0; top: -3px;
@@ -506,50 +490,6 @@
   }
   .foot-social a:hover { background: var(--gold); border-color: var(--gold); color: var(--charcoal); }
 
-  /* ─────────────── MODAL ─────────────── */
-  .modal-backdrop {
-    position: fixed; inset: 0; background: rgba(20,18,16,0.7);
-    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-    z-index: 200; display: flex; align-items: center; justify-content: center;
-    padding: 24px;
-    opacity: 0; pointer-events: none; transition: opacity 0.3s;
-  }
-  .modal-backdrop.open { opacity: 1; pointer-events: auto; }
-  .modal {
-    background: var(--cream-3); color: var(--ink); width: 100%; max-width: 540px;
-    padding: 48px;
-    transform: translateY(20px); transition: transform 0.4s ease;
-    max-height: 92vh; overflow-y: auto;
-    border: 1px solid var(--rule);
-  }
-  .modal-backdrop.open .modal { transform: translateY(0); }
-  .modal h3 { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 400; line-height: 1.05; margin-bottom: 8px; }
-  .modal h3 em { font-style: italic; color: var(--gold-deep); }
-  .modal-sub { color: var(--ink-soft); margin-bottom: 32px; }
-  .modal-form { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  .modal-form label { display: flex; flex-direction: column; gap: 6px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); font-weight: 500; }
-  .modal-form input, .modal-form select, .modal-form textarea {
-    font-family: 'Inter', sans-serif; font-size: 15px;
-    padding: 12px 14px; border: 1px solid var(--rule);
-    background: var(--cream-2); color: var(--ink);
-    text-transform: none; letter-spacing: 0;
-    transition: border-color 0.2s;
-  }
-  .modal-form input:focus, .modal-form select:focus, .modal-form textarea:focus { outline: none; border-color: var(--gold-deep); }
-  .modal-form .full { grid-column: span 2; }
-  .modal-actions { display: flex; gap: 12px; margin-top: 28px; align-items: center; }
-  .modal-close { margin-left: auto; font-size: 12px; color: var(--ink-mute); letter-spacing: 0.1em; text-transform: uppercase; }
-  .modal-close:hover { color: var(--ink); }
-
-  .modal-success {
-    text-align: center; padding: 16px 0;
-  }
-  .modal-success .check {
-    width: 64px; height: 64px; border-radius: 50%; background: var(--gold);
-    margin: 0 auto 24px; display: flex; align-items: center; justify-content: center;
-    color: var(--charcoal); font-size: 28px;
-  }
-
   /* ─────────────── REVEAL ─────────────── */
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1); }
   .reveal.in { opacity: 1; transform: none; }
@@ -558,7 +498,6 @@
   @media (max-width: 960px) {
     .nav { padding: 14px 20px; }
     .nav-links { display: none; }
-    .nav-cta { display: none; }
     .nav-right { gap: 12px; margin-left: auto; margin-right: 8px; }
     .nav-burger { display: flex; }
     .hero-inner { padding: 120px 24px 60px; }
@@ -577,9 +516,6 @@
     .visit-grid { grid-template-columns: 1fr; gap: 40px; }
     .visit-map { min-height: 380px; padding: 28px; }
     .foot-top { grid-template-columns: 1fr 1fr; gap: 40px; }
-    .modal { padding: 32px 24px; }
-    .modal-form { grid-template-columns: 1fr; }
-    .modal-form .full { grid-column: span 1; }
   }
   @media (max-width: 520px) {
     .foot-top { grid-template-columns: 1fr; }
