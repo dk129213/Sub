@@ -102,6 +102,22 @@
   .nav-burger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
   .nav-burger span { display: block; width: 22px; height: 1.5px; background: currentColor; }
 
+  .nav-right { display: flex; align-items: center; gap: 18px; }
+  .lang-toggle {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .lang-btn {
+    font-family: inherit; font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; font-weight: 500;
+    padding: 4px 2px;
+    color: currentColor; opacity: 0.55;
+    transition: opacity 0.2s ease, color 0.2s ease;
+  }
+  .lang-btn:hover { opacity: 1; }
+  .lang-btn.active { opacity: 1; color: var(--gold); }
+  .lang-sep { opacity: 0.35; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+
   /* ─────────────── HERO ─────────────── */
   .hero {
     position: relative; min-height: 100vh;
@@ -541,6 +557,7 @@
     .nav { padding: 14px 20px; }
     .nav-links { display: none; }
     .nav-cta { display: none; }
+    .nav-right { gap: 12px; margin-left: auto; margin-right: 8px; }
     .nav-burger { display: flex; }
     .hero-inner { padding: 120px 24px 60px; }
     .hero-meta { gap: 28px; }
