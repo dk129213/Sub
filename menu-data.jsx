@@ -70,7 +70,7 @@ const MENU_DATA = [
       { hr: 'Brancin na žaru', en: 'Grilled Sea Bass', desc: 'Whole fish, olive oil, herbs, grilled vegetables', descHr: 'Cijela riba, maslinovo ulje, začinsko bilje, povrće s roštilja', price: '24.80' },
       { hr: 'Biftek na žaru', en: 'Grilled Beef Tenderloin', desc: '220 g, peppercorn or gorgonzola sauce, baked potato', descHr: '220 g, umak od papra ili gorgonzole, pečeni krumpir', price: '28.40' },
       { hr: 'Pileći file', en: 'Chicken Fillet', desc: 'Pan-seared, lemon-thyme jus, seasonal vegetables', descHr: 'Prepečen, sok od limuna i timijana, sezonsko povrće', price: '13.90' },
-      { hr: 'Janjetina ispod peke', en: 'Lamb Under the Bell', desc: 'Slow-roasted, potato, rosemary — order 24 h ahead', descHr: 'Polako pečena, krumpir, ružmarin — naručiti 24 h unaprijed', price: '32.00' },
+      { hr: 'Janjetina ispod peke', en: 'Lamb Under the Bell', desc: 'Slow-roasted, potato, rosemary; order 24 h ahead', descHr: 'Polako pečena, krumpir, ružmarin; naručiti 24 h unaprijed', price: '32.00' },
       { hr: 'Pljeskavica', en: 'Balkan Pljeskavica', desc: 'Grilled beef-pork patty, ajvar, kajmak, fresh bread', descHr: 'Pljeskavica od goveđeg i svinjskog mesa, ajvar, kajmak, svjež kruh', price: '12.80' },
     ],
   },
@@ -137,7 +137,7 @@ const MENU_DATA = [
     items: [
       { hr: 'Tiramisu', en: 'Tiramisu', desc: 'Mascarpone, espresso, savoiardi, cocoa', descHr: 'Mascarpone, espresso, savoiardi, kakao', price: '6.80' },
       { hr: 'Panna cotta', en: 'Panna Cotta', desc: 'Vanilla cream, raspberry coulis, mint', descHr: 'Vanilij krema, malina coulis, metvica', price: '6.40' },
-      { hr: 'Rožata', en: 'Dubrovnik Rožata', desc: 'Caramel custard with rose liqueur — Dalmatian classic', descHr: 'Karamel krema s likerom od ruže — dalmatinski klasik', price: '6.20' },
+      { hr: 'Rožata', en: 'Dubrovnik Rožata', desc: 'Caramel custard with rose liqueur, Dalmatian classic', descHr: 'Karamel krema s likerom od ruže, dalmatinski klasik', price: '6.20' },
       { hr: 'Čokoladni soufflé', en: 'Chocolate Soufflé', desc: 'Warm dark chocolate, vanilla ice cream', descHr: 'Topla tamna čokolada, vanilij sladoled', price: '7.40' },
       { hr: 'Sladoled', en: 'Ice Cream Selection', desc: 'Three scoops, house-made daily', descHr: 'Tri kuglice, svakodnevno domaće', price: '5.20' },
     ],

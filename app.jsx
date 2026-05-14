@@ -1,32 +1,21 @@
-const { useState, useEffect, useRef, useCallback } = React;
+const { useState, useEffect } = React;
 
 const MENU = window.MENU_DATA;
 
-const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "accentColor": "#C9A961",
-  "heroImage": "interior",
-  "showSignatureStars": true,
-  "menuLayout": "two-column"
-}/*EDITMODE-END*/;
-
-const HERO_IMAGES = {
-  interior: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=2000&q=80',
-  pasta: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=2000&q=80',
-  table: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=2000&q=80',
-  coast: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=2000&q=80',
-};
+const HERO_IMAGE = 'images/p1.jpg';
+const ABOUT_IMAGE = 'images/p2.jpg';
 
 // ─────────────── i18n ───────────────
 const TRANSLATIONS = {
   en: {
     htmlLang: 'en',
-    pageTitle: 'Sub Gourmet — Mediterranean flavors, Adriatic soul',
+    pageTitle: 'Sub Gourmet · Mediterranean flavors, Adriatic soul',
     nav: { about: 'About', menu: 'Menu', gallery: 'Gallery', visit: 'Visit', reserve: 'Reserve', menuAria: 'Menu' },
     hero: {
       eyebrow: 'Srebreno · Dubrovnik Riviera',
       h1Top: 'Sub',
       h1Bot: ['Gourm', 'e', 't'],
-      tag: 'Mediterranean flavors, Adriatic soul — where the coast meets the table, slowly, the way it should.',
+      tag: 'Mediterranean flavors, Adriatic soul, where the coast meets the table, slowly, the way it should.',
       viewMenu: 'View Menu',
       reserveTable: 'Reserve a Table',
       today: 'Today',
@@ -41,8 +30,8 @@ const TRANSLATIONS = {
       h2a: 'A small kitchen with the ',
       h2em: 'whole sea',
       h2b: ' beside it.',
-      lead: 'In Srebreno, a quiet bay just east of Dubrovnik, we cook the way our grandmothers did — and the way travelers wished they could.',
-      p1: 'Our kitchen mixes the Dalmatian classics — grilled fish, slow-baked lamb, hand-rolled pasta with Istrian truffle — with the comfort dishes our guests have come to love over a long afternoon.',
+      lead: 'In Srebreno, a quiet bay just east of Dubrovnik, we cook the way our grandmothers did, and the way travelers wished they could.',
+      p1: 'Our kitchen mixes the Dalmatian classics (grilled fish, slow-baked lamb, hand-rolled pasta with Istrian truffle) with the comfort dishes our guests have come to love over a long afternoon.',
       p2: 'The fish is from boats two minutes away. The olive oil from the hill behind us. The rest, we earn.',
       stat1Num: '12', stat1Lbl: 'Years on the bay',
       stat2Num: '94%', stat2Lbl: 'Locally sourced',
@@ -113,20 +102,20 @@ const TRANSLATIONS = {
       notesPh: 'Birthday, allergies, anything we should know...',
       submit: 'Request table',
       cancel: 'Cancel',
-      doneTitleA: 'Hvala — ', doneTitleEm: 'see you soon.',
+      doneTitleA: 'Hvala, ', doneTitleEm: 'see you soon.',
       doneConfirm: (g, d, t) => `We'll confirm your table for ${g} guests on ${d || 'the requested date'} at ${t} by phone shortly.`,
       close: 'Close',
     },
   },
   hr: {
     htmlLang: 'hr',
-    pageTitle: 'Sub Gourmet — Mediteranski okusi, jadranska duša',
+    pageTitle: 'Sub Gourmet · Mediteranski okusi, jadranska duša',
     nav: { about: 'O nama', menu: 'Meni', gallery: 'Galerija', visit: 'Posjetite nas', reserve: 'Rezervirajte', menuAria: 'Meni' },
     hero: {
       eyebrow: 'Srebreno · Dubrovačka rivijera',
       h1Top: 'Sub',
       h1Bot: ['Gourm', 'e', 't'],
-      tag: 'Mediteranski okusi, jadranska duša — gdje se obala susreće sa stolom, polako, onako kako treba.',
+      tag: 'Mediteranski okusi, jadranska duša, gdje se obala susreće sa stolom, polako, onako kako treba.',
       viewMenu: 'Pogledajte meni',
       reserveTable: 'Rezervirajte stol',
       today: 'Danas',
@@ -141,8 +130,8 @@ const TRANSLATIONS = {
       h2a: 'Mala kuhinja s ',
       h2em: 'cijelim morem',
       h2b: ' pored sebe.',
-      lead: 'U Srebrenom, tihoj uvali istočno od Dubrovnika, kuhamo kao što su naše bake — i kako su putnici poželjeli da znaju.',
-      p1: 'U našoj kuhinji se miješaju dalmatinski klasici — riba s roštilja, polagano pečena janjetina, ručno valjana tjestenina s istarskim tartufom — s domaćim jelima koja naši gosti vole uz dugo popodne.',
+      lead: 'U Srebrenom, tihoj uvali istočno od Dubrovnika, kuhamo kao što su naše bake, i kako su putnici poželjeli da znaju.',
+      p1: 'U našoj kuhinji se miješaju dalmatinski klasici (riba s roštilja, polagano pečena janjetina, ručno valjana tjestenina s istarskim tartufom) s domaćim jelima koja naši gosti vole uz dugo popodne.',
       p2: 'Riba je s brodova dvije minute odavde. Maslinovo ulje s brda iza nas. Ostalo zaslužujemo.',
       stat1Num: '12', stat1Lbl: 'Godina u uvali',
       stat2Num: '94%', stat2Lbl: 'Lokalnog porijekla',
@@ -213,7 +202,7 @@ const TRANSLATIONS = {
       notesPh: 'Rođendan, alergije, nešto što bismo trebali znati...',
       submit: 'Zatraži stol',
       cancel: 'Odustani',
-      doneTitleA: 'Hvala — ', doneTitleEm: 'vidimo se uskoro.',
+      doneTitleA: 'Hvala, ', doneTitleEm: 'vidimo se uskoro.',
       doneConfirm: (g, d, t) => `Potvrdit ćemo vaš stol za ${g} gostiju ${d || 'traženi datum'} u ${t} telefonom uskoro.`,
       close: 'Zatvori',
     },
@@ -240,7 +229,7 @@ function useLang() {
   return [lang, setLang];
 }
 
-function Logo({ color = 'currentColor' }) {
+function Logo() {
   return (
     <span className="nav-logo">
       <span>SUB</span>
@@ -296,11 +285,11 @@ function Nav({ onReserve, scrolled, dark, lang, setLang, t }) {
   );
 }
 
-function Hero({ onReserve, heroImage, t }) {
+function Hero({ onReserve, t }) {
   const [a, b, c] = t.hero.h1Bot;
   return (
     <section className="hero" id="top">
-      <div className="hero-bg" style={{ backgroundImage: `linear-gradient(120deg, rgba(20,18,16,0.78) 0%, rgba(20,18,16,0.45) 55%, rgba(20,18,16,0.78) 100%), url(${HERO_IMAGES[heroImage] || HERO_IMAGES.interior})` }}></div>
+      <div className="hero-bg" style={{ backgroundImage: `linear-gradient(120deg, rgba(20,18,16,0.78) 0%, rgba(20,18,16,0.45) 55%, rgba(20,18,16,0.78) 100%), url(${HERO_IMAGE})` }}></div>
       <div className="hero-inner">
         <div>
           <div className="hero-eyebrow mono">
@@ -343,7 +332,7 @@ function About({ t }) {
       <div className="container">
         <div className="about-grid">
           <div className="about-img reveal">
-            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80" alt={t.about.imgAlt} />
+            <img src={ABOUT_IMAGE} alt={t.about.imgAlt} loading="lazy" decoding="async" />
             <div className="stamp">
               <span className="small">{t.about.stampEst}</span>
               {t.about.stampSince}
@@ -380,10 +369,9 @@ function About({ t }) {
   );
 }
 
-function MenuSection({ showSignatureStars, layout, lang, t }) {
+function MenuSection({ lang, t }) {
   const [active, setActive] = useState('breakfast');
   const current = MENU.find(m => m.id === active);
-  // Single-language menu: names, headings, and descriptions follow the active UI language.
   const primaryLang = lang === 'hr' ? 'hr' : 'en';
   const itemDesc = (item) => lang === 'hr' ? (item.descHr || item.desc) : item.desc;
   const sectionNote = (m) => lang === 'hr' ? (m.noteHr || m.note) : m.note;
@@ -412,9 +400,9 @@ function MenuSection({ showSignatureStars, layout, lang, t }) {
           </div>
         </div>
 
-        <div className="menu-grid reveal" style={layout === 'one-column' ? {gridTemplateColumns: '1fr'} : {}}>
+        <div className="menu-grid reveal">
           {current.items.map((item, i) => (
-            <div key={i} className={'menu-item' + (item.signature && showSignatureStars ? ' signature' : '')}>
+            <div key={i} className={'menu-item' + (item.signature ? ' signature' : '')}>
               <div>
                 <div className="menu-item-name">
                   {item[primaryLang]}
@@ -438,18 +426,19 @@ function MenuSection({ showSignatureStars, layout, lang, t }) {
   );
 }
 
+const GALLERY = [
+  { src: 'images/p3.jpg', cls: 'big',  alt: 'Sub Gourmet interior' },
+  { src: 'images/f5.jpg', cls: 'tall', alt: 'House plate' },
+  { src: 'images/f3.jpg', cls: '',     alt: 'House plate' },
+  { src: 'images/f9.jpg', cls: '',     alt: 'House plate' },
+  { src: 'images/f10.jpg', cls: 'wide', alt: 'House plate' },
+  { src: 'images/f15.jpg', cls: 'tall', alt: 'House plate' },
+  { src: 'images/f8.jpg', cls: '',     alt: 'House plate' },
+  { src: 'images/f4.jpg', cls: '',     alt: 'House plate' },
+  { src: 'images/f17.jpg', cls: 'wide', alt: 'House plate' },
+];
+
 function Gallery({ t }) {
-  const imgs = [
-    { src: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1200&q=80', cls: 'big', alt: 'Sub Gourmet pizza' },
-    { src: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=900&q=80', cls: 'tall', alt: 'Hand-rolled pasta' },
-    { src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80', cls: '', alt: 'Outdoor terrace at dusk' },
-    { src: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=900&q=80', cls: '', alt: 'Restaurant interior' },
-    { src: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=900&q=80', cls: 'wide', alt: 'House burger and fries' },
-    { src: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=900&q=80', cls: 'tall', alt: 'Dubrovnik Riviera coastline' },
-    { src: 'https://images.unsplash.com/photo-1559847844-5315695dadae?w=900&q=80', cls: '', alt: 'Grilled squid' },
-    { src: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=900&q=80', cls: '', alt: 'Tiramisu dessert' },
-    { src: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=900&q=80', cls: 'wide', alt: 'Grilled fish on plate' },
-  ];
   return (
     <section className="gallery dark" id="gallery">
       <div className="container">
@@ -458,9 +447,9 @@ function Gallery({ t }) {
           <h2>{t.gallery.h2a}<em>{t.gallery.h2em}</em>{t.gallery.h2b}</h2>
         </div>
         <div className="gallery-grid reveal">
-          {imgs.map((img, i) => (
+          {GALLERY.map((img, i) => (
             <div key={i} className={'gallery-item ' + img.cls}>
-              <img src={img.src} alt={img.alt} loading="lazy" />
+              <img src={img.src} alt={img.alt} loading="lazy" decoding="async" />
             </div>
           ))}
         </div>
@@ -510,7 +499,7 @@ function Visit({ t }) {
 
           <div className="visit-map reveal">
             <div className="map-canvas">
-              <svg viewBox="0 0 600 600" preserveAspectRatio="none">
+              <svg viewBox="0 0 600 600" preserveAspectRatio="none" aria-hidden="true">
                 <defs>
                   <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
                     <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(245,240,232,0.1)" strokeWidth="0.5"/>
@@ -576,10 +565,10 @@ function Footer({ t }) {
             <h5>{t.footer.follow}</h5>
             <div className="foot-social">
               <a href="#" aria-label="Instagram">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.7" fill="currentColor"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.7" fill="currentColor"/></svg>
               </a>
               <a href="#" aria-label="Facebook">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M14 9h3V6h-3a3 3 0 0 0-3 3v2H8v3h3v7h3v-7h3l1-3h-4V9z"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M14 9h3V6h-3a3 3 0 0 0-3 3v2H8v3h3v7h3v-7h3l1-3h-4V9z"/></svg>
               </a>
             </div>
             <p style={{fontSize: 13, color: 'rgba(245,240,232,0.55)', marginTop: 14}}>@subcaffegourmet</p>
@@ -667,7 +656,6 @@ function ReservationModal({ open, onClose, t }) {
 }
 
 function App() {
-  const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const [modalOpen, setModalOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [overDark, setOverDark] = useState(true);
@@ -678,7 +666,6 @@ function App() {
     const onScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 80);
-      // Determine if nav is over dark section (hero or gallery)
       const gallery = document.getElementById('gallery');
       const galleryRect = gallery ? gallery.getBoundingClientRect() : null;
       const overHero = y < window.innerHeight - 80;
@@ -690,7 +677,6 @@ function App() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Reveal on scroll
   useEffect(() => {
     const els = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver((entries) => {
@@ -705,52 +691,16 @@ function App() {
     return () => io.disconnect();
   });
 
-  // Apply accent color
-  useEffect(() => {
-    document.documentElement.style.setProperty('--gold', tweaks.accentColor);
-  }, [tweaks.accentColor]);
-
   return (
     <>
       <Nav onReserve={() => setModalOpen(true)} scrolled={scrolled} dark={overDark} lang={lang} setLang={setLang} t={t} />
-      <Hero onReserve={() => setModalOpen(true)} heroImage={tweaks.heroImage} t={t} />
+      <Hero onReserve={() => setModalOpen(true)} t={t} />
       <About t={t} />
-      <MenuSection showSignatureStars={tweaks.showSignatureStars} layout={tweaks.menuLayout} lang={lang} t={t} />
+      <MenuSection lang={lang} t={t} />
       <Gallery t={t} />
       <Visit t={t} />
       <Footer t={t} />
       <ReservationModal open={modalOpen} onClose={() => setModalOpen(false)} t={t} />
-
-      <TweaksPanel title="Tweaks">
-        <TweakSection title="Hero">
-          <TweakRadio
-            label="Hero image"
-            value={tweaks.heroImage}
-            onChange={v => setTweak('heroImage', v)}
-            options={[
-              {value: 'interior', label: 'Interior'},
-              {value: 'pasta', label: 'Pasta'},
-              {value: 'table', label: 'Terrace'},
-              {value: 'coast', label: 'Coast'},
-            ]}
-          />
-        </TweakSection>
-        <TweakSection title="Brand">
-          <TweakColor label="Accent color" value={tweaks.accentColor} onChange={v => setTweak('accentColor', v)} />
-        </TweakSection>
-        <TweakSection title="Menu">
-          <TweakToggle label="Highlight signature items" value={tweaks.showSignatureStars} onChange={v => setTweak('showSignatureStars', v)} />
-          <TweakRadio
-            label="Layout"
-            value={tweaks.menuLayout}
-            onChange={v => setTweak('menuLayout', v)}
-            options={[
-              {value: 'two-column', label: 'Two column'},
-              {value: 'one-column', label: 'One column'},
-            ]}
-          />
-        </TweakSection>
-      </TweaksPanel>
     </>
   );
 }
