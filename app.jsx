@@ -345,15 +345,28 @@ function MenuSection({ lang, t }) {
           <span className="eyebrow mono"><span className="line"></span><span>{t.menu.eyebrow}</span></span>
           <h2>{t.menu.h2a}<em>{t.menu.h2em}</em></h2>
         </div>
-        <div className="menu-tabs reveal">
+        <div className="menu-tabs reveal" role="tablist">
           {MENU.map(m => (
             <button
               key={m.id}
               className={'menu-tab' + (active === m.id ? ' active' : '')}
               onClick={() => setActive(m.id)}
+              role="tab"
+              aria-selected={active === m.id}
             >{m[primaryLang]}</button>
           ))}
         </div>
+        <label htmlFor="menu-category-select" className="sr-only">{t.menu.eyebrow}</label>
+        <select
+          id="menu-category-select"
+          className="menu-tabs-select reveal"
+          value={active}
+          onChange={e => setActive(e.target.value)}
+        >
+          {MENU.map(m => (
+            <option key={m.id} value={m.id}>{m[primaryLang]}</option>
+          ))}
+        </select>
 
         <div className="menu-section-meta reveal">
           <h3>{current[primaryLang]}</h3>
@@ -388,35 +401,40 @@ function MenuSection({ lang, t }) {
 }
 
 // Gallery: 26 photos total. First 9 shown by default; rest revealed by "Show all photos".
+// w/h are the source aspect ratios (used as <img width/height> hints to prevent
+// column rebalancing as images load in the masonry layout).
+const L = { w: 1800, h: 1200 };   // landscape food shots
+const P = { w: 1200, h: 1800 };   // portrait food shots
+const W = { w: 2200, h: 1466 };   // wide hero photo (p1)
 const GALLERY = [
-  // Initial 9 (16 grid cells across 4 rows)
-  { src: 'images/p3.jpg',  cls: 'big',  alt: 'Sub Gourmet interior' },
-  { src: 'images/f5.jpg',  cls: 'tall', alt: 'House plate' },
-  { src: 'images/f1.jpg',  cls: '',     alt: 'House plate' },
-  { src: 'images/f3.jpg',  cls: '',     alt: 'House plate' },
-  { src: 'images/f10.jpg', cls: 'wide', alt: 'House plate' },
-  { src: 'images/f15.jpg', cls: 'tall', alt: 'House plate' },
-  { src: 'images/f8.jpg',  cls: '',     alt: 'House plate' },
-  { src: 'images/f4.jpg',  cls: '',     alt: 'House plate' },
-  { src: 'images/f17.jpg', cls: 'wide', alt: 'House plate' },
+  // Initial 9
+  { src: 'images/p3.jpg',  ...L, alt: 'Sub Gourmet interior' },
+  { src: 'images/f5.jpg',  ...P, alt: 'House plate' },
+  { src: 'images/f1.jpg',  ...L, alt: 'House plate' },
+  { src: 'images/f3.jpg',  ...L, alt: 'House plate' },
+  { src: 'images/f10.jpg', ...L, alt: 'House plate' },
+  { src: 'images/f15.jpg', ...P, alt: 'House plate' },
+  { src: 'images/f8.jpg',  ...L, alt: 'House plate' },
+  { src: 'images/f4.jpg',  ...L, alt: 'House plate' },
+  { src: 'images/f17.jpg', ...L, alt: 'House plate' },
   // Revealed by "Show all photos"
-  { src: 'images/p1.jpg',  cls: 'wide', alt: 'Sub Gourmet dining room' },
-  { src: 'images/p2.jpg',  cls: 'wide', alt: 'Sub Gourmet seating' },
-  { src: 'images/f2.jpg',  cls: '',     alt: 'House plate' },
-  { src: 'images/f6.jpg',  cls: 'wide', alt: 'House plate' },
-  { src: 'images/f7.jpg',  cls: 'tall', alt: 'House plate' },
-  { src: 'images/f9.jpg',  cls: '',     alt: 'House plate' },
-  { src: 'images/f11.jpg', cls: 'tall', alt: 'House plate' },
-  { src: 'images/f12.jpg', cls: 'wide', alt: 'House plate' },
-  { src: 'images/f13.jpg', cls: '',     alt: 'House plate' },
-  { src: 'images/f14.jpg', cls: 'wide', alt: 'House plate' },
-  { src: 'images/f16.jpg', cls: 'tall', alt: 'House plate' },
-  { src: 'images/f18.jpg', cls: '',     alt: 'House plate' },
-  { src: 'images/f19.jpg', cls: 'wide', alt: 'House plate' },
-  { src: 'images/f20.jpg', cls: '',     alt: 'House plate' },
-  { src: 'images/f21.jpg', cls: '',     alt: 'House plate' },
-  { src: 'images/f22.jpg', cls: 'wide', alt: 'House plate' },
-  { src: 'images/f23.jpg', cls: '',     alt: 'House plate' },
+  { src: 'images/p1.jpg',  ...W, alt: 'Sub Gourmet dining room' },
+  { src: 'images/p2.jpg',  ...L, alt: 'Sub Gourmet seating' },
+  { src: 'images/f2.jpg',  ...L, alt: 'House plate' },
+  { src: 'images/f6.jpg',  ...L, alt: 'House plate' },
+  { src: 'images/f7.jpg',  ...P, alt: 'House plate' },
+  { src: 'images/f9.jpg',  ...L, alt: 'House plate' },
+  { src: 'images/f11.jpg', ...P, alt: 'House plate' },
+  { src: 'images/f12.jpg', ...L, alt: 'House plate' },
+  { src: 'images/f13.jpg', ...L, alt: 'House plate' },
+  { src: 'images/f14.jpg', ...L, alt: 'House plate' },
+  { src: 'images/f16.jpg', ...P, alt: 'House plate' },
+  { src: 'images/f18.jpg', ...L, alt: 'House plate' },
+  { src: 'images/f19.jpg', ...L, alt: 'House plate' },
+  { src: 'images/f20.jpg', ...L, alt: 'House plate' },
+  { src: 'images/f21.jpg', ...L, alt: 'House plate' },
+  { src: 'images/f22.jpg', ...L, alt: 'House plate' },
+  { src: 'images/f23.jpg', ...L, alt: 'House plate' },
 ];
 const GALLERY_INITIAL = 9;
 
@@ -431,9 +449,9 @@ function Gallery({ t }) {
           <h2>{t.gallery.h2a}<em>{t.gallery.h2em}</em>{t.gallery.h2b}</h2>
         </div>
         <div className="gallery-grid reveal">
-          {visible.map((img, i) => (
-            <div key={img.src} className={'gallery-item ' + img.cls}>
-              <img src={img.src} alt={img.alt} loading="lazy" decoding="async" />
+          {visible.map((img) => (
+            <div key={img.src} className="gallery-item">
+              <img src={img.src} alt={img.alt} width={img.w} height={img.h} loading="lazy" decoding="async" />
             </div>
           ))}
         </div>

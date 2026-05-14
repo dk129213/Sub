@@ -434,11 +434,25 @@ function MenuSection({
   }, /*#__PURE__*/React.createElement("span", {
     className: "line"
   }), /*#__PURE__*/React.createElement("span", null, t.menu.eyebrow)), /*#__PURE__*/React.createElement("h2", null, t.menu.h2a, /*#__PURE__*/React.createElement("em", null, t.menu.h2em))), /*#__PURE__*/React.createElement("div", {
-    className: "menu-tabs reveal"
+    className: "menu-tabs reveal",
+    role: "tablist"
   }, MENU.map(m => /*#__PURE__*/React.createElement("button", {
     key: m.id,
     className: 'menu-tab' + (active === m.id ? ' active' : ''),
-    onClick: () => setActive(m.id)
+    onClick: () => setActive(m.id),
+    role: "tab",
+    "aria-selected": active === m.id
+  }, m[primaryLang]))), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "menu-category-select",
+    className: "sr-only"
+  }, t.menu.eyebrow), /*#__PURE__*/React.createElement("select", {
+    id: "menu-category-select",
+    className: "menu-tabs-select reveal",
+    value: active,
+    onChange: e => setActive(e.target.value)
+  }, MENU.map(m => /*#__PURE__*/React.createElement("option", {
+    key: m.id,
+    value: m.id
   }, m[primaryLang]))), /*#__PURE__*/React.createElement("div", {
     className: "menu-section-meta reveal"
   }, /*#__PURE__*/React.createElement("h3", null, current[primaryLang]), /*#__PURE__*/React.createElement("div", {
@@ -464,113 +478,127 @@ function MenuSection({
 }
 
 // Gallery: 26 photos total. First 9 shown by default; rest revealed by "Show all photos".
+// w/h are the source aspect ratios (used as <img width/height> hints to prevent
+// column rebalancing as images load in the masonry layout).
+const L = {
+  w: 1800,
+  h: 1200
+}; // landscape food shots
+const P = {
+  w: 1200,
+  h: 1800
+}; // portrait food shots
+const W = {
+  w: 2200,
+  h: 1466
+}; // wide hero photo (p1)
 const GALLERY = [
-// Initial 9 (16 grid cells across 4 rows)
+// Initial 9
 {
   src: 'images/p3.jpg',
-  cls: 'big',
+  ...L,
   alt: 'Sub Gourmet interior'
 }, {
   src: 'images/f5.jpg',
-  cls: 'tall',
+  ...P,
   alt: 'House plate'
 }, {
   src: 'images/f1.jpg',
-  cls: '',
+  ...L,
   alt: 'House plate'
 }, {
   src: 'images/f3.jpg',
-  cls: '',
+  ...L,
   alt: 'House plate'
 }, {
   src: 'images/f10.jpg',
-  cls: 'wide',
+  ...L,
   alt: 'House plate'
 }, {
   src: 'images/f15.jpg',
-  cls: 'tall',
+  ...P,
   alt: 'House plate'
 }, {
   src: 'images/f8.jpg',
-  cls: '',
+  ...L,
   alt: 'House plate'
 }, {
   src: 'images/f4.jpg',
-  cls: '',
+  ...L,
   alt: 'House plate'
 }, {
   src: 'images/f17.jpg',
-  cls: 'wide',
+  ...L,
   alt: 'House plate'
 },
 // Revealed by "Show all photos"
 {
   src: 'images/p1.jpg',
-  cls: 'wide',
+  ...W,
   alt: 'Sub Gourmet dining room'
 }, {
   src: 'images/p2.jpg',
-  cls: 'wide',
+  ...L,
   alt: 'Sub Gourmet seating'
 }, {
   src: 'images/f2.jpg',
-  cls: '',
+  ...L,
   alt: 'House plate'
 }, {
   src: 'images/f6.jpg',
-  cls: 'wide',
+  ...L,
   alt: 'House plate'
 }, {
   src: 'images/f7.jpg',
-  cls: 'tall',
+  ...P,
   alt: 'House plate'
 }, {
   src: 'images/f9.jpg',
-  cls: '',
+  ...L,
   alt: 'House plate'
 }, {
   src: 'images/f11.jpg',
-  cls: 'tall',
+  ...P,
   alt: 'House plate'
 }, {
   src: 'images/f12.jpg',
-  cls: 'wide',
+  ...L,
   alt: 'House plate'
 }, {
   src: 'images/f13.jpg',
-  cls: '',
+  ...L,
   alt: 'House plate'
 }, {
   src: 'images/f14.jpg',
-  cls: 'wide',
+  ...L,
   alt: 'House plate'
 }, {
   src: 'images/f16.jpg',
-  cls: 'tall',
+  ...P,
   alt: 'House plate'
 }, {
   src: 'images/f18.jpg',
-  cls: '',
+  ...L,
   alt: 'House plate'
 }, {
   src: 'images/f19.jpg',
-  cls: 'wide',
+  ...L,
   alt: 'House plate'
 }, {
   src: 'images/f20.jpg',
-  cls: '',
+  ...L,
   alt: 'House plate'
 }, {
   src: 'images/f21.jpg',
-  cls: '',
+  ...L,
   alt: 'House plate'
 }, {
   src: 'images/f22.jpg',
-  cls: 'wide',
+  ...L,
   alt: 'House plate'
 }, {
   src: 'images/f23.jpg',
-  cls: '',
+  ...L,
   alt: 'House plate'
 }];
 const GALLERY_INITIAL = 9;
@@ -592,12 +620,14 @@ function Gallery({
     className: "line"
   }), /*#__PURE__*/React.createElement("span", null, t.gallery.eyebrow)), /*#__PURE__*/React.createElement("h2", null, t.gallery.h2a, /*#__PURE__*/React.createElement("em", null, t.gallery.h2em), t.gallery.h2b)), /*#__PURE__*/React.createElement("div", {
     className: "gallery-grid reveal"
-  }, visible.map((img, i) => /*#__PURE__*/React.createElement("div", {
+  }, visible.map(img => /*#__PURE__*/React.createElement("div", {
     key: img.src,
-    className: 'gallery-item ' + img.cls
+    className: "gallery-item"
   }, /*#__PURE__*/React.createElement("img", {
     src: img.src,
     alt: img.alt,
+    width: img.w,
+    height: img.h,
     loading: "lazy",
     decoding: "async"
   })))), !expanded && /*#__PURE__*/React.createElement("div", {
