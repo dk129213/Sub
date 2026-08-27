@@ -54,6 +54,10 @@ const TRANSLATIONS = {
       h2em: 'Adriatic',
       h2b: ' meets the table.',
       showMore: 'Show all photos',
+      viewLarger: 'View larger',
+      close: 'Close',
+      prev: 'Previous photo',
+      next: 'Next photo',
     },
     visit: {
       eyebrow: 'Find Us',
@@ -136,6 +140,10 @@ const TRANSLATIONS = {
       h2em: 'Jadran',
       h2b: ' susreće sa stolom.',
       showMore: 'Pogledaj sve fotografije',
+      viewLarger: 'Prikaži veće',
+      close: 'Zatvori',
+      prev: 'Prethodna fotografija',
+      next: 'Sljedeća fotografija',
     },
     visit: {
       eyebrow: 'Pronađite nas',
@@ -275,7 +283,7 @@ function Hero({ t }) {
             </div>
             <div className="hero-meta-item">
               <span className="hero-meta-label">{t.hero.perPerson}</span>
-              <span className="hero-meta-value">€10 – €15</span>
+              <span className="hero-meta-value">10€ – 15€</span>
             </div>
           </div>
         </div>
@@ -384,7 +392,7 @@ function MenuSection({ lang, t }) {
                 </div>
                 {item.desc && <div className="menu-item-desc">{itemDesc(item)}</div>}
               </div>
-              <div className="menu-item-price">€{item.price}</div>
+              <div className="menu-item-price">{item.price}€</div>
             </div>
           ))}
         </div>
@@ -438,9 +446,73 @@ const GALLERY = [
 ];
 const GALLERY_INITIAL = 9;
 
+// Fullscreen photo viewer. `index` is a position in `photos`; null means closed.
+function Lightbox({ photos, index, onClose, onNavigate, t }) {
+  const open = index !== null;
+
+  // Escape to close, arrows to navigate. Rebound whenever the index changes so
+  // the handler always sees the current position.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose();
+      else if (e.key === 'ArrowLeft') onNavigate(-1);
+      else if (e.key === 'ArrowRight') onNavigate(1);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open, index, onClose, onNavigate]);
+
+  // Lock background scroll while the viewer is up.
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prev; };
+  }, [open]);
+
+  if (!open) return null;
+  const photo = photos[index];
+
+  return (
+    <div className="lightbox" role="dialog" aria-modal="true" aria-label={photo.alt} onClick={onClose}>
+      <button type="button" className="lightbox-close" aria-label={t.gallery.close} onClick={onClose}>&times;</button>
+
+      <button
+        type="button"
+        className="lightbox-nav prev"
+        aria-label={t.gallery.prev}
+        onClick={(e) => { e.stopPropagation(); onNavigate(-1); }}
+      >&#8249;</button>
+
+      {/* Stop propagation so clicking the photo itself doesn't dismiss. */}
+      <figure className="lightbox-figure" onClick={(e) => e.stopPropagation()}>
+        <img src={photo.src} alt={photo.alt} width={photo.w} height={photo.h} />
+        <figcaption className="lightbox-caption mono">
+          <span>{photo.alt}</span>
+          <span className="lightbox-count">{index + 1} / {photos.length}</span>
+        </figcaption>
+      </figure>
+
+      <button
+        type="button"
+        className="lightbox-nav next"
+        aria-label={t.gallery.next}
+        onClick={(e) => { e.stopPropagation(); onNavigate(1); }}
+      >&#8250;</button>
+    </div>
+  );
+}
+
 function Gallery({ t }) {
   const [expanded, setExpanded] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
   const visible = expanded ? GALLERY : GALLERY.slice(0, GALLERY_INITIAL);
+
+  // Navigation wraps around the set the visitor can currently see.
+  const navigate = (step) =>
+    setLightboxIndex((i) => (i === null ? i : (i + step + visible.length) % visible.length));
+
   return (
     <section className="gallery dark" id="gallery">
       <div className="container">
@@ -449,10 +521,17 @@ function Gallery({ t }) {
           <h2>{t.gallery.h2a}<em>{t.gallery.h2em}</em>{t.gallery.h2b}</h2>
         </div>
         <div className="gallery-grid reveal">
-          {visible.map((img) => (
-            <div key={img.src} className="gallery-item">
+          {visible.map((img, i) => (
+            <button
+              key={img.src}
+              type="button"
+              className="gallery-item"
+              aria-label={t.gallery.viewLarger + ': ' + img.alt}
+              onClick={() => setLightboxIndex(i)}
+            >
               <img src={img.src} alt={img.alt} width={img.w} height={img.h} loading="lazy" decoding="async" />
-            </div>
+              <span className="gallery-item-zoom" aria-hidden="true"></span>
+            </button>
           ))}
         </div>
         {!expanded && (
@@ -463,6 +542,13 @@ function Gallery({ t }) {
           </div>
         )}
       </div>
+      <Lightbox
+        photos={visible}
+        index={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onNavigate={navigate}
+        t={t}
+      />
     </section>
   );
 }
@@ -506,7 +592,7 @@ function Visit({ t }) {
             </div>
             <div className="visit-block">
               <span className="label">{t.visit.perPerson}</span>
-              <span className="value">€10 – €15</span>
+              <span className="value">10€ – 15€</span>
             </div>
           </div>
 

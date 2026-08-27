@@ -64,7 +64,11 @@ const TRANSLATIONS = {
       h2a: 'Where the ',
       h2em: 'Adriatic',
       h2b: ' meets the table.',
-      showMore: 'Show all photos'
+      showMore: 'Show all photos',
+      viewLarger: 'View larger',
+      close: 'Close',
+      prev: 'Previous photo',
+      next: 'Next photo'
     },
     visit: {
       eyebrow: 'Find Us',
@@ -159,7 +163,11 @@ const TRANSLATIONS = {
       h2a: 'Gdje se ',
       h2em: 'Jadran',
       h2b: ' susreće sa stolom.',
-      showMore: 'Pogledaj sve fotografije'
+      showMore: 'Pogledaj sve fotografije',
+      viewLarger: 'Prikaži veće',
+      close: 'Zatvori',
+      prev: 'Prethodna fotografija',
+      next: 'Sljedeća fotografija'
     },
     visit: {
       eyebrow: 'Pronađite nas',
@@ -348,7 +356,7 @@ function Hero({
     className: "hero-meta-label"
   }, t.hero.perPerson), /*#__PURE__*/React.createElement("span", {
     className: "hero-meta-value"
-  }, "\u20AC10 \u2013 \u20AC15"))))), /*#__PURE__*/React.createElement("div", {
+  }, "10\u20AC \u2013 15\u20AC"))))), /*#__PURE__*/React.createElement("div", {
     className: "hero-corner mono"
   }, /*#__PURE__*/React.createElement("span", null, t.hero.scroll), /*#__PURE__*/React.createElement("span", {
     className: "scroll-line"
@@ -470,7 +478,7 @@ function MenuSection({
     className: "menu-item-desc"
   }, itemDesc(item))), /*#__PURE__*/React.createElement("div", {
     className: "menu-item-price"
-  }, "\u20AC", item.price)))), /*#__PURE__*/React.createElement("div", {
+  }, item.price, "\u20AC")))), /*#__PURE__*/React.createElement("div", {
     className: "menu-callout reveal"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "serif"
@@ -602,11 +610,89 @@ const GALLERY = [
   alt: 'House plate'
 }];
 const GALLERY_INITIAL = 9;
+
+// Fullscreen photo viewer. `index` is a position in `photos`; null means closed.
+function Lightbox({
+  photos,
+  index,
+  onClose,
+  onNavigate,
+  t
+}) {
+  const open = index !== null;
+
+  // Escape to close, arrows to navigate. Rebound whenever the index changes so
+  // the handler always sees the current position.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = e => {
+      if (e.key === 'Escape') onClose();else if (e.key === 'ArrowLeft') onNavigate(-1);else if (e.key === 'ArrowRight') onNavigate(1);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open, index, onClose, onNavigate]);
+
+  // Lock background scroll while the viewer is up.
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+  if (!open) return null;
+  const photo = photos[index];
+  return /*#__PURE__*/React.createElement("div", {
+    className: "lightbox",
+    role: "dialog",
+    "aria-modal": "true",
+    "aria-label": photo.alt,
+    onClick: onClose
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "lightbox-close",
+    "aria-label": t.gallery.close,
+    onClick: onClose
+  }, "\xD7"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "lightbox-nav prev",
+    "aria-label": t.gallery.prev,
+    onClick: e => {
+      e.stopPropagation();
+      onNavigate(-1);
+    }
+  }, "\u2039"), /*#__PURE__*/React.createElement("figure", {
+    className: "lightbox-figure",
+    onClick: e => e.stopPropagation()
+  }, /*#__PURE__*/React.createElement("img", {
+    src: photo.src,
+    alt: photo.alt,
+    width: photo.w,
+    height: photo.h
+  }), /*#__PURE__*/React.createElement("figcaption", {
+    className: "lightbox-caption mono"
+  }, /*#__PURE__*/React.createElement("span", null, photo.alt), /*#__PURE__*/React.createElement("span", {
+    className: "lightbox-count"
+  }, index + 1, " / ", photos.length))), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "lightbox-nav next",
+    "aria-label": t.gallery.next,
+    onClick: e => {
+      e.stopPropagation();
+      onNavigate(1);
+    }
+  }, "\u203A"));
+}
 function Gallery({
   t
 }) {
   const [expanded, setExpanded] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
   const visible = expanded ? GALLERY : GALLERY.slice(0, GALLERY_INITIAL);
+
+  // Navigation wraps around the set the visitor can currently see.
+  const navigate = step => setLightboxIndex(i => i === null ? i : (i + step + visible.length) % visible.length);
   return /*#__PURE__*/React.createElement("section", {
     className: "gallery dark",
     id: "gallery"
@@ -620,9 +706,12 @@ function Gallery({
     className: "line"
   }), /*#__PURE__*/React.createElement("span", null, t.gallery.eyebrow)), /*#__PURE__*/React.createElement("h2", null, t.gallery.h2a, /*#__PURE__*/React.createElement("em", null, t.gallery.h2em), t.gallery.h2b)), /*#__PURE__*/React.createElement("div", {
     className: "gallery-grid reveal"
-  }, visible.map(img => /*#__PURE__*/React.createElement("div", {
+  }, visible.map((img, i) => /*#__PURE__*/React.createElement("button", {
     key: img.src,
-    className: "gallery-item"
+    type: "button",
+    className: "gallery-item",
+    "aria-label": t.gallery.viewLarger + ': ' + img.alt,
+    onClick: () => setLightboxIndex(i)
   }, /*#__PURE__*/React.createElement("img", {
     src: img.src,
     alt: img.alt,
@@ -630,6 +719,9 @@ function Gallery({
     height: img.h,
     loading: "lazy",
     decoding: "async"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "gallery-item-zoom",
+    "aria-hidden": "true"
   })))), !expanded && /*#__PURE__*/React.createElement("div", {
     className: "gallery-more reveal"
   }, /*#__PURE__*/React.createElement("button", {
@@ -638,7 +730,13 @@ function Gallery({
     onClick: () => setExpanded(true)
   }, t.gallery.showMore, " ", /*#__PURE__*/React.createElement("span", {
     className: "arrow"
-  })))));
+  })))), /*#__PURE__*/React.createElement(Lightbox, {
+    photos: visible,
+    index: lightboxIndex,
+    onClose: () => setLightboxIndex(null),
+    onNavigate: navigate,
+    t: t
+  }));
 }
 function Visit({
   t
@@ -710,7 +808,7 @@ function Visit({
     className: "label"
   }, t.visit.perPerson), /*#__PURE__*/React.createElement("span", {
     className: "value"
-  }, "\u20AC10 \u2013 \u20AC15"))), /*#__PURE__*/React.createElement("div", {
+  }, "10\u20AC \u2013 15\u20AC"))), /*#__PURE__*/React.createElement("div", {
     className: "visit-map reveal"
   }, /*#__PURE__*/React.createElement("iframe", {
     className: "map-frame",
