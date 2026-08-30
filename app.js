@@ -6,6 +6,9 @@ const MENU = window.MENU_DATA;
 const HERO_IMAGE = 'p1';
 const ABOUT_IMAGE = 'p2';
 const PHONE_E164 = '+38520642111';
+const INSTAGRAM_URL = 'https://www.instagram.com/subcaffegourmet/';
+const FACEBOOK_URL = 'https://www.facebook.com/subcaffegourmet';
+const SOCIAL_HANDLE = '@subcaffegourmet';
 const PHONE_DISPLAY = '+385 20 642 111';
 
 // Brand mark, traced from the 2026 logo artwork. Inlined so it inherits the
@@ -1005,7 +1008,9 @@ function Footer({
   }, /*#__PURE__*/React.createElement("h5", null, t.footer.follow), /*#__PURE__*/React.createElement("div", {
     className: "foot-social"
   }, /*#__PURE__*/React.createElement("a", {
-    href: "#",
+    href: INSTAGRAM_URL,
+    target: "_blank",
+    rel: "noreferrer",
     "aria-label": "Instagram"
   }, /*#__PURE__*/React.createElement("svg", {
     width: "14",
@@ -1031,7 +1036,9 @@ function Footer({
     r: "0.7",
     fill: "currentColor"
   }))), /*#__PURE__*/React.createElement("a", {
-    href: "#",
+    href: FACEBOOK_URL,
+    target: "_blank",
+    rel: "noreferrer",
     "aria-label": "Facebook"
   }, /*#__PURE__*/React.createElement("svg", {
     width: "14",
@@ -1046,10 +1053,14 @@ function Footer({
   })))), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 13,
-      color: 'rgba(245,240,232,0.55)',
       marginTop: 14
     }
-  }, "@subcaffegourmet"))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("a", {
+    className: "foot-handle",
+    href: INSTAGRAM_URL,
+    target: "_blank",
+    rel: "noreferrer"
+  }, SOCIAL_HANDLE)))), /*#__PURE__*/React.createElement("div", {
     className: "foot-bottom"
   }, /*#__PURE__*/React.createElement("span", null, t.footer.copyright), /*#__PURE__*/React.createElement("span", null, t.footer.designed))));
 }

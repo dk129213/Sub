@@ -5,6 +5,9 @@ const MENU = window.MENU_DATA;
 const HERO_IMAGE = 'p1';
 const ABOUT_IMAGE = 'p2';
 const PHONE_E164 = '+38520642111';
+const INSTAGRAM_URL = 'https://www.instagram.com/subcaffegourmet/';
+const FACEBOOK_URL = 'https://www.facebook.com/subcaffegourmet';
+const SOCIAL_HANDLE = '@subcaffegourmet';
 const PHONE_DISPLAY = '+385 20 642 111';
 
 // Brand mark, traced from the 2026 logo artwork. Inlined so it inherits the
@@ -770,14 +773,16 @@ function Footer({ t }) {
           <div className="foot-col">
             <h5>{t.footer.follow}</h5>
             <div className="foot-social">
-              <a href="#" aria-label="Instagram">
+              <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" aria-label="Instagram">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.7" fill="currentColor"/></svg>
               </a>
-              <a href="#" aria-label="Facebook">
+              <a href={FACEBOOK_URL} target="_blank" rel="noreferrer" aria-label="Facebook">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M14 9h3V6h-3a3 3 0 0 0-3 3v2H8v3h3v7h3v-7h3l1-3h-4V9z"/></svg>
               </a>
             </div>
-            <p style={{fontSize: 13, color: 'rgba(245,240,232,0.55)', marginTop: 14}}>@subcaffegourmet</p>
+            <p style={{fontSize: 13, marginTop: 14}}>
+              <a className="foot-handle" href={INSTAGRAM_URL} target="_blank" rel="noreferrer">{SOCIAL_HANDLE}</a>
+            </p>
           </div>
         </div>
         <div className="foot-bottom">
