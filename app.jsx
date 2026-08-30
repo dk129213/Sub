@@ -2,8 +2,44 @@ const { useState, useEffect } = React;
 
 const MENU = window.MENU_DATA;
 
-const HERO_IMAGE = 'images/p1.jpg';
-const ABOUT_IMAGE = 'images/p2.jpg';
+const HERO_IMAGE = 'p1';
+const ABOUT_IMAGE = 'p2';
+const PHONE_E164 = '+38520642111';
+const PHONE_DISPLAY = '+385 20 642 111';
+
+// Brand mark, traced from the 2026 logo artwork. Inlined so it inherits the
+// nav's currentColor as the header transitions, and costs no extra request.
+const LOGO_SVG = "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"250 824 2578 834\" role=\"img\" aria-label=\"Sub Gourmet\"><defs><path id=\"font_2_54\" d=\"M.237 .241C.20766 .251 .18099 .26116 .157 .2715 .133 .28183 .11234 .29433 .095 .30899 .07767 .32366 .06416 .34116 .05449 .3615 .04483 .38183 .03999 .40667 .03999 .436 .03999 .49267 .06183 .53799 .1055 .57199 .14917 .606 .21034 .623 .289 .623 .31767 .623 .34433 .621 .369 .61699 .39367 .61299 .41484 .60683 .4325 .5985 .45016 .59016 .464 .5795 .474 .5665 .484 .5535 .489 .53833 .489 .521 .489 .50366 .485 .48883 .47699 .47649 .46899 .46416 .45933 .45366 .448 .44501 .43333 .45434 .41366 .4625 .38899 .4695 .36433 .4765 .33734 .48 .308 .48 .278 .48 .256 .47583 .24199 .4675 .22799 .45917 .22099 .44867 .22099 .436 .22099 .42601 .22533 .41784 .23399 .4115 .24266 .40516 .25566 .39933 .27299 .394L.326 .377C.38867 .357 .43683 .3315 .47049 .30049 .50416 .2695 .521 .22733 .521 .174 .521 .11733 .49866 .0715 .45399 .0365 .40933 .0015 .34366-.01601 .257-.01601 .22633-.01601 .19783-.0135 .17149-.0085 .14517-.0035 .12217 .00382 .10249 .01349 .08283 .02316 .06749 .03517 .05649 .0495 .04549 .06383 .03999 .08033 .03999 .099 .03999 .11834 .04566 .13484 .05699 .1485 .06833 .16217 .08067 .17267 .09399 .17999 .11266 .16533 .13549 .15267 .16249 .142 .1895 .13134 .219 .12601 .25101 .12601 .28367 .12601 .30667 .13101 .31999 .14101 .33333 .15101 .34 .16267 .34 .17599 .34 .18933 .33466 .1995 .32399 .2065 .31333 .2135 .29833 .22033 .27901 .22701L.237 .241Z\"/><path id=\"font_2_56\" d=\"M.60201 .224C.60201 .188 .59584 .15516 .5835 .12549 .57117 .09583 .55333 .0705 .53 .0495 .50666 .0285 .47833 .01233 .44499 .00099 .41167-.01034 .374-.01601 .332-.01601 .29-.01601 .25233-.01034 .21899 .00099 .18567 .01233 .15734 .0285 .134 .0495 .11067 .0705 .09283 .09583 .08049 .12549 .06816 .15516 .062 .188 .062 .224V.606C.06933 .60734 .081 .60917 .097 .6115 .113 .61384 .12834 .61501 .14301 .61501 .15834 .61501 .17183 .61384 .1835 .6115 .19517 .60917 .205 .605 .213 .599 .221 .593 .22701 .58466 .231 .57399 .235 .56333 .237 .54933 .237 .532V.22701C.237 .195 .24583 .17 .26349 .15199 .28116 .134 .304 .125 .332 .125 .36067 .125 .38367 .134 .401 .15199 .41833 .17 .427 .195 .427 .22701V.606C.43434 .60734 .446 .60917 .46199 .6115 .47799 .61384 .49333 .61501 .508 .61501 .52334 .61501 .53683 .61384 .54849 .6115 .56016 .60917 .56999 .605 .57799 .599 .58599 .593 .592 .58466 .59599 .57399 .6 .56333 .60201 .54933 .60201 .532V.224Z\"/><path id=\"font_2_37\" d=\"M.235 .125C.24433 .12233 .25633 .1205 .271 .11949 .28566 .11849 .29967 .118 .313 .118 .33967 .118 .36183 .12349 .3795 .13449 .39717 .1455 .40601 .16267 .40601 .186 .40601 .208 .39867 .22366 .384 .23299 .36933 .24232 .347 .24699 .317 .24699H.235V.125M.235 .369H.308C.33666 .369 .3575 .37433 .3705 .38499 .3835 .39567 .39 .41134 .39 .43201 .39 .45 .3825 .46433 .36749 .47499 .3525 .48566 .33 .491 .3 .491 .29 .491 .2785 .49066 .2655 .48999 .2525 .48933 .24233 .48833 .235 .487V.369M.3-.01601C.28867-.01601 .27533-.01567 .25999-.015 .24466-.01434 .22883-.01301 .21249-.011 .19617-.009 .18-.0065 .164-.00349 .148-.00049 .13333 .00367 .12 .009 .08333 .023 .065 .04733 .065 .082V.549C.065 .563 .06883 .57384 .07649 .5815 .08416 .58917 .09467 .59534 .108 .60001 .13067 .608 .159 .61383 .19299 .61749 .227 .62116 .262 .623 .298 .623 .38333 .623 .44899 .60867 .495 .58 .541 .55134 .564 .507 .564 .44701 .564 .417 .55533 .39116 .53799 .36949 .52066 .34783 .49733 .33201 .468 .32201 .50134 .31267 .52917 .29566 .5515 .271 .57384 .24633 .58501 .21533 .58501 .17799 .58501 .11199 .56051 .06316 .51151 .03149 .4625-.00017 .392-.01601 .3-.01601Z\"/><path id=\"font_2_42\" d=\"M.614 .099C.614 .07833 .61033 .06299 .603 .05299 .59566 .04299 .58399 .03333 .56799 .024 .55866 .01867 .547 .0135 .53299 .0085 .51899 .0035 .50366-.00082 .487-.00449 .47034-.00816 .45284-.011 .43449-.013 .41616-.015 .398-.01601 .38-.01601 .332-.01601 .287-.00951 .245 .00349 .203 .01649 .1665 .03616 .1355 .0625 .1045 .08884 .08 .12167 .062 .161 .044 .20033 .035 .246 .035 .298 .035 .35267 .04484 .40033 .0645 .44099 .08416 .48166 .11016 .5155 .14249 .5425 .17483 .56949 .21183 .58966 .25349 .603 .29516 .61633 .338 .623 .382 .623 .44534 .623 .4955 .61283 .5325 .5925 .5695 .57216 .588 .54566 .588 .513 .588 .49567 .58366 .48067 .575 .468 .56633 .45534 .55633 .44534 .545 .438 .52834 .448 .5075 .45783 .4825 .4675 .4575 .47716 .42934 .48199 .39799 .48199 .342 .48199 .2975 .46599 .2645 .43399 .2315 .402 .215 .35767 .215 .30099 .215 .27033 .2195 .24384 .2285 .2215 .2375 .19917 .24967 .18084 .265 .1665 .28033 .15217 .29799 .1415 .31799 .13449 .338 .12749 .35934 .12399 .382 .12399 .39667 .12399 .40967 .12533 .42101 .12799 .43234 .13067 .441 .13367 .44701 .13699V.231H.34C.336 .23834 .33216 .248 .32849 .25999 .32483 .272 .323 .28467 .323 .298 .323 .322 .3285 .33933 .33949 .34999 .3505 .36066 .36467 .366 .382 .366H.55099C.57099 .366 .58649 .36049 .59749 .34949 .6085 .33849 .614 .32299 .614 .30299V.099Z\"/><path id=\"font_2_50\" d=\"M.035 .304C.035 .356 .04317 .402 .05949 .442 .07583 .482 .09816 .5155 .1265 .5425 .15484 .56949 .18817 .58999 .2265 .60399 .26483 .618 .30633 .625 .351 .625 .39567 .625 .43716 .618 .47549 .60399 .51383 .58999 .54734 .56949 .576 .5425 .60467 .5155 .62717 .482 .64349 .442 .65983 .402 .668 .356 .668 .304 .668 .252 .66 .20583 .644 .1655 .628 .12516 .60583 .0915 .5775 .0645 .54917 .0375 .51567 .017 .47701 .00299 .43834-.01101 .39634-.01801 .351-.01801 .30567-.01801 .26367-.01084 .22501 .00349 .18634 .01783 .153 .03866 .125 .06599 .097 .09333 .07499 .12699 .05899 .16699 .043 .207 .035 .25267 .035 .304M.215 .304C.215 .24333 .22733 .198 .252 .168 .27667 .138 .30967 .123 .351 .123 .393 .123 .42634 .138 .451 .168 .47567 .198 .48801 .24333 .48801 .304 .48801 .364 .47584 .409 .45149 .439 .42716 .46899 .394 .48399 .35201 .48399 .31066 .48399 .27749 .46916 .25249 .4395 .22749 .40984 .215 .36467 .215 .304Z\"/><path id=\"font_2_53\" d=\"M.239 .196V.004C.23166 .002 .22016 .00001 .2045-.002 .18883-.004 .17333-.005 .158-.005 .14266-.005 .12916-.00384 .11749-.0015 .10583 .00083 .09617 .005 .0885 .011 .08083 .017 .075 .02533 .071 .036 .067 .04667 .065 .06067 .065 .078V.549C.065 .563 .06883 .57384 .07649 .5815 .08416 .58917 .09467 .59534 .108 .60001 .13067 .608 .157 .61383 .187 .61749 .217 .62116 .249 .623 .283 .623 .37501 .623 .44434 .60367 .491 .565 .53767 .52634 .561 .474 .561 .408 .561 .36666 .55033 .33132 .52899 .30199 .50766 .27266 .48233 .24999 .453 .23399 .477 .20133 .50067 .17066 .524 .142 .54734 .11333 .56567 .08733 .57899 .064 .57233 .04067 .56017 .02284 .5425 .0105 .52484-.00183 .505-.008 .483-.008 .46833-.008 .45566-.00633 .44499-.00299 .43433 .00034 .425 .005 .41699 .011 .409 .017 .40166 .02434 .39499 .033 .38833 .04167 .382 .05101 .37601 .061L.29201 .196H.239M.302 .32899C.32733 .32899 .34733 .33549 .362 .3485 .37667 .3615 .384 .38067 .384 .40601 .384 .43134 .37583 .4505 .3595 .4635 .34317 .4765 .31734 .483 .282 .483 .272 .483 .264 .48267 .258 .48199 .25199 .48133 .24533 .48034 .23801 .479V.32899H.302Z\"/><path id=\"font_2_48\" d=\"M.48399 .149C.47533 .14167 .46416 .13583 .45049 .1315 .43682 .12717 .421 .125 .403 .125 .379 .125 .35917 .128 .34351 .134 .32784 .14 .31767 .15033 .313 .16499 .29434 .22367 .279 .27117 .267 .3075 .25499 .34383 .24566 .37567 .239 .403H.23399C.232 .36366 .2305 .32782 .22949 .29549 .2285 .26316 .22783 .23166 .22749 .20099 .22717 .17033 .2265 .13933 .22549 .108 .2245 .07667 .223 .042 .22099 .004 .21233 .00066 .20099-.00217 .187-.0045 .173-.00683 .159-.008 .145-.008 .11567-.008 .09283-.00333 .07649 .006 .06017 .01534 .052 .03234 .052 .05701L.08099 .567C.08633 .57567 .098 .585 .116 .595 .134 .605 .15934 .61 .192 .61 .22733 .61 .25499 .6045 .27499 .59349 .29499 .58249 .30966 .56466 .319 .53999 .325 .524 .3315 .50567 .3385 .485 .3455 .46433 .3525 .44299 .3595 .42099 .3665 .399 .37333 .37717 .37999 .3555 .38666 .33383 .39266 .31433 .39799 .297H.403C.419 .353 .435 .40716 .451 .45949 .46701 .51183 .48167 .55566 .495 .591 .50499 .59633 .51783 .60083 .53349 .60449 .54917 .60816 .56667 .61 .586 .61 .61866 .61 .64533 .60516 .666 .59549 .68667 .58583 .69867 .572 .702 .554 .70466 .54066 .70749 .52016 .71049 .49249 .7135 .46483 .71666 .43367 .72 .399 .72334 .36433 .72667 .32767 .73 .289 .73333 .25034 .7365 .21317 .7395 .17749 .7425 .14183 .745 .10916 .74699 .0795 .749 .04984 .75034 .027 .75101 .011 .73966 .00434 .72783-.00049 .7155-.00349 .70317-.0065 .68734-.008 .668-.008 .64267-.008 .62134-.00366 .604 .005 .58667 .01367 .57734 .03067 .576 .056 .57201 .12866 .5695 .194 .5685 .252 .5675 .31 .566 .35867 .564 .39799H.55901C.55233 .37199 .54266 .33932 .53 .29999 .51733 .26066 .502 .21033 .48399 .149Z\"/><path id=\"font_2_40\" d=\"M.065 .513C.065 .54167 .07333 .56433 .09 .58099 .10667 .59767 .12934 .606 .158 .606H.48801C.49267 .59867 .49683 .589 .50049 .577 .50416 .565 .506 .55234 .506 .539 .506 .51367 .5005 .49567 .4895 .485 .47851 .47433 .464 .46899 .446 .46899H.235V.37601H.46001C.46467 .36867 .46883 .35917 .47249 .3475 .47616 .33584 .478 .32333 .478 .31 .478 .28467 .47266 .26667 .46199 .256 .45133 .24534 .437 .24001 .41901 .24001H.235V.13499H.492C.49666 .12766 .50082 .11799 .50449 .10599 .50816 .09399 .50999 .08133 .50999 .06799 .50999 .04266 .5045 .0245 .4935 .01349 .4825 .00249 .468-.00301 .45-.00301H.158C.12934-.00301 .10667 .00533 .09 .02199 .07333 .03866 .065 .06133 .065 .09V.513Z\"/><path id=\"font_2_55\" d=\"M.037 .466C.03233 .47334 .028 .48334 .024 .496 .02 .50867 .01801 .522 .01801 .536 .01801 .562 .02383 .58066 .03549 .592 .04716 .60333 .06233 .60899 .08099 .60899H.517C.52167 .60167 .526 .59167 .53 .57899 .534 .56633 .536 .553 .536 .539 .536 .513 .53016 .49433 .51849 .483 .50684 .47167 .49167 .466 .47301 .466H.362V.004C.35467 .002 .34317 .00001 .3275-.002 .31183-.004 .29634-.005 .28101-.005 .26567-.005 .25216-.00384 .24049-.0015 .22884 .00083 .219 .005 .211 .011 .203 .017 .197 .02533 .19299 .036 .189 .04667 .187 .06067 .187 .078V.466H.037Z\"/></defs><g><use xlink:href=\"#font_2_54\" transform=\"matrix(890.13,0,0,-890.13,-1650.19,-303.74)\" fill=\"currentColor\"/><use xlink:href=\"#font_2_56\" transform=\"matrix(890.13,0,0,-890.13,-1159.73,-303.74)\" fill=\"currentColor\"/><use xlink:href=\"#font_2_37\" transform=\"matrix(890.13,0,0,-890.13,-568.69,-303.74)\" fill=\"currentColor\"/><path transform=\"matrix(1,0,0,-1,2375,1470.5)\" d=\"M0 0C12.07-3.458 27.6-5.824 46.59-7.119 65.56-8.413 83.68-9.06 100.95-9.06 135.45-9.06 164.15-1.942 187.02 12.29 209.87 26.53 221.31 48.73 221.31 78.95 221.31 107.42 211.81 127.68 192.84 139.78 173.85 151.85 144.95 157.9 106.13 157.9H0ZM0 315.79H94.48C131.57 315.79 158.54 322.69 175.37 336.5 192.19 350.29 200.6 370.57 200.6 397.33 200.6 420.62 190.9 439.17 171.49 452.98 152.07 466.77 122.95 473.69 84.12 473.69 71.18 473.69 56.3 473.24 39.48 472.39 22.65 471.52 9.485 470.23 0 468.51ZM84.12-182.49C69.44-182.49 52.19-182.04 32.35-181.19 12.5-180.32-7.987-178.6-29.12-176.01-50.27-173.43-71.18-170.19-91.89-166.31-112.6-162.43-131.59-157.05-148.84-150.13-196.3-132.01-220.02-100.53-220.02-55.65V548.75C-220.02 566.87-215.06 580.88-205.13 590.82-195.22 600.72-181.64 608.71-164.37 614.76-135.04 625.11-98.36 632.65-54.36 637.41-10.35 642.14 34.94 644.52 81.54 644.52 191.97 644.52 276.96 625.96 336.5 588.87 396.03 551.76 425.8 494.39 425.8 416.74 425.8 377.91 414.58 344.47 392.15 316.44 369.7 288.39 339.51 267.9 301.56 254.96 344.69 242.87 380.71 220.87 409.62 188.96 438.52 157.03 452.98 116.91 452.98 68.59 452.98-16.82 421.27-80.04 357.85-121.01 294.44-161.98 203.19-182.49 84.12-182.49\" fill=\"currentColor\"/><path transform=\"matrix(1,0,0,-1,506.42,1323.52)\" d=\"M0 0C-37.98 12.94-72.48 26.09-103.54 39.47-134.6 52.84-161.35 69.02-183.78 88.01-206.23 106.98-223.7 129.62-236.2 155.95-248.71 182.26-254.96 214.4-254.96 252.37-254.96 325.7-226.71 384.38-170.19 428.39-113.69 472.39-34.52 494.39 67.3 494.39 104.39 494.39 138.91 491.81 170.84 486.63 202.75 481.45 230.15 473.46 253.02 462.69 275.87 451.89 293.79 438.1 306.73 421.27 319.67 404.45 326.14 384.81 326.14 362.38 326.14 339.94 320.97 320.75 310.62 304.79 300.26 288.81 287.74 275.23 273.08 264.02 254.09 276.1 228.63 286.67 196.72 295.73 164.79 304.79 129.85 309.32 91.89 309.32 53.06 309.32 24.59 303.92 6.471 293.14-11.65 282.34-20.71 268.75-20.71 252.37-20.71 239.43-15.11 228.86-3.883 220.67 7.321 212.46 24.14 204.91 46.59 198.02L115.19 176.01C196.28 150.13 258.62 117.13 302.2 77.01 345.76 36.88 367.56-17.69 367.56-86.71 367.56-160.06 338.64-219.37 280.85-264.67 223.03-309.97 138.04-332.62 25.89-332.62-13.81-332.62-50.7-329.38-84.77-322.91-118.87-316.44-148.63-306.95-174.07-294.44-199.53-281.94-219.37-266.41-233.61-247.84-247.84-229.3-254.96-207.95-254.96-183.78-254.96-158.76-247.64-137.41-232.96-119.72-218.3-102.04-202.34-88.45-185.07-78.95-160.93-97.94-131.36-114.34-96.42-128.13-61.48-141.94-23.3-148.84 18.12-148.84 60.38-148.84 90.15-142.37 107.42-129.42 124.67-116.48 133.31-101.39 133.31-84.12 133.31-66.88 126.39-53.71 112.6-44.65 98.79-35.59 79.37-26.75 54.36-18.12Z\" fill=\"currentColor\"/></g><use xlink:href=\"#font_2_42\" transform=\"matrix(152.67,0,0,-152.67,871.36,1645.21)\" fill=\"currentColor\"/><use xlink:href=\"#font_2_50\" transform=\"matrix(152.67,0,0,-152.67,1064.33,1645.21)\" fill=\"currentColor\"/><use xlink:href=\"#font_2_56\" transform=\"matrix(152.67,0,0,-152.67,1263.25,1645.21)\" fill=\"currentColor\"/><use xlink:href=\"#font_2_53\" transform=\"matrix(152.67,0,0,-152.67,1456.23,1645.21)\" fill=\"currentColor\"/><use xlink:href=\"#font_2_48\" transform=\"matrix(152.67,0,0,-152.67,1640.19,1645.21)\" fill=\"currentColor\"/><use xlink:href=\"#font_2_40\" transform=\"matrix(152.67,0,0,-152.67,1853.47,1645.21)\" fill=\"currentColor\"/><use xlink:href=\"#font_2_55\" transform=\"matrix(152.67,0,0,-152.67,2028.73,1645.21)\" fill=\"currentColor\"/><g><path transform=\"matrix(1,0,0,-1,2057.11,1065.78)\" d=\"M0 0C0 22.43-2.59 40.55-7.767 54.36-12.94 68.15-20.71 78.95-31.06 86.71-41.42 94.48-54.16 99.86-69.24 102.89-84.35 105.9-101.82 107.42-121.66 107.42-140.65 107.42-160.49 105.9-181.19 102.89-201.9 99.86-217.01 97.49-226.49 95.77L-223.49-100.51C-223.49-141.92-234.72-174.28-257.14-197.58-279.59-220.87-309.36-232.52-346.44-232.52H-763.75C-799.99-232.52-829.55-220.87-852.4-197.58-875.27-174.28-886.7-141.92-886.7-100.51L-889.7 0C-889.7 22.43-892.28 40.55-897.46 54.36-902.64 68.15-910.4 78.95-920.76 86.71-931.11 94.48-943.85 99.86-958.94 102.89-974.04 105.9-991.51 107.42-1011.35 107.42-1030.34 107.42-1050.18 105.9-1070.89 102.89-1091.6 99.86-1106.7 97.49-1116.18 95.77L-1113.19-104.39C-1113.19-150.98-1105.22-193.49-1089.24-231.87-1073.29-270.27-1050.22-303.06-1020-330.23-989.81-357.41-953.15-378.34-909.99-393-866.86-407.67-818.1-415-763.75-415H-346.44C-292.09-415-243.35-407.67-200.2-393-157.06-378.34-120.4-357.41-90.19-330.23-59.99-303.06-36.92-270.27-20.95-231.87-4.991-193.49 2.998-150.98 2.998-104.39Z\" fill=\"currentColor\"/><path transform=\"matrix(1,0,0,-1,1495.31,1152.76)\" d=\"M0 0C0-45.21-36.64-81.84-81.85-81.84-127.07-81.84-163.71-45.21-163.71 0-163.71 45.21-127.07 81.86-81.85 81.86-36.64 81.86 0 45.21 0 0\" fill=\"currentColor\"/><path transform=\"matrix(1,0,0,-1,1681.88,1152.76)\" d=\"M0 0C0-45.21-36.64-81.84-81.85-81.84-127.05-81.84-163.72-45.21-163.72 0-163.72 45.21-127.05 81.86-81.85 81.86-36.64 81.86 0 45.21 0 0\" fill=\"currentColor\"/><path transform=\"matrix(1,0,0,-1,1594.81,999.36)\" d=\"M0 0C0-45.21-36.65-81.86-81.86-81.86-127.07-81.86-163.71-45.21-163.71 0-163.71 45.21-127.07 81.84-81.86 81.84-36.65 81.84 0 45.21 0 0\" fill=\"currentColor\"/></g></svg>";
+
+// Widths built by tools/optimize-images.py. Derivatives are never upscaled, so
+// the ladder is clamped to each source's own width.
+const IMG_WIDTHS = [800, 1600];
+function widthsFor(srcW, extra) {
+  const all = extra ? IMG_WIDTHS.concat(extra) : IMG_WIDTHS;
+  return Array.from(new Set(all.map((w) => Math.min(w, srcW)))).sort((a, b) => a - b);
+}
+
+// AVIF with a WebP step and the original JPEG as the floor.
+function Picture({ name, alt, srcW, extra, sizes, className, width, height, priority }) {
+  const ws = widthsFor(srcW, extra);
+  const set = (ext) => ws.map((w) => `images/opt/${name}-${w}.${ext} ${w}w`).join(', ');
+  return (
+    <picture>
+      <source type="image/avif" srcSet={set('avif')} sizes={sizes} />
+      <source type="image/webp" srcSet={set('webp')} sizes={sizes} />
+      <img
+        src={`images/${name}.jpg`}
+        alt={alt}
+        className={className}
+        width={width}
+        height={height}
+        loading={priority ? 'eager' : 'lazy'}
+        fetchpriority={priority ? 'high' : 'auto'}
+        decoding="async"
+      />
+    </picture>
+  );
+}
 
 // ─────────────── i18n ───────────────
 const TRANSLATIONS = {
@@ -47,6 +83,10 @@ const TRANSLATIONS = {
       calloutEm: 'or a bottle from the cellar?',
       calloutBody: 'Our team is happy to walk you through everything. Most pasta and risotto can be prepared gluten-free; vegetarian options are marked on request.',
       calloutCta: 'Talk to us',
+    },
+    callFab: {
+      label: 'Call the restaurant',
+      copied: 'Number copied',
     },
     gallery: {
       eyebrow: 'The Room & The Plate',
@@ -134,6 +174,10 @@ const TRANSLATIONS = {
       calloutBody: 'Naš tim će vas rado provesti kroz sve. Većina tjestenina i rižota može se pripremiti bez glutena; vegetarijanske opcije dostupne su na upit.',
       calloutCta: 'Razgovarajte s nama',
     },
+    callFab: {
+      label: 'Nazovite restoran',
+      copied: 'Broj kopiran',
+    },
     gallery: {
       eyebrow: 'Prostor i tanjur',
       h2a: 'Gdje se ',
@@ -203,11 +247,12 @@ function useLang() {
 
 function Logo() {
   return (
-    <span className="nav-logo">
-      <span>SUB</span>
-      <span className="glyph" aria-hidden="true"></span>
-      <span>GOURMET</span>
-    </span>
+    <span
+      className="nav-logo"
+      role="img"
+      aria-label="Sub Gourmet"
+      dangerouslySetInnerHTML={{ __html: LOGO_SVG }}
+    />
   );
 }
 
@@ -260,7 +305,10 @@ function Hero({ t }) {
   const [a, b, c] = t.hero.h1Bot;
   return (
     <section className="hero" id="top">
-      <div className="hero-bg" style={{ backgroundImage: `linear-gradient(120deg, rgba(20,18,16,0.78) 0%, rgba(20,18,16,0.45) 55%, rgba(20,18,16,0.78) 100%), url(${HERO_IMAGE})` }}></div>
+      <div className="hero-bg">
+        <Picture name={HERO_IMAGE} alt="" srcW={2200} extra={[2200]} sizes="100vw" className="hero-bg-img" priority />
+        <div className="hero-bg-tint" aria-hidden="true"></div>
+      </div>
       <div className="hero-inner">
         <div>
           <div className="hero-eyebrow mono">
@@ -302,7 +350,7 @@ function About({ t }) {
       <div className="container">
         <div className="about-grid">
           <div className="about-img reveal">
-            <img src={ABOUT_IMAGE} alt={t.about.imgAlt} loading="lazy" decoding="async" />
+            <Picture name={ABOUT_IMAGE} alt={t.about.imgAlt} srcW={1800} sizes="(max-width: 960px) 92vw, 40vw" />
             <div className="stamp">
               <span className="small">{t.about.stampEst}</span>
               {t.about.stampSince}
@@ -409,40 +457,42 @@ function MenuSection({ lang, t }) {
 }
 
 // Gallery: 26 photos total. First 9 shown by default; rest revealed by "Show all photos".
-// w/h are the source aspect ratios (used as <img width/height> hints to prevent
-// column rebalancing as images load in the masonry layout).
+// `name` is the base filename; Picture resolves it to images/opt/<name>-<w>.<ext>
+// with images/<name>.jpg as the fallback. w/h are the source pixel dimensions,
+// used both as <img> aspect hints (preventing column rebalancing in the masonry
+// layout) and as the ceiling for the srcset ladder.
 const L = { w: 1800, h: 1200 };   // landscape food shots
 const P = { w: 1200, h: 1800 };   // portrait food shots
 const W = { w: 2200, h: 1466 };   // wide hero photo (p1)
 const GALLERY = [
   // Initial 9
-  { src: 'images/p3.jpg',  ...L, alt: 'Sub Gourmet interior' },
-  { src: 'images/f5.jpg',  ...P, alt: 'House plate' },
-  { src: 'images/f1.jpg',  ...L, alt: 'House plate' },
-  { src: 'images/f3.jpg',  ...L, alt: 'House plate' },
-  { src: 'images/f10.jpg', ...L, alt: 'House plate' },
-  { src: 'images/f15.jpg', ...P, alt: 'House plate' },
-  { src: 'images/f8.jpg',  ...L, alt: 'House plate' },
-  { src: 'images/f4.jpg',  ...L, alt: 'House plate' },
-  { src: 'images/f17.jpg', ...L, alt: 'House plate' },
+  { name: 'p3',  ...L, alt: 'Sub Gourmet interior' },
+  { name: 'f5',  ...P, alt: 'House plate' },
+  { name: 'f1',  ...L, alt: 'House plate' },
+  { name: 'f3',  ...L, alt: 'House plate' },
+  { name: 'f10', ...L, alt: 'House plate' },
+  { name: 'f15', ...P, alt: 'House plate' },
+  { name: 'f8',  ...L, alt: 'House plate' },
+  { name: 'f4',  ...L, alt: 'House plate' },
+  { name: 'f17', ...L, alt: 'House plate' },
   // Revealed by "Show all photos"
-  { src: 'images/p1.jpg',  ...W, alt: 'Sub Gourmet dining room' },
-  { src: 'images/p2.jpg',  ...L, alt: 'Sub Gourmet seating' },
-  { src: 'images/f2.jpg',  ...L, alt: 'House plate' },
-  { src: 'images/f6.jpg',  ...L, alt: 'House plate' },
-  { src: 'images/f7.jpg',  ...P, alt: 'House plate' },
-  { src: 'images/f9.jpg',  ...L, alt: 'House plate' },
-  { src: 'images/f11.jpg', ...P, alt: 'House plate' },
-  { src: 'images/f12.jpg', ...L, alt: 'House plate' },
-  { src: 'images/f13.jpg', ...L, alt: 'House plate' },
-  { src: 'images/f14.jpg', ...L, alt: 'House plate' },
-  { src: 'images/f16.jpg', ...P, alt: 'House plate' },
-  { src: 'images/f18.jpg', ...L, alt: 'House plate' },
-  { src: 'images/f19.jpg', ...L, alt: 'House plate' },
-  { src: 'images/f20.jpg', ...L, alt: 'House plate' },
-  { src: 'images/f21.jpg', ...L, alt: 'House plate' },
-  { src: 'images/f22.jpg', ...L, alt: 'House plate' },
-  { src: 'images/f23.jpg', ...L, alt: 'House plate' },
+  { name: 'p1',  ...W, alt: 'Sub Gourmet dining room' },
+  { name: 'p2',  ...L, alt: 'Sub Gourmet seating' },
+  { name: 'f2',  ...L, alt: 'House plate' },
+  { name: 'f6',  ...L, alt: 'House plate' },
+  { name: 'f7',  ...P, alt: 'House plate' },
+  { name: 'f9',  ...L, alt: 'House plate' },
+  { name: 'f11', ...P, alt: 'House plate' },
+  { name: 'f12', ...L, alt: 'House plate' },
+  { name: 'f13', ...L, alt: 'House plate' },
+  { name: 'f14', ...L, alt: 'House plate' },
+  { name: 'f16', ...P, alt: 'House plate' },
+  { name: 'f18', ...L, alt: 'House plate' },
+  { name: 'f19', ...L, alt: 'House plate' },
+  { name: 'f20', ...L, alt: 'House plate' },
+  { name: 'f21', ...L, alt: 'House plate' },
+  { name: 'f22', ...L, alt: 'House plate' },
+  { name: 'f23', ...L, alt: 'House plate' },
 ];
 const GALLERY_INITIAL = 9;
 
@@ -487,7 +537,7 @@ function Lightbox({ photos, index, onClose, onNavigate, t }) {
 
       {/* Stop propagation so clicking the photo itself doesn't dismiss. */}
       <figure className="lightbox-figure" onClick={(e) => e.stopPropagation()}>
-        <img src={photo.src} alt={photo.alt} width={photo.w} height={photo.h} />
+        <Picture name={photo.name} alt={photo.alt} srcW={photo.w} width={photo.w} height={photo.h} sizes="(max-width: 960px) 96vw, 88vw" priority />
         <figcaption className="lightbox-caption mono">
           <span>{photo.alt}</span>
           <span className="lightbox-count">{index + 1} / {photos.length}</span>
@@ -523,13 +573,14 @@ function Gallery({ t }) {
         <div className="gallery-grid reveal">
           {visible.map((img, i) => (
             <button
-              key={img.src}
+              key={img.name}
               type="button"
               className="gallery-item"
               aria-label={t.gallery.viewLarger + ': ' + img.alt}
               onClick={() => setLightboxIndex(i)}
             >
-              <img src={img.src} alt={img.alt} width={img.w} height={img.h} loading="lazy" decoding="async" />
+              <Picture name={img.name} alt={img.alt} srcW={img.w} width={img.w} height={img.h}
+                sizes="(max-width: 520px) 92vw, (max-width: 960px) 46vw, 30vw" />
               <span className="gallery-item-zoom" aria-hidden="true"></span>
             </button>
           ))}
@@ -550,6 +601,65 @@ function Gallery({ t }) {
         t={t}
       />
     </section>
+  );
+}
+
+// Floating call button (mobile only). Tapping copies the number to the
+// clipboard and then lets the tel: link open the dialer.
+function CallFab({ t }) {
+  const [copied, setCopied] = useState(false);
+
+  const copy = (text) => {
+    // The async Clipboard API needs a secure context; fall back to a hidden
+    // textarea so the copy still works over plain http on a local network.
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise((resolve, reject) => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:-9999px;opacity:0;';
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      ok ? resolve() : reject();
+    });
+  };
+
+  // No preventDefault: the anchor's tel: navigation still runs and opens the
+  // dialer. The write is started inside the gesture, so it stays permitted.
+  const onClick = () => {
+    copy(PHONE_DISPLAY).then(
+      () => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2200);
+      },
+      () => {}
+    );
+  };
+
+  return (
+    <a
+      className="call-fab"
+      href={'tel:' + PHONE_E164}
+      onClick={onClick}
+      aria-label={t.callFab.label + ' ' + PHONE_DISPLAY}
+    >
+      <svg className="call-fab-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          fill="currentColor"
+          d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2z"
+        />
+      </svg>
+      <span className={'call-fab-toast' + (copied ? ' show' : '')} aria-hidden="true">
+        {t.callFab.copied}
+      </span>
+      <span className="sr-only" role="status" aria-live="polite">
+        {copied ? t.callFab.copied : ''}
+      </span>
+    </a>
   );
 }
 
@@ -630,7 +740,12 @@ function Footer({ t }) {
       <div className="container">
         <div className="foot-top">
           <div>
-            <div className="foot-brand">SUB · GOURMET</div>
+            <div
+              className="foot-brand"
+              role="img"
+              aria-label="Sub Gourmet"
+              dangerouslySetInnerHTML={{ __html: LOGO_SVG }}
+            />
             <p className="foot-tag">{t.footer.tag}</p>
           </div>
           <div className="foot-col">
@@ -718,6 +833,7 @@ function App() {
       <Gallery t={t} />
       <Visit t={t} />
       <Footer t={t} />
+      <CallFab t={t} />
     </>
   );
 }
