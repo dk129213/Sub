@@ -94,8 +94,9 @@
   }
   .nav-links a:hover { opacity: 1; }
 
-  .nav-burger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
-  .nav-burger span { display: block; width: 22px; height: 1.5px; background: currentColor; }
+  /* Mobile-only shortcut to the food menu. Shown as a labelled button rather
+     than a hamburger, which would promise navigation it does not open. */
+  .nav-menu-btn { display: none; }
 
   .nav-right { display: flex; align-items: center; gap: 18px; }
   .lang-toggle {
@@ -673,7 +674,27 @@
     .nav { padding: 14px 20px; }
     .nav-links { display: none; }
     .nav-right { gap: 12px; margin-left: auto; margin-right: 8px; }
-    .nav-burger { display: flex; }
+    .nav-menu-btn {
+      display: inline-flex; align-items: center;
+      padding: 9px 15px;
+      border: 1px solid var(--rule-light);
+      border-radius: 999px;
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500;
+      transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .nav-menu-btn:active,
+    .nav-menu-btn:focus-visible {
+      background: var(--gold); border-color: var(--gold); color: var(--charcoal);
+    }
+    /* The pill reads better small, so grow only the touch target to 44px. */
+    .nav-menu-btn { position: relative; }
+    .nav-menu-btn::after {
+      content: '';
+      position: absolute; left: 0; right: 0;
+      top: 50%; transform: translateY(-50%);
+      height: 44px;
+    }
     .hero-inner { padding: 120px 24px 60px; }
     .hero-meta { gap: 28px; }
     .container { padding: 0 24px; }

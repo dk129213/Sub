@@ -55,7 +55,7 @@ const TRANSLATIONS = {
   en: {
     htmlLang: 'en',
     pageTitle: 'Sub Gourmet · Mediterranean flavors, Adriatic soul',
-    nav: { about: 'About', menu: 'Menu', gallery: 'Gallery', visit: 'Visit', menuAria: 'Menu' },
+    nav: { about: 'About', menu: 'Menu', gallery: 'Gallery', visit: 'Visit' },
     hero: {
       eyebrow: 'Srebreno · Dubrovnik Riviera',
       h1Top: 'Sub',
@@ -145,7 +145,7 @@ const TRANSLATIONS = {
   hr: {
     htmlLang: 'hr',
     pageTitle: 'Sub Gourmet · Mediteranski okusi, jadranska duša',
-    nav: { about: 'O nama', menu: 'Meni', gallery: 'Galerija', visit: 'Posjetite nas', menuAria: 'Meni' },
+    nav: { about: 'O nama', menu: 'Meni', gallery: 'Galerija', visit: 'Posjetite nas' },
     hero: {
       eyebrow: 'Srebreno · Dubrovačka rivijera',
       h1Top: 'Sub',
@@ -301,10 +301,10 @@ function Nav({ scrolled, dark, lang, setLang, t }) {
       <div className="nav-right">
         <LangToggle lang={lang} setLang={setLang} />
       </div>
-      <button className="nav-burger" aria-label={t.nav.menuAria} onClick={() => {
+      <button className="nav-menu-btn" onClick={() => {
         document.querySelector('#menu').scrollIntoView({behavior:'smooth'});
       }}>
-        <span></span><span></span><span></span>
+        {t.nav.menu}
       </button>
     </nav>
   );

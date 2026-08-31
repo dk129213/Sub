@@ -72,8 +72,7 @@ const TRANSLATIONS = {
       about: 'About',
       menu: 'Menu',
       gallery: 'Gallery',
-      visit: 'Visit',
-      menuAria: 'Menu'
+      visit: 'Visit'
     },
     hero: {
       eyebrow: 'Srebreno · Dubrovnik Riviera',
@@ -175,8 +174,7 @@ const TRANSLATIONS = {
       about: 'O nama',
       menu: 'Meni',
       gallery: 'Galerija',
-      visit: 'Posjetite nas',
-      menuAria: 'Meni'
+      visit: 'Posjetite nas'
     },
     hero: {
       eyebrow: 'Srebreno · Dubrovačka rivijera',
@@ -359,14 +357,13 @@ function Nav({
     lang: lang,
     setLang: setLang
   })), /*#__PURE__*/React.createElement("button", {
-    className: "nav-burger",
-    "aria-label": t.nav.menuAria,
+    className: "nav-menu-btn",
     onClick: () => {
       document.querySelector('#menu').scrollIntoView({
         behavior: 'smooth'
       });
     }
-  }, /*#__PURE__*/React.createElement("span", null), /*#__PURE__*/React.createElement("span", null), /*#__PURE__*/React.createElement("span", null)));
+  }, t.nav.menu));
 }
 function Hero({
   t
