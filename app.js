@@ -9,6 +9,12 @@ const PHONE_E164 = '+38520642111';
 const INSTAGRAM_URL = 'https://www.instagram.com/subcaffegourmet/';
 const FACEBOOK_URL = 'https://www.facebook.com/subcaffegourmet';
 const SOCIAL_HANDLE = '@subcaffegourmet';
+
+// Google Maps listing, checked 2026-08-31. Note the other platforms differ a
+// lot (Facebook 4.5/16, TripAdvisor ~3.2/29), so the source is stated in the
+// copy rather than left ambiguous.
+const GOOGLE_RATING = '4.5';
+const GOOGLE_REVIEWS = 285;
 const PHONE_DISPLAY = '+385 20 642 111';
 
 // Brand mark, traced from the 2026 logo artwork. Inlined so it inherits the
@@ -78,7 +84,7 @@ const TRANSLATIONS = {
       today: 'Today',
       todayValue: 'Open until 9 PM',
       reviewed: 'Reviewed',
-      reviewedValue: '16 reviews',
+      reviewedValue: GOOGLE_REVIEWS + ' Google reviews',
       perPerson: 'Per person',
       scroll: 'Scroll'
     },
@@ -94,8 +100,8 @@ const TRANSLATIONS = {
       stat1Lbl: 'Years on the bay',
       stat2Num: '94%',
       stat2Lbl: 'Locally sourced',
-      stat3Num: '4.5★',
-      stat3Lbl: '16 reviews',
+      stat3Num: GOOGLE_RATING + '★',
+      stat3Lbl: GOOGLE_REVIEWS + ' Google reviews',
       stampEst: 'Established',
       stampSince: 'Since 2014',
       imgAlt: 'Outdoor terrace at Sub Gourmet'
@@ -181,7 +187,7 @@ const TRANSLATIONS = {
       today: 'Danas',
       todayValue: 'Otvoreno do 21h',
       reviewed: 'Ocjenjeno',
-      reviewedValue: '16 recenzija',
+      reviewedValue: GOOGLE_REVIEWS + ' Google recenzija',
       perPerson: 'Po osobi',
       scroll: 'Pomakni'
     },
@@ -197,8 +203,8 @@ const TRANSLATIONS = {
       stat1Lbl: 'Godina u uvali',
       stat2Num: '94%',
       stat2Lbl: 'Lokalnog porijekla',
-      stat3Num: '4.5★',
-      stat3Lbl: '16 recenzija',
+      stat3Num: GOOGLE_RATING + '★',
+      stat3Lbl: GOOGLE_REVIEWS + ' Google recenzija',
       stampEst: 'Osnovano',
       stampSince: 'Od 2014.',
       imgAlt: 'Vanjska terasa Sub Gourmeta'
@@ -417,7 +423,7 @@ function Hero({
     className: "hero-meta-value"
   }, /*#__PURE__*/React.createElement("span", {
     className: "gold"
-  }, "\u2605"), " 4.5 ", /*#__PURE__*/React.createElement("span", {
+  }, "\u2605"), " ", GOOGLE_RATING, " ", /*#__PURE__*/React.createElement("span", {
     className: "dot"
   }, "\xB7"), " ", t.hero.reviewedValue)), /*#__PURE__*/React.createElement("div", {
     className: "hero-meta-item"
