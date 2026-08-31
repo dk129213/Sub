@@ -1,385 +1,536 @@
+// Sub Gourmet menu, transcribed from the restaurant's own menu boards published
+// at maison.hr (/sgmenu/ and /breakfast/), checked 2026-08-31. Prices in euros.
+// Keep this file in step with the printed menu.
 const MENU_DATA = [{
   id: 'breakfast',
   hr: 'Doručak',
   en: 'Breakfast',
   hours: '09:00 – 11:30 · Monday to Sunday',
   hoursHr: '09:00 – 11:30 · Ponedjeljak do nedjelje',
-  note: 'Served slow, the Mediterranean way.',
-  noteHr: 'Posluženo polako, na mediteranski način.',
   items: [{
-    hr: 'Sub Gourmet doručak',
-    en: 'Sub Gourmet Breakfast',
-    desc: 'Fried eggs, prosciutto, paški cheese, tomato, olives, fresh bread',
-    descHr: 'Pržena jaja, pršut, paški sir, rajčica, masline, svjež kruh',
-    price: '12.90',
-    signature: true
+    hr: 'Slavonski doručak',
+    en: 'Slavonic Breakfast',
+    desc: 'Two sunny side up eggs, sausage, salad, mustard',
+    descHr: 'Dva jaja na oko, kobasica, panceta, salata, senf',
+    price: '11.90'
   }, {
-    hr: 'Omlet sa šunkom i sirom',
-    en: 'Ham & Cheese Omelette',
-    desc: 'Three eggs, smoked ham, edamer, chives, sourdough toast',
-    descHr: 'Tri jaja, dimljena šunka, edamer, vlasac, kruh od kiselog tijesta',
-    price: '8.40'
-  }, {
-    hr: 'Omlet od povrća',
-    en: 'Garden Omelette',
-    desc: 'Spinach, peppers, tomato, feta, parsley',
-    descHr: 'Špinat, paprika, rajčica, feta, peršin',
+    hr: 'Omlet',
+    en: 'Omelette',
+    desc: 'Three eggs, salad · Extras 0.90 each: ham, cheese, mushroom, bacon, vegetables',
+    descHr: 'Tri jaja, salata · Dodaci 0,90 svaki: šunka, sir, gljive, panceta, povrće',
     price: '7.90'
   }, {
-    hr: 'Granola s jogurtom',
-    en: 'Granola & Yoghurt',
-    desc: 'House granola, Greek yoghurt, seasonal fruit, lavender honey',
-    descHr: 'Domaća granola, grčki jogurt, sezonsko voće, lavandin med',
-    price: '6.80'
+    hr: 'Sendvić u lepinji',
+    en: 'Sandwich in a Bun',
+    desc: 'Homemade bun, cream, cheese, ham, tomato, green salad',
+    descHr: 'Domaća lepinja, vrhnje, sir, šunka, rajčica, zelena salata',
+    price: '11.90'
   }, {
-    hr: 'Avokado tost',
-    en: 'Avocado Toast',
-    desc: 'Sourdough, smashed avocado, poached egg, chili oil',
-    descHr: 'Kruh od kiselog tijesta, gnječeni avokado, poširano jaje, chili ulje',
-    price: '9.20'
+    hr: 'Omlet u tortilji',
+    en: 'Omelette in Tortilla',
+    desc: 'Tortilla, two eggs, tomato, cheese, salad',
+    descHr: 'Tortilja, dva jaja, rajčica, sir, salata',
+    price: '8.90'
   }, {
     hr: 'Palačinke',
     en: 'Pancakes',
-    desc: 'Maple, fresh berries, mascarpone',
-    descHr: 'Javorov sirup, svježe bobice, mascarpone',
-    price: '7.40'
+    desc: 'Two pancakes with marmalade or Nutella',
+    descHr: 'Dvije palačinke s marmeladom ili Nutellom',
+    price: '5.20'
+  }, {
+    hr: 'Dubrovački doručak',
+    en: 'Dubrovnik Breakfast',
+    desc: 'Homemade fritters, prosciutto, cheese, cream, tomato, olives, salad',
+    descHr: 'Domaći uštipci, pršut, sir, kiselo vrhnje, rajčica, masline, salata',
+    price: '12.90'
+  }, {
+    hr: 'Fitness doručak',
+    en: 'Fitness Breakfast',
+    desc: 'Oat flakes, chia seeds, cream, strawberry puree',
+    descHr: 'Zobene pahuljice, chia sjemenke, mileram, pire od jagode',
+    price: '9.90'
+  }, {
+    hr: 'Sub Gourmet doručak',
+    en: 'Sub Gourmet Breakfast',
+    desc: 'Two poached eggs, toast, mozzarella, salad',
+    descHr: 'Dva poširana jaja, tost, mozzarella, salata',
+    price: '12.90',
+    signature: true
+  }, {
+    hr: 'Kajgana',
+    en: 'Scrambled Eggs',
+    desc: 'Three eggs, cheese, cherry tomatoes, salad',
+    descHr: 'Tri jaja, sir, cherry rajčica, salata',
+    price: '9.90'
+  }, {
+    hr: 'Ponuda uz doručak (uz nadoplatu)',
+    en: 'Additional Charge with Breakfast',
+    desc: 'Coffee of your choice and fresh orange juice 0.30L',
+    descHr: 'Kava po izboru i cijeđena naranča 0,30L',
+    price: '5.10'
   }]
 }, {
   id: 'appetizers',
   hr: 'Predjela',
   en: 'Appetizers',
-  note: 'To begin slowly, with bread and good company.',
-  noteHr: 'Za polagani početak, uz kruh i dobro društvo.',
+  note: 'To start.',
+  noteHr: 'Za početak.',
   items: [{
-    hr: 'Dalmatinski pršut',
-    en: 'Dalmatian Prosciutto',
-    desc: 'Aged 18 months, paški cheese, capers, olives',
-    descHr: 'Sušen 18 mjeseci, paški sir, kapari, masline',
-    price: '14.50'
+    hr: 'Proljetne rolice',
+    en: 'Spring Rolls',
+    desc: 'Vegetables, sweet chilli sauce',
+    descHr: 'Povrće, umak sweet chilli',
+    price: '8.40'
   }, {
-    hr: 'Carpaccio od goveđeg filea',
-    en: 'Beef Tenderloin Carpaccio',
-    desc: 'Rocket, parmesan shavings, lemon, truffle oil',
-    descHr: 'Rikola, listići parmezana, limun, ulje tartufa',
-    price: '13.80'
+    hr: 'Proljetne rolice s piletinom i povrćem',
+    en: 'Spring Rolls with Chicken and Vegetables',
+    desc: 'Pieces of chicken, vegetables, sweet chilli sauce',
+    descHr: 'Komadići piletine, povrće, umak sweet chilli',
+    price: '9.60'
   }, {
-    hr: 'Tuna tartar',
-    en: 'Tuna Tartare',
-    desc: 'Adriatic tuna, avocado, lime, sesame, soy reduction',
-    descHr: 'Jadranska tuna, avokado, limeta, sezam, redukcija soje',
-    price: '15.20'
-  }, {
-    hr: 'Bruschette al pomodoro',
-    en: 'Tomato Bruschetta',
-    desc: 'Heirloom tomato, basil, olive oil, garlic',
-    descHr: 'Stara sorta rajčice, bosiljak, maslinovo ulje, češnjak',
-    price: '7.80'
-  }, {
-    hr: 'Rižoto od škampa',
-    en: 'Shrimp Risotto',
-    desc: 'Adriatic shrimp, white wine, cherry tomato',
-    descHr: 'Jadranski škampi, bijelo vino, cherry rajčica',
-    price: '13.40'
+    hr: 'Repovi kozica',
+    en: 'Shrimp Tails',
+    desc: 'Sweet chilli sauce',
+    descHr: 'Umak sweet chilli',
+    price: '10.90'
   }]
 }, {
   id: 'soups',
-  hr: 'Juhe i salate',
-  en: 'Soups & Salads',
-  note: 'From the garden, the sea, and the soup pot.',
-  noteHr: 'Iz vrta, iz mora i iz lonca.',
+  hr: 'Juhe',
+  en: 'Soups',
+  note: 'From the pot.',
+  noteHr: 'Iz lonca.',
   items: [{
-    hr: 'Riblja juha',
-    en: 'Adriatic Fish Soup',
-    desc: 'White fish, tomato, white wine, croutons',
-    descHr: 'Bijela riba, rajčica, bijelo vino, krutoni',
-    price: '8.90'
+    hr: 'Domaća goveđa juha',
+    en: 'Homemade Beef Soup',
+    desc: 'Carrots, celery, noodles',
+    descHr: 'Mrkva, celer, rezanci',
+    price: '5.50'
   }, {
-    hr: 'Goveđa juha',
-    en: 'Beef Broth',
-    desc: 'Slow-cooked, fine noodles, parsley',
-    descHr: 'Polako kuhana, fine rezance, peršin',
-    price: '5.40'
+    hr: 'Juha od rajčice',
+    en: 'Tomato Soup',
+    desc: 'Fresh tomatoes, peeled tomatoes, carrots, onions, peppers',
+    descHr: 'Svježe rajčice, pelata, mrkva, luk, paprika',
+    price: '6.00'
   }, {
-    hr: 'Cezar salata',
-    en: 'Caesar Salad',
-    desc: 'Romaine, grilled chicken, anchovy dressing, parmesan',
-    descHr: 'Romana salata, piletina s roštilja, dressing od inćuna, parmezan',
-    price: '11.80'
+    hr: 'Krem juha od tikve',
+    en: 'Cream Pumpkin Soup',
+    desc: 'Pumpkin, onions, carrot',
+    descHr: 'Tikva, luk, mrkva',
+    price: '7.00'
+  }]
+}, {
+  id: 'salads',
+  hr: 'Salate',
+  en: 'Salads',
+  note: 'Fresh from the garden.',
+  noteHr: 'Svježe iz vrta.',
+  items: [{
+    hr: 'Sezonska salata',
+    en: 'Season Salad',
+    price: '7.80'
   }, {
-    hr: 'Mediteranska salata',
-    en: 'Mediterranean Salad',
-    desc: 'Tomato, cucumber, feta, kalamata olives, oregano',
-    descHr: 'Rajčica, krastavac, feta, kalamata masline, origano',
-    price: '10.20'
+    hr: 'Grčka salata',
+    en: 'Greek Salad',
+    desc: 'Tomatoes, peppers, cucumbers, feta cheese, olives, onion',
+    descHr: 'Rajčica, paprika, krastavci, feta sir, masline, luk',
+    price: '12.30'
   }, {
-    hr: 'Salata s tunom',
+    hr: 'Cezar salata s piletinom',
+    en: 'Caesar Salad with Chicken',
+    desc: 'Chicken, green salad, arugula, tomato, cucumber, cherry tomato, croutons',
+    descHr: 'Piletina, zelena salata, rikula, rajčica, krastavci, cherry rajčica, krutoni',
+    price: '13.90'
+  }, {
+    hr: 'Tuna salata',
     en: 'Tuna Salad',
-    desc: 'Mixed greens, seared tuna, capers, soft egg',
-    descHr: 'Mješavina zelenih salata, prepečena tuna, kapari, meko jaje',
-    price: '13.40'
+    desc: 'Tuna, lettuce, arugula, cucumber, tomato, onion, corn, capers, olives, reduced vinegar',
+    descHr: 'Tuna, zelena salata, rikula, krastavac, rajčica, luk, kukuruz, kapari, maslina, aceto',
+    price: '16.40'
   }]
 }, {
   id: 'pasta',
-  hr: 'Tjestenina',
+  hr: 'Tjestenine',
   en: 'Pasta',
-  note: 'Hand-rolled, sauced with patience.',
-  noteHr: 'Ručno valjana, s umakom u kojem je strpljenje.',
+  note: 'Made to order.',
+  noteHr: 'Pripremljeno po narudžbi.',
   items: [{
+    hr: 'Pasta Napolitana',
+    en: 'Napolitan Pasta',
+    desc: 'Tomato sauce',
+    descHr: 'Umak od rajčice',
+    price: '13.60'
+  }, {
+    hr: 'Spaghetti Carbonara',
+    en: 'Spaghetti Carbonara',
+    desc: 'Bacon, ham',
+    descHr: 'Panceta, šunka',
+    price: '14.40'
+  }, {
+    hr: 'Spaghetti Bolognese',
+    en: 'Spaghetti Bolognese',
+    desc: 'Beef, tomato sauce',
+    descHr: 'Junetina, pelata',
+    price: '14.60'
+  }, {
+    hr: 'Njoke s kozicama i kaduljom',
+    en: 'Gnocchi with Prawns and Sage',
+    desc: 'Homemade prawns, peeled tomato',
+    descHr: 'Domaće kozice, pelata',
+    price: '16.60'
+  }, {
+    hr: 'Tortellini s pršutom i gljivama',
+    en: 'Tortellini with Prosciutto and Mushrooms',
+    desc: 'Prosciutto, mushrooms',
+    descHr: 'Pršut, gljive',
+    price: '15.30'
+  }, {
     hr: 'Tagliatelle s umakom od tartufa',
     en: 'Tagliatelle with Truffle Sauce',
-    desc: 'Fresh tagliatelle, Istrian black truffle, butter, parmesan',
-    descHr: 'Svježi tagliatelle, istarski crni tartuf, maslac, parmezan',
-    price: '15.30',
-    signature: true
+    desc: 'Truffle sauce, cream, cheese',
+    descHr: 'Umak od tartufa, vrhnje, sir',
+    price: '16.30'
   }, {
-    hr: 'Spaghetti vongole',
-    en: 'Spaghetti Vongole',
-    desc: 'Adriatic clams, white wine, garlic, parsley',
-    descHr: 'Jadranski školjkaši, bijelo vino, češnjak, peršin',
-    price: '16.80'
-  }, {
-    hr: 'Lasagne bolognese',
-    en: 'Lasagne Bolognese',
-    desc: 'Layered with slow ragù and besciamella',
-    descHr: 'Slojevito s polaganim ragù umakom i bešamelom',
-    price: '12.40'
-  }, {
-    hr: 'Gnocchi quattro formaggi',
-    en: 'Four-Cheese Gnocchi',
-    desc: 'Gorgonzola, parmesan, mozzarella, ricotta',
-    descHr: 'Gorgonzola, parmezan, mozzarella, ricotta',
-    price: '13.20'
-  }, {
-    hr: 'Penne arrabbiata',
-    en: 'Penne Arrabbiata',
-    desc: 'San Marzano tomato, garlic, chili, basil',
-    descHr: 'San Marzano rajčica, češnjak, chili, bosiljak',
-    price: '10.60'
-  }, {
-    hr: 'Ravioli s ricottom',
-    en: 'Ricotta Ravioli',
-    desc: 'Brown butter, sage, walnut crumble',
-    descHr: 'Tamni maslac, kadulja, mrvica od oraha',
-    price: '13.80'
+    hr: 'Tagliatelle s kozicama u umaku od tartufa',
+    en: 'Tagliatelle with Shrimps in Truffle Sauce',
+    desc: 'Shrimps, tomato, truffle sauce, cream',
+    descHr: 'Kozice, rajčica, umak od tartufa, vrhnje',
+    price: '18.30'
   }]
 }, {
   id: 'mains',
   hr: 'Glavna jela',
   en: 'Main Courses',
-  note: 'From land and the sea two minutes away.',
-  noteHr: 'S kopna i mora dvije minute odavde.',
+  note: 'From the grill and the pan.',
+  noteHr: 'S roštilja i iz tave.',
   items: [{
-    hr: 'Lignje na žaru',
-    en: 'Grilled Squids',
-    desc: 'Charcoal grilled, blitva, boiled potato, lemon',
-    descHr: 'Na žaru, blitva, kuhani krumpir, limun',
-    price: '19.60',
-    signature: true
+    hr: 'Piletina u umaku od gljiva',
+    en: 'Chicken in Mushroom Sauce',
+    desc: 'Chicken, mushrooms, mashed potatoes or French fries',
+    descHr: 'Piletina, gljive, pire krumpir ili pomfrit',
+    price: '18.30'
   }, {
-    hr: 'Brancin na žaru',
-    en: 'Grilled Sea Bass',
-    desc: 'Whole fish, olive oil, herbs, grilled vegetables',
-    descHr: 'Cijela riba, maslinovo ulje, začinsko bilje, povrće s roštilja',
-    price: '24.80'
+    hr: 'Pileći file sa žara',
+    en: 'Grilled Chicken Fillet',
+    desc: 'Chicken, French fries or grilled vegetables',
+    descHr: 'Piletina, pomfrit ili grill povrće',
+    price: '17.10'
   }, {
-    hr: 'Biftek na žaru',
-    en: 'Grilled Beef Tenderloin',
-    desc: '220 g, peppercorn or gorgonzola sauce, baked potato',
-    descHr: '220 g, umak od papra ili gorgonzole, pečeni krumpir',
-    price: '28.40'
+    hr: 'Ćevapi + lepinja',
+    en: 'Ćevapi + Flat Bread',
+    desc: 'Ćevapi 8 pcs., flat bread, onion, ajvar',
+    descHr: 'Ćevapi 8 kom., lepinja, luk, ajvar',
+    price: '16.90'
   }, {
-    hr: 'Pileći file',
-    en: 'Chicken Fillet',
-    desc: 'Pan-seared, lemon-thyme jus, seasonal vegetables',
-    descHr: 'Prepečen, sok od limuna i timijana, sezonsko povrće',
-    price: '13.90'
+    hr: 'Lignje sa žara',
+    en: 'Grilled Squid',
+    desc: 'Squid, grilled vegetables or French fries',
+    descHr: 'Lignje, grill povrće ili pomfrit',
+    price: '20.60'
   }, {
-    hr: 'Janjetina ispod peke',
-    en: 'Lamb Under the Bell',
-    desc: 'Slow-roasted, potato, rosemary; order 24 h ahead',
-    descHr: 'Polako pečena, krumpir, ružmarin; naručiti 24 h unaprijed',
-    price: '32.00'
-  }, {
-    hr: 'Pljeskavica',
-    en: 'Balkan Pljeskavica',
-    desc: 'Grilled beef-pork patty, ajvar, kajmak, fresh bread',
-    descHr: 'Pljeskavica od goveđeg i svinjskog mesa, ajvar, kajmak, svjež kruh',
-    price: '12.80'
+    hr: 'Fish and Chips',
+    en: 'Fish and Chips',
+    desc: 'Hake fish fillet, tartar sauce, French fries',
+    descHr: 'Filet oslića, tartar umak, pomfrit',
+    price: '17.60'
   }]
 }, {
   id: 'pizza',
   hr: 'Pizza',
   en: 'Pizza',
-  note: 'Stone oven. Three-day dough.',
-  noteHr: 'Kameno peć. Tijesto tri dana.',
+  note: 'Stone baked.',
+  noteHr: 'Pečena na kamenu.',
   items: [{
-    hr: 'Sub Gourmet Pizza',
-    en: 'Sub Gourmet Pizza',
-    desc: 'Prosciutto, rocket, cherry tomato, parmesan, truffle oil',
-    descHr: 'Pršut, rikola, cherry rajčica, parmezan, ulje tartufa',
-    price: '17.20',
-    signature: true
+    hr: 'Margarita',
+    en: 'Margarita',
+    desc: 'Tomato sauce, mozzarella cheese, oregano, olive, basil, olive oil',
+    descHr: 'Pelata, mozzarella sir, origano, maslina, bosiljak, maslinovo ulje',
+    price: '13.90'
   }, {
-    hr: 'Margherita',
-    en: 'Margherita',
-    desc: 'San Marzano tomato, fior di latte, basil',
-    descHr: 'San Marzano rajčica, fior di latte, bosiljak',
-    price: '9.40'
+    hr: 'Funghi',
+    en: 'Funghi',
+    desc: 'Tomato sauce, mozzarella cheese, mushrooms, oregano, olive',
+    descHr: 'Pelata, mozzarella sir, gljive, origano, maslina',
+    price: '14.30'
   }, {
-    hr: 'Quattro Formaggi',
-    en: 'Four Cheese',
-    desc: 'Mozzarella, gorgonzola, parmesan, smoked scamorza',
-    descHr: 'Mozzarella, gorgonzola, parmezan, dimljena scamorza',
-    price: '12.80'
-  }, {
-    hr: 'Diavola',
-    en: 'Diavola',
-    desc: 'Spicy salami, chili, mozzarella, tomato',
-    descHr: 'Ljuti salami, chili, mozzarella, rajčica',
-    price: '11.60'
+    hr: 'Romana',
+    en: 'Romana',
+    desc: 'Tomato sauce, mozzarella cheese, ham, bacon, oregano, olive',
+    descHr: 'Pelata, mozzarella sir, šunka, panceta, origano, maslina',
+    price: '14.60'
   }, {
     hr: 'Capricciosa',
     en: 'Capricciosa',
-    desc: 'Ham, mushroom, artichoke, olives, mozzarella',
-    descHr: 'Šunka, gljive, artičoke, masline, mozzarella',
-    price: '12.20'
+    desc: 'Tomato sauce, mozzarella cheese, ham, mushrooms, oregano, olive',
+    descHr: 'Pelata, mozzarella sir, šunka, gljive, origano, maslina',
+    price: '14.90'
+  }, {
+    hr: 'Quattro Formaggi',
+    en: 'Quattro Formaggi',
+    desc: 'Tomato sauce, four types of cheese, oregano, olive',
+    descHr: 'Pelata, četiri vrste sira, origano, maslina',
+    price: '16.30'
+  }, {
+    hr: 'Gurmanska',
+    en: 'Gourmet',
+    desc: 'Tomato sauce, mozzarella cheese, prosciutto, ham, cherry tomato, egg, oregano, olive',
+    descHr: 'Pelata, mozzarella sir, pršut, šunka, cherry rajčica, jaje, origano, maslina',
+    price: '15.90'
+  }, {
+    hr: 'Tuna',
+    en: 'Tuna',
+    desc: 'Tomato sauce, mozzarella cheese, tuna, onion, capers, oregano, olive',
+    descHr: 'Pelata, mozzarella sir, tuna, luk, kapari, origano, maslina',
+    price: '15.90'
+  }, {
+    hr: 'Piccante',
+    en: 'Piccante',
+    desc: 'Tomato sauce, mozzarella cheese, ham, bacon, kulen, hot peppers, oregano, olive',
+    descHr: 'Pelata, mozzarella sir, šunka, panceta, kulen, ljuti feferoni, origano, maslina',
+    price: '16.80'
+  }, {
+    hr: 'Sub Gourmet',
+    en: 'Sub Gourmet',
+    desc: 'Tomato sauce, mozzarella cheese, prosciutto, arugula, grana padano, cherry tomatoes, reduced aceto, oregano, olive',
+    descHr: 'Pelata, mozzarella sir, pršut, rikula, grana padano, cherry rajčica, reducirani aceto, origano, maslina',
+    price: '18.20',
+    signature: true
+  }, {
+    hr: 'Slavonska',
+    en: 'Slavonska',
+    desc: 'Tomato sauce, mozzarella cheese, ham, mushrooms, bacon, kulen, onion, oregano, olive',
+    descHr: 'Pelata, mozzarella sir, šunka, gljive, panceta, kulen, luk, origano, maslina',
+    price: '16.30'
   }, {
     hr: 'Vegetariana',
-    en: 'Vegetarian',
-    desc: 'Grilled zucchini, peppers, eggplant, ricotta',
-    descHr: 'Tikvice s roštilja, paprika, patlidžan, ricotta',
-    price: '11.80'
+    en: 'Vegetariana',
+    desc: 'Tomato sauce, mozzarella cheese, tomatoes, zucchini, peppers, onion, corn, oregano, olive',
+    descHr: 'Pelata, mozzarella sir, rajčica, tikvice, paprika, luk, kukuruz, origano, maslina',
+    price: '16.30'
+  }, {
+    hr: 'Calzone',
+    en: 'Calzone',
+    desc: 'Tomato sauce, mozzarella cheese, ham, mushrooms, sour cream, oregano, olive',
+    descHr: 'Pelata, mozzarella sir, šunka, gljive, kiselo vrhnje, origano, maslina',
+    price: '14.90'
   }]
 }, {
   id: 'burgers',
   hr: 'Burgeri',
   en: 'Burgers',
-  note: 'Brioche bun, Adriatic salt, no shortcuts.',
-  noteHr: 'Brioche peciva, jadranska sol, bez prečaca.',
+  note: 'On a brioche bun.',
+  noteHr: 'U brioche pecivu.',
   items: [{
-    hr: 'Sub Gourmet Burger',
-    en: 'Sub Gourmet Burger',
-    desc: '200 g beef, cheddar, bacon, caramelised onion, house sauce',
-    descHr: '200 g govedine, cheddar, slanina, karamelizirani luk, kućni umak',
-    price: '14.80',
-    signature: true
+    hr: 'Klasik',
+    en: 'Classic',
+    desc: 'Brioche bun, 150g 100% beef, lettuce, white sauce, onion, tomato, BBQ sauce',
+    descHr: 'Brioche pecivo, 150g 100% junetina, zelena salata, bijeli umak, luk, rajčica, BBQ umak',
+    price: '12.70'
   }, {
-    hr: 'Klasik burger',
-    en: 'Classic Burger',
-    desc: 'Beef, cheddar, lettuce, tomato, pickle, mustard mayo',
-    descHr: 'Govedina, cheddar, salata, rajčica, kiseli krastavac, senf majoneza',
-    price: '11.40'
+    hr: 'Cheeseburger',
+    en: 'Cheeseburger',
+    desc: 'Brioche bun, 150g 100% beef, cheese, lettuce, white sauce, onion, tomato, BBQ',
+    descHr: 'Brioche pecivo, 150g 100% junetina, sir, zelena salata, bijeli umak, luk, rajčica, BBQ',
+    price: '13.90'
+  }, {
+    hr: 'Duplo',
+    en: 'Double',
+    desc: 'Brioche bun, 300g 100% beef, lettuce, slightly pickled cucumbers, white sauce, tomato, BBQ',
+    descHr: 'Brioche pecivo, 300g 100% junetina, zelena salata, blago kiseli krastavci, bijeli umak, rajčica, BBQ umak',
+    price: '19.20'
+  }, {
+    hr: 'Spicy',
+    en: 'Spicy',
+    desc: 'Brioche bun, 150g 100% beef, pickled jalapeno peppers, lettuce, tomatoes, caramelized onion, white sauce, spicy sauce',
+    descHr: 'Brioche pecivo, 150g 100% junetina, ukiseljene jalapeno papričice, zelena salata, rajčica, karamelizirani luk, bijeli umak, spicy umak',
+    price: '14.10'
   }, {
     hr: 'Pileći burger',
-    en: 'Crispy Chicken Burger',
-    desc: 'Buttermilk chicken, slaw, chipotle aioli, brioche',
-    descHr: 'Piletina u mlaćenici, kupus salata, chipotle aioli, brioche',
-    price: '11.80'
+    en: 'Chicken Burger',
+    desc: 'Brioche bun, 150g 100% chicken, lettuce, tomato, Thousand Island sauce',
+    descHr: 'Brioche pecivo, 150g 100% piletina, zelena salata, rajčica, umak Thousand Island',
+    price: '16.10'
   }, {
-    hr: 'Vege burger',
-    en: 'Vegetarian Burger',
-    desc: 'Black bean & beet patty, smoked cheese, avocado',
-    descHr: 'Pljeskavica od graha i cikle, dimljeni sir, avokado',
-    price: '11.20'
+    hr: 'Vegeeee',
+    en: 'Vegeeee',
+    desc: 'Brioche bun, veggie burger, lettuce, tomato, onion, caramelized onion, BBQ sauce',
+    descHr: 'Brioche pecivo, vege pljeskavica, zelena salata, rajčica, luk, karamelizirani luk, BBQ',
+    price: '16.10'
+  }, {
+    hr: 'Našburger',
+    en: 'Našburger',
+    desc: 'Brioche bun, 150g 100% beef, lettuce, white cabbage, egg, caramelized onion, white sauce, onion',
+    descHr: 'Brioche pecivo, 150g 100% junetina, zelena salata, jaje, bijeli kupus, karamelizirani luk, bijeli umak, luk',
+    price: '15.60',
+    signature: true
+  }, {
+    hr: 'Fishburger',
+    en: 'Fishburger',
+    desc: 'Brioche bun, hake fish and shrimps, lettuce, tomato, Thousand Island sauce',
+    descHr: 'Brioche pecivo, oslić i kozice, zelena salata, rajčica, umak Thousand Island',
+    price: '15.60'
   }]
 }, {
   id: 'gyros',
-  hr: 'Giros i tortilje',
+  hr: 'Gyros i tortilje',
   en: 'Gyros & Tortillas',
-  note: 'Wrapped, charred, ready to walk.',
-  noteHr: 'Umotano, opečeno, spremno za put.',
+  note: 'Wrapped and ready.',
+  noteHr: 'Zamotano i spremno.',
   items: [{
-    hr: 'Pileći giros',
+    hr: 'Gyros piletina',
     en: 'Chicken Gyros',
-    desc: 'Marinated chicken, tzatziki, tomato, onion, fries inside',
-    descHr: 'Marinirana piletina, tzatziki, rajčica, luk, pomfrit unutra',
-    price: '9.80'
+    desc: 'Chicken, bun, lettuce, cabbage, tomato, onion, sour cream, soya sauce',
+    descHr: 'Piletina, lepinja, zelena salata, kupus, rajčica, luk, kiselo vrhnje, soya sos',
+    price: '11.90'
   }, {
-    hr: 'Giros tortilja',
-    en: 'Gyros Tortilla',
-    desc: 'Pork or chicken, ajvar, kajmak, salad, soft tortilla',
-    descHr: 'Svinjetina ili piletina, ajvar, kajmak, salata, meka tortilja',
-    price: '9.40'
+    hr: 'Našgyros',
+    en: 'Našgyros',
+    desc: 'Chicken, bun, lettuce, cabbage, tomato, onion, Thousand Island sauce',
+    descHr: 'Piletina, lepinja, zelena salata, kupus, rajčica, luk, umak Thousand Island',
+    price: '12.90',
+    signature: true
   }, {
-    hr: 'Falafel tortilja',
-    en: 'Falafel Tortilla',
-    desc: 'House falafel, hummus, pickled cabbage, tahini',
-    descHr: 'Domaći falafel, humus, kiseli kupus, tahini',
-    price: '8.60'
+    hr: 'Tortilja piletina',
+    en: 'Chicken Tortilla',
+    desc: 'Chicken, tomato, cream, BBQ sauce, green salad',
+    descHr: 'Piletina, rajčica, vrhnje, BBQ umak, zelena salata',
+    price: '11.80'
   }, {
-    hr: 'Tortilja s tunom',
+    hr: 'Tortilja Sub Gourmet',
+    en: 'Sub Gourmet Tortilla',
+    desc: 'Chicken, green salad, tartar sauce, bacon, tomato, reduced aceto',
+    descHr: 'Piletina, zelena salata, tartar umak, panceta, rajčica, reducirani aceto',
+    price: '13.90',
+    signature: true
+  }, {
+    hr: 'Tortilja Vegetariana',
+    en: 'Vegetarian Tortilla',
+    desc: 'BBQ sauce, lettuce, tomato, mixed vegetables, spices',
+    descHr: 'BBQ umak, zelena salata, rajčica, mix povrće, začini',
+    price: '12.60'
+  }, {
+    hr: 'Tortilja Tuna',
     en: 'Tuna Tortilla',
-    desc: 'Tuna, capers, lettuce, lemon mayo, tomato',
-    descHr: 'Tuna, kapari, salata, majoneza s limunom, rajčica',
-    price: '8.40'
+    desc: 'Tuna, lettuce, tomato, pickles, corn, tartar sauce',
+    descHr: 'Tuna, zelena salata, rajčica, kiseli krastavac, kukuruz, tartar umak',
+    price: '13.90'
   }]
 }, {
   id: 'kids',
-  hr: 'Dječji kutak',
-  en: "Kids' Corner",
-  note: 'For the small captains of the Adriatic.',
-  noteHr: 'Za male kapetane Jadrana.',
+  hr: 'Kutak za djecu',
+  en: "Children's Corner",
+  note: 'Smaller plates for smaller guests.',
+  noteHr: 'Manji tanjuri za manje goste.',
   items: [{
-    hr: 'Pileći medaljoni s pomfritom',
-    en: 'Chicken Strips & Fries',
-    desc: 'Crispy chicken, fries, ketchup',
-    descHr: 'Hrskava piletina, pomfrit, kečap',
-    price: '7.80'
+    hr: 'Pasta Napolitana',
+    en: 'Napolitan Pasta',
+    desc: 'Tomato sauce, pasta',
+    descHr: 'Umak od rajčice, pasta',
+    price: '12.20'
   }, {
-    hr: 'Mini margherita',
-    en: 'Mini Margherita',
-    desc: 'Small classic margherita pizza',
-    descHr: 'Mala klasična margherita pizza',
-    price: '6.40'
+    hr: 'Pileći banditosi',
+    en: 'Chicken Banditos',
+    desc: 'Fried chicken, ketchup, French fries',
+    descHr: 'Pohana piletina, kečap, pomfrit',
+    price: '12.30'
+  }]
+}, {
+  id: 'sides',
+  hr: 'Prilozi i dodaci',
+  en: 'Sides & Extras',
+  note: 'Add to any plate.',
+  noteHr: 'Uz svako jelo.',
+  items: [{
+    hr: 'Mediteransko povrće sa žara',
+    en: 'Grilled Mediterranean Vegetables',
+    price: '5.90'
   }, {
-    hr: 'Pasta s rajčicom',
-    en: 'Tomato Pasta',
-    desc: 'Penne, tomato sauce, parmesan',
-    descHr: 'Penne, umak od rajčice, parmezan',
-    price: '5.80'
+    hr: 'Pomfrit',
+    en: 'French Fries',
+    price: '3.80'
   }, {
-    hr: 'Mini burger s pomfritom',
-    en: 'Mini Burger & Fries',
-    desc: 'Small beef burger, cheddar, fries',
-    descHr: 'Mali burger od govedine, cheddar, pomfrit',
-    price: '7.20'
+    hr: 'Majoneza',
+    en: 'Mayonnaise',
+    price: '2.20'
+  }, {
+    hr: 'Ketchup',
+    en: 'Ketchup',
+    price: '2.20'
+  }, {
+    hr: 'Senf',
+    en: 'Mustard',
+    price: '2.20'
+  }, {
+    hr: 'Tartar umak',
+    en: 'Tartar Sauce',
+    price: '2.20'
+  }, {
+    hr: 'Ajvar',
+    en: 'Ajvar',
+    price: '2.20'
+  }, {
+    hr: 'Kulen',
+    en: 'Kulen',
+    price: '2.20'
+  }, {
+    hr: 'Panceta',
+    en: 'Bacon',
+    price: '2.20'
+  }, {
+    hr: 'Gljive',
+    en: 'Mushrooms',
+    price: '2.20'
+  }, {
+    hr: 'Vrhnje',
+    en: 'Cream',
+    price: '2.20'
+  }, {
+    hr: 'Lepinja',
+    en: 'Flat Bread',
+    price: '2.60'
+  }, {
+    hr: 'Lepinja 1/2',
+    en: 'Flat Bread 1/2',
+    price: '1.30'
   }]
 }, {
   id: 'desserts',
-  hr: 'Desert',
+  hr: 'Deserti',
   en: 'Desserts',
-  note: 'Always room. Ask for the spoon.',
-  noteHr: 'Uvijek ima mjesta. Tražite žličicu.',
+  note: 'Home made.',
+  noteHr: 'Domaće.',
   items: [{
-    hr: 'Tiramisu',
-    en: 'Tiramisu',
-    desc: 'Mascarpone, espresso, savoiardi, cocoa',
-    descHr: 'Mascarpone, espresso, savoiardi, kakao',
-    price: '6.80'
+    hr: 'Sladoled bourbon vanilija s bučinim uljem',
+    en: 'Bourbon Vanilla Ice Cream with Pumpkin Seed Oil',
+    price: '5.90'
   }, {
-    hr: 'Panna cotta',
-    en: 'Panna Cotta',
-    desc: 'Vanilla cream, raspberry coulis, mint',
-    descHr: 'Vanilij krema, malina coulis, metvica',
-    price: '6.40'
+    hr: 'Sladoled (kuglica)',
+    en: 'Ice Cream (scoop)',
+    price: '2.90'
   }, {
-    hr: 'Rožata',
-    en: 'Dubrovnik Rožata',
-    desc: 'Caramel custard with rose liqueur, Dalmatian classic',
-    descHr: 'Karamel krema s likerom od ruže, dalmatinski klasik',
-    price: '6.20'
+    hr: 'Palačinke s marmeladom / čokoladom',
+    en: 'Pancakes with Marmalade / Chocolate',
+    price: '5.70'
   }, {
-    hr: 'Čokoladni soufflé',
-    en: 'Chocolate Soufflé',
-    desc: 'Warm dark chocolate, vanilla ice cream',
-    descHr: 'Topla tamna čokolada, vanilij sladoled',
-    price: '7.40'
+    hr: 'Lava Cake',
+    en: 'Lava Cake',
+    price: '7.60'
   }, {
-    hr: 'Sladoled',
-    en: 'Ice Cream Selection',
-    desc: 'Three scoops, house-made daily',
-    descHr: 'Tri kuglice, svakodnevno domaće',
-    price: '5.20'
+    hr: 'Torta od mjendula',
+    en: 'Almond Cake',
+    price: '5.60'
+  }, {
+    hr: 'Torta Monte',
+    en: 'Monte Cake',
+    price: '5.60'
+  }, {
+    hr: 'Čoko-lješnjak torta',
+    en: 'Chocolate-Hazelnut Cake',
+    price: '5.60'
+  }, {
+    hr: 'Cheesecake',
+    en: 'Cheesecake',
+    price: '5.60'
   }]
 }];
 window.MENU_DATA = MENU_DATA;
