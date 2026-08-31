@@ -9,6 +9,8 @@ const PHONE_E164 = '+38520642111';
 const INSTAGRAM_URL = 'https://www.instagram.com/subcaffegourmet/';
 const FACEBOOK_URL = 'https://www.facebook.com/subcaffegourmet';
 const SOCIAL_HANDLE = '@subcaffegourmet';
+const EMAIL = 'info@subgourmet.hr';
+const CAREERS_URL = 'careers.html';
 
 // Google Maps listing, checked 2026-08-31. Note the other platforms differ a
 // lot (Facebook 4.5/16, TripAdvisor ~3.2/29), so the source is stated in the
@@ -72,7 +74,8 @@ const TRANSLATIONS = {
       about: 'About',
       menu: 'Menu',
       gallery: 'Gallery',
-      visit: 'Visit'
+      visit: 'Visit',
+      join: 'Join the Team'
     },
     hero: {
       eyebrow: 'Srebreno · Dubrovnik Riviera',
@@ -174,7 +177,8 @@ const TRANSLATIONS = {
       about: 'O nama',
       menu: 'Meni',
       gallery: 'Galerija',
-      visit: 'Posjetite nas'
+      visit: 'Posjetite nas',
+      join: 'Postani dio tima'
     },
     hero: {
       eyebrow: 'Srebreno · Dubrovačka rivijera',
@@ -351,7 +355,10 @@ function Nav({
     href: "#gallery"
   }, t.nav.gallery), /*#__PURE__*/React.createElement("a", {
     href: "#visit"
-  }, t.nav.visit)), /*#__PURE__*/React.createElement("div", {
+  }, t.nav.visit), /*#__PURE__*/React.createElement("a", {
+    className: "nav-join",
+    href: CAREERS_URL
+  }, t.nav.join)), /*#__PURE__*/React.createElement("div", {
     className: "nav-right"
   }, /*#__PURE__*/React.createElement(LangToggle, {
     lang: lang,
@@ -996,7 +1003,9 @@ function Footer({
     href: "#gallery"
   }, t.footer.lGallery)), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
     href: "#visit"
-  }, t.footer.lFindUs)))), /*#__PURE__*/React.createElement("div", {
+  }, t.footer.lFindUs)), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: CAREERS_URL
+  }, t.nav.join)))), /*#__PURE__*/React.createElement("div", {
     className: "foot-col"
   }, /*#__PURE__*/React.createElement("h5", null, t.footer.contact), /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
     href: "tel:+38520642111"
@@ -1005,8 +1014,8 @@ function Footer({
     target: "_blank",
     rel: "noreferrer"
   }, "+385 91 400 9999 (WhatsApp)")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
-    href: "mailto:info.subcaffe@gmail.com"
-  }, "info.subcaffe@gmail.com")), /*#__PURE__*/React.createElement("li", null, "\u0160etali\u0161te dr. Franje Tu\u0111mana 2A"), /*#__PURE__*/React.createElement("li", null, "20207 \u017Dupa Dubrova\u010Dka, ", t.htmlLang === 'hr' ? 'Hrvatska' : 'Croatia'))), /*#__PURE__*/React.createElement("div", {
+    href: 'mailto:' + EMAIL
+  }, EMAIL)), /*#__PURE__*/React.createElement("li", null, "\u0160etali\u0161te dr. Franje Tu\u0111mana 2A"), /*#__PURE__*/React.createElement("li", null, "20207 \u017Dupa Dubrova\u010Dka, ", t.htmlLang === 'hr' ? 'Hrvatska' : 'Croatia'))), /*#__PURE__*/React.createElement("div", {
     className: "foot-col"
   }, /*#__PURE__*/React.createElement("h5", null, t.footer.follow), /*#__PURE__*/React.createElement("div", {
     className: "foot-social"

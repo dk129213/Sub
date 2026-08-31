@@ -1,0 +1,190 @@
+/* Careers page. Loads on top of styles.css and reuses its tokens, nav and
+   button styles; only the form and page-specific layout live here. */
+
+/* The shared nav inlines its logo as SVG from React. This page is static, so
+   the mark is painted with a mask instead - same file, still currentColor. */
+.nav-logo-mask {
+  display: block;
+  width: 93px; height: 30px;
+  background-color: currentColor;
+  -webkit-mask: url('images/logo.svg') no-repeat center / contain;
+  mask: url('images/logo.svg') no-repeat center / contain;
+}
+
+.careers-page { background: var(--cream); }
+.careers-page .nav { position: sticky; }
+.nav-join.is-current { color: var(--gold); opacity: 1; }
+
+.careers-hero {
+  /* The nav is sticky here, not fixed, so it takes up layout space and this
+     padding does not need to clear it the way the homepage hero does. */
+  padding: 78px 0 60px;
+  border-bottom: 1px solid var(--rule);
+}
+.careers-hero h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1.02; margin: 18px 0 20px; }
+.careers-lede {
+  max-width: 60ch;
+  color: var(--ink-soft);
+  font-size: 17px; line-height: 1.7;
+}
+
+.careers-main { padding: 70px 0 120px; }
+.careers-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: 72px;
+  align-items: start;
+}
+
+/* ─────────────── FORM ─────────────── */
+.careers-form { display: flex; flex-direction: column; gap: 26px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+.field { display: flex; flex-direction: column; gap: 9px; min-width: 0; }
+
+.careers-form label {
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold-deep); font-weight: 500;
+}
+.careers-form label .optional {
+  letter-spacing: 0.06em; text-transform: none;
+  color: var(--ink-mute);
+}
+
+.careers-form input[type="text"],
+.careers-form input[type="email"],
+.careers-form input[type="tel"],
+.careers-form select,
+.careers-form textarea {
+  font-family: inherit; font-size: 16px;   /* 16px keeps iOS from zooming on focus */
+  width: 100%;
+  padding: 14px 16px;
+  color: var(--ink);
+  background: var(--cream-3);
+  border: 1px solid var(--rule);
+  border-radius: 0;
+  transition: border-color 0.25s ease, background 0.25s ease;
+  -webkit-appearance: none; appearance: none;
+}
+.careers-form textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+
+.careers-form select {
+  cursor: pointer;
+  /* Chevron drawn inline so no image request is needed. */
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--gold) 50%),
+    linear-gradient(135deg, var(--gold) 50%, transparent 50%);
+  background-position: calc(100% - 19px) center, calc(100% - 13px) center;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 44px;
+}
+.careers-form select:invalid { color: var(--ink-mute); }
+.careers-form option { color: var(--ink); background: var(--charcoal); }
+
+.careers-form input:focus,
+.careers-form select:focus,
+.careers-form textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: var(--charcoal);
+}
+.careers-form ::placeholder { color: var(--ink-mute); }
+
+/* ─────────────── FILE INPUT ─────────────── */
+.file-drop {
+  position: relative;
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px 16px;
+  background: var(--cream-3);
+  border: 1px dashed var(--rule-light);
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.file-drop:hover, .file-drop.is-dragover { border-color: var(--gold); background: var(--charcoal); }
+.file-drop input[type="file"] {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0; cursor: pointer;
+}
+.file-drop-text { font-size: 14px; color: var(--ink-mute); }
+.file-drop.has-file { border-style: solid; border-color: var(--gold-deep); }
+.file-drop.has-file .file-drop-text { color: var(--ink); }
+
+.hp-field {
+  position: absolute; left: -9999px;
+  width: 1px; height: 1px; overflow: hidden;
+}
+
+/* ─────────────── CONSENT ─────────────── */
+.field-consent { margin-top: 4px; }
+.consent {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 13px; line-height: 1.65;
+  letter-spacing: normal; text-transform: none;
+  color: var(--ink-soft); font-weight: 400;
+  cursor: pointer;
+}
+.consent input[type="checkbox"] {
+  flex: none;
+  width: 18px; height: 18px;
+  margin-top: 2px;
+  accent-color: var(--gold);
+  cursor: pointer;
+}
+.consent a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
+
+/* ─────────────── VALIDATION / STATUS ─────────────── */
+.field-error {
+  font-size: 12px; color: var(--terracotta);
+  min-height: 0; display: none;
+}
+.field-error.show { display: block; }
+.field.has-error input,
+.field.has-error select,
+.field.has-error textarea,
+.field.has-error .file-drop { border-color: var(--terracotta); }
+
+.careers-form .btn { align-self: flex-start; margin-top: 6px; }
+.careers-form .btn[disabled] { opacity: 0.55; cursor: not-allowed; }
+
+.form-status { font-size: 14px; line-height: 1.6; margin-top: 4px; }
+.form-status.ok { color: var(--olive); }
+.form-status.err { color: var(--terracotta); }
+
+/* ─────────────── ASIDE ─────────────── */
+.careers-aside {
+  display: flex; flex-direction: column; gap: 30px;
+  padding: 34px 32px;
+  background: var(--cream-2);
+  border: 1px solid var(--rule);
+  position: sticky; top: 96px;
+}
+.aside-block { display: flex; flex-direction: column; gap: 8px; }
+.aside-block .label {
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold-deep); font-weight: 500;
+}
+.aside-block .value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px; line-height: 1.5; color: var(--ink-soft);
+}
+.aside-block .value a { color: inherit; }
+.aside-block .value a:hover { color: var(--gold); }
+.aside-list {
+  list-style: none;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px; line-height: 1.6; color: var(--ink);
+}
+
+.careers-page .foot { padding: 40px 0; border-top: 1px solid var(--rule); }
+.careers-page .foot-bottom { border-top: none; padding-top: 0; margin-top: 0; }
+
+@media (max-width: 960px) {
+  .careers-hero { padding: 46px 0 40px; }
+  .careers-main { padding: 48px 0 90px; }
+  .careers-grid { grid-template-columns: 1fr; gap: 48px; }
+  .careers-aside { position: static; order: -1; padding: 26px 24px; }
+}
+@media (max-width: 560px) {
+  .field-row { grid-template-columns: 1fr; gap: 26px; }
+  .careers-form .btn { align-self: stretch; justify-content: center; }
+}

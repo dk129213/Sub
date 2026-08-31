@@ -8,6 +8,8 @@ const PHONE_E164 = '+38520642111';
 const INSTAGRAM_URL = 'https://www.instagram.com/subcaffegourmet/';
 const FACEBOOK_URL = 'https://www.facebook.com/subcaffegourmet';
 const SOCIAL_HANDLE = '@subcaffegourmet';
+const EMAIL = 'info@subgourmet.hr';
+const CAREERS_URL = 'careers.html';
 
 // Google Maps listing, checked 2026-08-31. Note the other platforms differ a
 // lot (Facebook 4.5/16, TripAdvisor ~3.2/29), so the source is stated in the
@@ -55,7 +57,7 @@ const TRANSLATIONS = {
   en: {
     htmlLang: 'en',
     pageTitle: 'Sub Gourmet · Mediterranean flavors, Adriatic soul',
-    nav: { about: 'About', menu: 'Menu', gallery: 'Gallery', visit: 'Visit' },
+    nav: { about: 'About', menu: 'Menu', gallery: 'Gallery', visit: 'Visit', join: 'Join the Team' },
     hero: {
       eyebrow: 'Srebreno · Dubrovnik Riviera',
       h1Top: 'Sub',
@@ -145,7 +147,7 @@ const TRANSLATIONS = {
   hr: {
     htmlLang: 'hr',
     pageTitle: 'Sub Gourmet · Mediteranski okusi, jadranska duša',
-    nav: { about: 'O nama', menu: 'Meni', gallery: 'Galerija', visit: 'Posjetite nas' },
+    nav: { about: 'O nama', menu: 'Meni', gallery: 'Galerija', visit: 'Posjetite nas', join: 'Postani dio tima' },
     hero: {
       eyebrow: 'Srebreno · Dubrovačka rivijera',
       h1Top: 'Sub',
@@ -297,6 +299,7 @@ function Nav({ scrolled, dark, lang, setLang, t }) {
         <a href="#menu">{t.nav.menu}</a>
         <a href="#gallery">{t.nav.gallery}</a>
         <a href="#visit">{t.nav.visit}</a>
+        <a className="nav-join" href={CAREERS_URL}>{t.nav.join}</a>
       </div>
       <div className="nav-right">
         <LangToggle lang={lang} setLang={setLang} />
@@ -764,6 +767,7 @@ function Footer({ t }) {
               <li><a href="#menu">{t.footer.lMenu}</a></li>
               <li><a href="#gallery">{t.footer.lGallery}</a></li>
               <li><a href="#visit">{t.footer.lFindUs}</a></li>
+              <li><a href={CAREERS_URL}>{t.nav.join}</a></li>
             </ul>
           </div>
           <div className="foot-col">
@@ -771,7 +775,7 @@ function Footer({ t }) {
             <ul>
               <li><a href="tel:+38520642111">+385 20 642 111</a></li>
               <li><a href="https://wa.me/385914009999" target="_blank" rel="noreferrer">+385 91 400 9999 (WhatsApp)</a></li>
-              <li><a href="mailto:info.subcaffe@gmail.com">info.subcaffe@gmail.com</a></li>
+              <li><a href={'mailto:' + EMAIL}>{EMAIL}</a></li>
               <li>Šetalište dr. Franje Tuđmana 2A</li>
               <li>20207 Župa Dubrovačka, {t.htmlLang === 'hr' ? 'Hrvatska' : 'Croatia'}</li>
             </ul>

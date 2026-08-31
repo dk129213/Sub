@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Postani dio tima · Sub Gourmet</title>
+<meta name="description" content="Otvorena prijava za rad u Sub Gourmetu, Srebreno. Konobar, kuhar i pomoćni kuhar." />
+<link rel="icon" href="images/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+<meta name="theme-color" content="#2C2620" />
+<meta name="robots" content="index, follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,300;1,400&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="careers.css" />
+</head>
+<body class="careers-page">
+
+<nav class="nav scrolled">
+  <a href="index.html" aria-label="Sub Gourmet">
+    <span class="nav-logo nav-logo-mask" role="img" aria-label="Sub Gourmet"></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#about" data-i18n="navAbout">O nama</a>
+    <a href="index.html#menu" data-i18n="navMenu">Meni</a>
+    <a href="index.html#gallery" data-i18n="navGallery">Galerija</a>
+    <a href="index.html#visit" data-i18n="navVisit">Posjetite nas</a>
+    <a class="nav-join is-current" href="careers.html" aria-current="page" data-i18n="navJoin">Postani dio tima</a>
+  </div>
+  <div class="nav-right">
+    <span class="lang-toggle">
+      <button type="button" data-lang="en">EN</button>
+      <span class="sep">·</span>
+      <button type="button" data-lang="hr">HR</button>
+    </span>
+  </div>
+  <a class="nav-menu-btn" href="index.html#menu" data-i18n="navMenu">Meni</a>
+</nav>
+
+<header class="careers-hero">
+  <div class="container">
+    <span class="eyebrow mono">
+      <span class="line"></span><span data-i18n="eyebrow">Otvorena prijava</span>
+    </span>
+    <h1 class="serif" data-i18n="h1">Postani dio tima</h1>
+    <p class="careers-lede" data-i18n="lede">
+      Prijave su otvorene tijekom cijele godine. Ostavite svoje podatke i javit ćemo vam se
+      kada se otvori mjesto koje odgovara vašem iskustvu.
+    </p>
+  </div>
+</header>
+
+<main class="careers-main">
+  <div class="container careers-grid">
+
+    <form class="careers-form" id="applyForm" novalidate>
+      <!-- Honeypot: hidden from people, irresistible to bots. apply.php drops
+           any submission that fills it in. -->
+      <div class="hp-field" aria-hidden="true">
+        <label for="website">Website</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="firstName" data-i18n="lblFirstName">Ime</label>
+          <input type="text" id="firstName" name="firstName" autocomplete="given-name" required />
+          <span class="field-error" data-error-for="firstName"></span>
+        </div>
+        <div class="field">
+          <label for="lastName" data-i18n="lblLastName">Prezime</label>
+          <input type="text" id="lastName" name="lastName" autocomplete="family-name" required />
+          <span class="field-error" data-error-for="lastName"></span>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="email" data-i18n="lblEmail">E-mail</label>
+          <input type="email" id="email" name="email" autocomplete="email" required />
+          <span class="field-error" data-error-for="email"></span>
+        </div>
+        <div class="field">
+          <label for="phone" data-i18n="lblPhone">Telefon</label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel" required />
+          <span class="field-error" data-error-for="phone"></span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="position" data-i18n="lblPosition">Pozicija za koju se prijavljujete</label>
+        <select id="position" name="position" required>
+          <option value="" data-i18n="optChoose">Odaberite poziciju</option>
+          <option value="konobar" data-i18n="optWaiter">Konobar</option>
+          <option value="kuhar" data-i18n="optCook">Kuhar</option>
+          <option value="pomocni-kuhar" data-i18n="optAsstCook">Pomoćni kuhar</option>
+        </select>
+        <span class="field-error" data-error-for="position"></span>
+      </div>
+
+      <div class="field">
+        <label for="cv" data-i18n="lblCv">Životopis (CV)</label>
+        <div class="file-drop" id="fileDrop">
+          <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required />
+          <span class="file-drop-text" id="fileLabel" data-i18n="cvHint">PDF ili Word dokument, najviše 5 MB</span>
+        </div>
+        <span class="field-error" data-error-for="cv"></span>
+      </div>
+
+      <div class="field">
+        <label for="message" data-i18n="lblMessage">Poruka <span class="optional" data-i18n="optional">(nije obavezno)</span></label>
+        <textarea id="message" name="message" rows="4"></textarea>
+      </div>
+
+      <div class="field field-consent">
+        <label class="consent">
+          <input type="checkbox" id="consent" name="consent" required />
+          <span data-i18n="consent">
+            Suglasan/na sam da Sub Gourmet obrađuje i čuva moje osobne podatke i životopis
+            u svrhu zapošljavanja. Privolu mogu povući u svakom trenutku na
+          </span>
+          <a href="mailto:info@subgourmet.hr">info@subgourmet.hr</a>.
+        </label>
+        <span class="field-error" data-error-for="consent"></span>
+      </div>
+
+      <button type="submit" class="btn btn-primary" id="submitBtn">
+        <span data-i18n="submit">Pošalji prijavu</span>
+        <span class="arrow"></span>
+      </button>
+
+      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+    </form>
+
+    <aside class="careers-aside">
+      <div class="aside-block">
+        <span class="label" data-i18n="asideRolesLbl">Pozicije</span>
+        <ul class="aside-list">
+          <li data-i18n="optWaiter">Konobar</li>
+          <li data-i18n="optCook">Kuhar</li>
+          <li data-i18n="optAsstCook">Pomoćni kuhar</li>
+        </ul>
+      </div>
+      <div class="aside-block">
+        <span class="label" data-i18n="asideWhereLbl">Gdje</span>
+        <p class="value">Sub City, 1. kat<br />Šetalište dr. Franje Tuđmana 2A<br />20207 Srebreno</p>
+      </div>
+      <div class="aside-block">
+        <span class="label" data-i18n="asideContactLbl">Kontakt</span>
+        <p class="value">
+          <a href="mailto:info@subgourmet.hr">info@subgourmet.hr</a><br />
+          <a href="tel:+38520642111">+385 20 642 111</a>
+        </p>
+      </div>
+    </aside>
+
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="container">
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> Sub Gourmet</span>
+      <a href="index.html" data-i18n="backHome">Natrag na naslovnicu</a>
+    </div>
+  </div>
+</footer>
+
+<script src="careers.js" defer></script>
+</body>
+</html>
