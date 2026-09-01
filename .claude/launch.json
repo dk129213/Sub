@@ -3,10 +3,14 @@
   "configurations": [
     {
       "name": "subgourmet",
-      "runtimeExecutable": "python",
+      "runtimeExecutable": "C:\\Users\\User\\Desktop\\poduzetnistvo\\php-portable\\php.exe",
       "runtimeArgs": [
-        "tools/devserver.py",
-        "5173"
+        "-c",
+        "C:\\Users\\User\\Desktop\\poduzetnistvo\\php-portable\\php.ini",
+        "-S",
+        "localhost:5173",
+        "-t",
+        "."
       ],
       "port": 5173
     }

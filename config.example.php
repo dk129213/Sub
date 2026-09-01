@@ -1,28 +1,20 @@
 <?php
 /**
- * Copy this file to config.php and fill in the real values.
+ * Copy this file to config.php and fill in the password.
  *
- * config.php is gitignored on purpose: it holds the mailbox password. Never
- * commit it and never link to it from a page.
+ * Everything is filled in except the password. Put the mailbox password for
+ * info@subgourmet.hr on the marked line (the same one you use for webmail).
  */
 return [
-    // Where applications are delivered.
     'to'       => 'info@subgourmet.hr',
-
-    // Envelope sender. Use an address on your own domain, otherwise the mail
-    // is likely to be rejected or land in spam.
     'from'     => 'info@subgourmet.hr',
-    'fromName' => 'Sub Gourmet — Prijave',
+    'fromName' => 'Sub Gourmet - Prijave',
 
-    // Leave 'host' empty to send with PHP's mail(), which works out of the box
-    // on most shared hosting. Fill it in (and upload PHPMailer to vendor/) to
-    // send over authenticated SMTP, which usually lands in the inbox more
-    // reliably. Your hosting provider supplies these values.
     'smtp' => [
-        'host'       => '',            // e.g. 'mail.subgourmet.hr'
-        'port'       => 587,           // 587 for TLS, 465 for SSL
+        'host'       => 'mail.subgourmet.hr',
+        'port'       => 587,
         'username'   => 'info@subgourmet.hr',
-        'password'   => '',            // mailbox password
-        'encryption' => 'tls',         // 'tls' or 'ssl'
+        'password'   => '',          // <-- PUT THE PASSWORD HERE
+        'encryption' => 'tls',
     ],
 ];

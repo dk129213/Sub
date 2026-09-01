@@ -8,9 +8,9 @@
  *   2. config.php holds the SMTP password. It is gitignored and must never be
  *      committed or served - keep it beside this file, and never reference it
  *      from the browser.
- *   3. Without PHPMailer this uses PHP's mail(), which works on most shared
- *      hosting. To send over authenticated SMTP instead (better deliverability),
- *      upload PHPMailer to vendor/ and fill in the SMTP block in config.php.
+ *   3. Sending goes over authenticated SMTP via smtp.php - no library to
+ *      install. PHP's mail() is not used: it cannot authenticate on Windows
+ *      hosting and tends to be filtered as spam.
  *
  * Everything the browser sends is re-validated here. Client-side checks are for
  * the applicant's convenience; they are not a security boundary.
@@ -55,6 +55,10 @@ if (!is_file($configPath)) {
     fail(500, 'Server is not configured yet.');
 }
 $config = require $configPath;
+
+if (empty($config['smtp']['host']) || empty($config['smtp']['password'])) {
+    fail(500, 'Mail is not configured yet.');
+}
 
 // Bots fill in every field they find; a real applicant never sees this one.
 if (!empty($_POST['website'] ?? '')) {
@@ -143,77 +147,24 @@ $lines[] = '';
 $lines[] = 'Privola za obradu podataka: da';
 $body = implode("\r\n", $lines);
 
-$sent = sendMail($config, $subject, $body, $email, $applicant, $cvBytes, $cvName, $mime);
+require __DIR__ . '/smtp.php';
 
-if (!$sent) {
+try {
+    $smtp = new Smtp($config['smtp']['host'], (int)$config['smtp']['port']);
+    $smtp->login($config['smtp']['username'], $config['smtp']['password']);
+    $smtp->sendMessage(
+        $config['from'], $config['fromName'],
+        $config['to'],
+        $subject, $body,
+        $email, $applicant,
+        [$cvBytes, $cvName, $mime]
+    );
+    $smtp->quit();
+} catch (SmtpException $e) {
+    // The transcript never contains the password - Smtp logs AUTH lines as ***.
+    $detail = isset($smtp) ? PHP_EOL . $smtp->transcript() : '';
+    error_log('[apply.php] ' . $e->getMessage() . $detail);
     fail(502, 'Could not send the application.');
 }
+
 echo json_encode(['ok' => true], JSON_UNESCAPED_UNICODE);
-
-
-/**
- * Sends via PHPMailer over SMTP when it is installed and configured,
- * otherwise falls back to PHP's mail() with a hand-built MIME message.
- */
-function sendMail(
-    array $config, string $subject, string $body,
-    string $replyTo, string $replyName,
-    string $cvBytes, string $cvName, string $cvMime
-): bool {
-    $to   = $config['to'];
-    $from = $config['from'];
-
-    $autoload = __DIR__ . '/vendor/autoload.php';
-    if (!empty($config['smtp']['host']) && is_file($autoload)) {
-        require_once $autoload;
-        try {
-            $mail = new PHPMailer\PHPMailer\PHPMailer(true);
-            $mail->isSMTP();
-            $mail->Host       = $config['smtp']['host'];
-            $mail->Port       = (int)$config['smtp']['port'];
-            $mail->SMTPAuth   = true;
-            $mail->Username   = $config['smtp']['username'];
-            $mail->Password   = $config['smtp']['password'];
-            $mail->SMTPSecure = $config['smtp']['encryption'];   // 'tls' or 'ssl'
-            $mail->CharSet    = 'UTF-8';
-            $mail->setFrom($from, $config['fromName']);
-            $mail->addAddress($to);
-            $mail->addReplyTo($replyTo, $replyName);
-            $mail->Subject = $subject;
-            $mail->Body    = $body;
-            $mail->addStringAttachment($cvBytes, $cvName, 'base64', $cvMime);
-            return $mail->send();
-        } catch (Throwable $e) {
-            error_log('[apply.php] SMTP send failed: ' . $e->getMessage());
-            return false;
-        }
-    }
-
-    $boundary = '=_' . bin2hex(random_bytes(16));
-    $headers  = implode("\r\n", [
-        'MIME-Version: 1.0',
-        'From: ' . sprintf('%s <%s>', $config['fromName'], $from),
-        'Reply-To: ' . sprintf('%s <%s>', $replyName, $replyTo),
-        'Content-Type: multipart/mixed; boundary="' . $boundary . '"',
-    ]);
-
-    $payload = implode("\r\n", [
-        '--' . $boundary,
-        'Content-Type: text/plain; charset=UTF-8',
-        'Content-Transfer-Encoding: 8bit',
-        '',
-        $body,
-        '',
-        '--' . $boundary,
-        'Content-Type: ' . $cvMime . '; name="' . $cvName . '"',
-        'Content-Transfer-Encoding: base64',
-        'Content-Disposition: attachment; filename="' . $cvName . '"',
-        '',
-        chunk_split(base64_encode($cvBytes)),
-        '--' . $boundary . '--',
-        '',
-    ]);
-
-    $encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
-    return mail($to, $encodedSubject, $payload, $headers);
-}
