@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Server-side endpoints and diagnostics - nothing to index.
+Disallow: /apply.php
+Disallow: /smtp.php
+Disallow: /_selftest.php
+Disallow: /tools/
+Disallow: /.claude/
+
+Sitemap: https://subgourmet.hr/sitemap.xml

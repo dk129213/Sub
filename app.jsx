@@ -56,7 +56,8 @@ function Picture({ name, alt, srcW, extra, sizes, className, width, height, prio
 const TRANSLATIONS = {
   en: {
     htmlLang: 'en',
-    pageTitle: 'Sub Gourmet · Mediterranean flavors, Adriatic soul',
+    pageTitle: 'Sub Gourmet — Restaurant in Srebreno, Dubrovnik Riviera',
+    pageDesc: 'All-day restaurant in Srebreno, Zupa Dubrovacka. Breakfast until 11:30, stone-baked pizza, pasta, burgers, grilled squid and cevapi. Open daily until 21:00.',
     nav: { about: 'About', menu: 'Menu', gallery: 'Gallery', visit: 'Visit', join: 'Join the Team' },
     hero: {
       eyebrow: 'Srebreno · Dubrovnik Riviera',
@@ -77,13 +78,13 @@ const TRANSLATIONS = {
       h2em: 'whole sea',
       h2b: ' beside it.',
       lead: 'In Srebreno, a quiet bay just east of Dubrovnik, we cook the way our grandmothers did, and the way travelers wished they could.',
-      p1: 'Our kitchen mixes the Dalmatian classics (grilled fish, slow-baked lamb, hand-rolled pasta with Istrian truffle) with the comfort dishes our guests have come to love over a long afternoon.',
-      p2: 'The fish is from boats two minutes away. The olive oil from the hill behind us. The rest, we earn.',
+      p1: 'Our kitchen runs all day: pizza baked to order, tagliatelle in truffle sauce, grilled squid and fish and chips, burgers on brioche buns, ćevapi with warm flat bread.',
+      p2: 'Breakfast is served until 11:30. The cakes and desserts are made in house.',
       stat1Num: '12', stat1Lbl: 'Years on the bay',
-      stat2Num: '94%', stat2Lbl: 'Locally sourced',
+      stat2Num: '81', stat2Lbl: 'Dishes on the menu',
       stat3Num: GOOGLE_RATING + '★', stat3Lbl: GOOGLE_REVIEWS + ' Google reviews',
       stampEst: 'Established', stampSince: 'Since 2014',
-      imgAlt: 'Outdoor terrace at Sub Gourmet',
+      imgAlt: 'Dining room at Sub Gourmet, Srebreno',
     },
     menu: {
       eyebrow: 'The Menu',
@@ -124,8 +125,8 @@ const TRANSLATIONS = {
       phone: 'Phone',
       whatsapp: 'WhatsApp',
       atTable: 'At the Table',
-      tagOutdoor: 'Outdoor seating',
-      tagCocktails: 'Great cocktails',
+      tagTakeaway: 'Takeaway',
+      tagDelivery: 'Delivery',
       tagVegetarian: 'Vegetarian options',
       tagWalkIn: 'Walk-ins welcome',
       perPerson: 'Per Person',
@@ -146,7 +147,8 @@ const TRANSLATIONS = {
   },
   hr: {
     htmlLang: 'hr',
-    pageTitle: 'Sub Gourmet · Mediteranski okusi, jadranska duša',
+    pageTitle: 'Sub Gourmet — Restoran u Srebrenom, Župa Dubrovačka',
+    pageDesc: 'Restoran u Srebrenom na Dubrovačkoj rivijeri. Doručak do 11:30, pizza iz peći, tjestenine, burgeri, lignje sa žara i ćevapi. Otvoreno svaki dan do 21:00.',
     nav: { about: 'O nama', menu: 'Meni', gallery: 'Galerija', visit: 'Posjetite nas', join: 'Postani dio tima' },
     hero: {
       eyebrow: 'Srebreno · Dubrovačka rivijera',
@@ -167,13 +169,13 @@ const TRANSLATIONS = {
       h2em: 'cijelim morem',
       h2b: ' pored sebe.',
       lead: 'U Srebrenom, tihoj uvali istočno od Dubrovnika, kuhamo kao što su naše bake, i kako su putnici poželjeli da znaju.',
-      p1: 'U našoj kuhinji se miješaju dalmatinski klasici (riba s roštilja, polagano pečena janjetina, ručno valjana tjestenina s istarskim tartufom) s domaćim jelima koja naši gosti vole uz dugo popodne.',
-      p2: 'Riba je s brodova dvije minute odavde. Maslinovo ulje s brda iza nas. Ostalo zaslužujemo.',
+      p1: 'Naša kuhinja radi cijeli dan: pizza pečena po narudžbi, tagliatelle u umaku od tartufa, lignje sa žara i fish and chips, burgeri u brioche pecivu, ćevapi s toplom lepinjom.',
+      p2: 'Doručak se poslužuje do 11:30. Kolači i deserti su domaći.',
       stat1Num: '12', stat1Lbl: 'Godina u uvali',
-      stat2Num: '94%', stat2Lbl: 'Lokalnog porijekla',
+      stat2Num: '81', stat2Lbl: 'Jela na jelovniku',
       stat3Num: GOOGLE_RATING + '★', stat3Lbl: GOOGLE_REVIEWS + ' Google recenzija',
       stampEst: 'Osnovano', stampSince: 'Od 2014.',
-      imgAlt: 'Vanjska terasa Sub Gourmeta',
+      imgAlt: 'Blagovaonica Sub Gourmeta u Srebrenom',
     },
     menu: {
       eyebrow: 'Meni',
@@ -214,8 +216,8 @@ const TRANSLATIONS = {
       phone: 'Telefon',
       whatsapp: 'WhatsApp',
       atTable: 'Za stolom',
-      tagOutdoor: 'Vanjska terasa',
-      tagCocktails: 'Odlični kokteli',
+      tagTakeaway: 'Hrana za van',
+      tagDelivery: 'Dostava',
       tagVegetarian: 'Vegetarijanske opcije',
       tagWalkIn: 'Dobrodošli i bez rezervacije',
       perPerson: 'Po osobi',
@@ -252,6 +254,8 @@ function useLang() {
   useEffect(() => {
     document.documentElement.setAttribute('lang', TRANSLATIONS[lang].htmlLang);
     document.title = TRANSLATIONS[lang].pageTitle;
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc) desc.setAttribute('content', TRANSLATIONS[lang].pageDesc);
   }, [lang]);
   return [lang, setLang];
 }
@@ -478,33 +482,33 @@ const P = { w: 1200, h: 1800 };   // portrait food shots
 const W = { w: 2200, h: 1466 };   // wide hero photo (p1)
 const GALLERY = [
   // Initial 9
-  { name: 'p3',  ...L, alt: 'Sub Gourmet interior' },
-  { name: 'f5',  ...P, alt: 'House plate' },
-  { name: 'f1',  ...L, alt: 'House plate' },
-  { name: 'f3',  ...L, alt: 'House plate' },
-  { name: 'f10', ...L, alt: 'House plate' },
-  { name: 'f15', ...P, alt: 'House plate' },
-  { name: 'f8',  ...L, alt: 'House plate' },
-  { name: 'f4',  ...L, alt: 'House plate' },
-  { name: 'f17', ...L, alt: 'House plate' },
+  { name: 'p3',  ...L, alt: 'Sub Gourmet dining room with tables and mustard velvet chairs', altHr: 'Blagovaonica Sub Gourmeta sa stolovima i žutim baršunastim stolicama' },
+  { name: 'f5',  ...P, alt: 'Spaghetti in tomato sauce with fresh basil, served by the window', altHr: 'Špageti u umaku od rajčice sa svježim bosiljkom, posluženi uz prozor' },
+  { name: 'f1',  ...L, alt: 'Sub Gourmet pizza with prosciutto, rocket and grana padano', altHr: 'Sub Gourmet pizza s pršutom, rikulom i grana padanom' },
+  { name: 'f3',  ...L, alt: 'Omelette served with green salad and tomato', altHr: 'Omlet poslužen sa zelenom salatom i rajčicom' },
+  { name: 'f10', ...L, alt: 'Tagliatelle in truffle cream sauce with warm flat bread', altHr: 'Tagliatelle u kremastom umaku od tartufa s toplom lepinjom' },
+  { name: 'f15', ...P, alt: 'Spaghetti with tomato sauce twirled on a fork', altHr: 'Špageti s umakom od rajčice namotani na vilicu' },
+  { name: 'f8',  ...L, alt: 'Omelette with cherry tomatoes and salad on a wooden table', altHr: 'Omlet s cherry rajčicama i salatom na drvenom stolu' },
+  { name: 'f4',  ...L, alt: 'Greek salad with feta, olives, cucumber and tomato', altHr: 'Grčka salata s fetom, maslinama, krastavcem i rajčicom' },
+  { name: 'f17', ...L, alt: 'Funghi pizza with mushrooms and mozzarella', altHr: 'Funghi pizza s gljivama i mozzarellom' },
   // Revealed by "Show all photos"
-  { name: 'p1',  ...W, alt: 'Sub Gourmet dining room' },
-  { name: 'p2',  ...L, alt: 'Sub Gourmet seating' },
-  { name: 'f2',  ...L, alt: 'House plate' },
-  { name: 'f6',  ...L, alt: 'House plate' },
-  { name: 'f7',  ...P, alt: 'House plate' },
-  { name: 'f9',  ...L, alt: 'House plate' },
-  { name: 'f11', ...P, alt: 'House plate' },
-  { name: 'f12', ...L, alt: 'House plate' },
-  { name: 'f13', ...L, alt: 'House plate' },
-  { name: 'f14', ...L, alt: 'House plate' },
-  { name: 'f16', ...P, alt: 'House plate' },
-  { name: 'f18', ...L, alt: 'House plate' },
-  { name: 'f19', ...L, alt: 'House plate' },
-  { name: 'f20', ...L, alt: 'House plate' },
-  { name: 'f21', ...L, alt: 'House plate' },
-  { name: 'f22', ...L, alt: 'House plate' },
-  { name: 'f23', ...L, alt: 'House plate' },
+  { name: 'p1',  ...W, alt: 'Sub Gourmet dining room with floor-to-ceiling windows', altHr: 'Blagovaonica Sub Gourmeta s prozorima od poda do stropa' },
+  { name: 'p2',  ...L, alt: 'Dining tables with velvet chairs beside the window', altHr: 'Stolovi s baršunastim stolicama uz prozor' },
+  { name: 'f2',  ...L, alt: 'Chicken tortilla wrap served with salad', altHr: 'Tortilja s piletinom poslužena sa salatom' },
+  { name: 'f6',  ...L, alt: 'Cream of pumpkin soup finished with cream', altHr: 'Krem juha od tikve dovršena vrhnjem' },
+  { name: 'f7',  ...P, alt: 'Fishburger on a sesame brioche bun with lettuce and tomato', altHr: 'Fishburger u brioche pecivu sa sezamom, zelenom salatom i rajčicom' },
+  { name: 'f9',  ...L, alt: 'Ćevapi with flat bread and ajvar', altHr: 'Ćevapi s lepinjom i ajvarom' },
+  { name: 'f11', ...P, alt: 'Tagliatelle in truffle sauce with a glass of white wine', altHr: 'Tagliatelle u umaku od tartufa uz čašu bijelog vina' },
+  { name: 'f12', ...L, alt: 'Tagliatelle with mushrooms and truffle cream sauce', altHr: 'Tagliatelle s gljivama i kremastim umakom od tartufa' },
+  { name: 'f13', ...L, alt: 'Spring rolls with sweet chilli dip', altHr: 'Proljetne rolice s umakom sweet chilli' },
+  { name: 'f14', ...L, alt: 'Breaded shrimp tails and spring rolls on a slate board', altHr: 'Panirani repovi kozica i proljetne rolice na kamenoj ploči' },
+  { name: 'f16', ...P, alt: 'Two pizzas seen from above, vegetable and cheese', altHr: 'Dvije pizze odozgo, povrtna i sirna' },
+  { name: 'f18', ...L, alt: 'Grilled chicken fillet with grilled Mediterranean vegetables', altHr: 'Pileći file sa žara s mediteranskim povrćem sa žara' },
+  { name: 'f19', ...L, alt: 'Beef burger with a fried egg, lettuce and tomato', altHr: 'Burger od junetine s jajem, zelenom salatom i rajčicom' },
+  { name: 'f20', ...L, alt: 'Slavonic breakfast with fried eggs, sausage and salad', altHr: 'Slavonski doručak s jajima na oko, kobasicom i salatom' },
+  { name: 'f21', ...L, alt: 'Dubrovnik breakfast with prosciutto, fritters and salads', altHr: 'Dubrovački doručak s pršutom, uštipcima i salatama' },
+  { name: 'f22', ...L, alt: 'A spread of breakfast plates and salads seen from above', altHr: 'Odozgo snimljen izbor doručaka i salata' },
+  { name: 'f23', ...L, alt: 'Table set with pasta dishes and menus', altHr: 'Stol postavljen s tjesteninama i jelovnicima' },
 ];
 const GALLERY_INITIAL = 9;
 
@@ -567,6 +571,7 @@ function Lightbox({ photos, index, onClose, onNavigate, t }) {
 }
 
 function Gallery({ t }) {
+  const altOf = (img) => (t.htmlLang === 'hr' ? img.altHr : img.alt);
   const [expanded, setExpanded] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const visible = expanded ? GALLERY : GALLERY.slice(0, GALLERY_INITIAL);
@@ -588,10 +593,10 @@ function Gallery({ t }) {
               key={img.name}
               type="button"
               className="gallery-item"
-              aria-label={t.gallery.viewLarger + ': ' + img.alt}
+              aria-label={t.gallery.viewLarger + ': ' + altOf(img)}
               onClick={() => setLightboxIndex(i)}
             >
-              <Picture name={img.name} alt={img.alt} srcW={img.w} width={img.w} height={img.h}
+              <Picture name={img.name} alt={altOf(img)} srcW={img.w} width={img.w} height={img.h}
                 sizes="(max-width: 520px) 92vw, (max-width: 960px) 46vw, 30vw" />
               <span className="gallery-item-zoom" aria-hidden="true"></span>
             </button>
@@ -606,7 +611,7 @@ function Gallery({ t }) {
         )}
       </div>
       <Lightbox
-        photos={visible}
+        photos={visible.map((g) => ({ ...g, alt: altOf(g) }))}
         index={lightboxIndex}
         onClose={() => setLightboxIndex(null)}
         onNavigate={navigate}
@@ -706,8 +711,8 @@ function Visit({ t }) {
             <div className="visit-block">
               <span className="label">{t.visit.atTable}</span>
               <div className="visit-tags">
-                <span className="visit-tag">{t.visit.tagOutdoor}</span>
-                <span className="visit-tag">{t.visit.tagCocktails}</span>
+                <span className="visit-tag">{t.visit.tagTakeaway}</span>
+                <span className="visit-tag">{t.visit.tagDelivery}</span>
                 <span className="visit-tag">{t.visit.tagVegetarian}</span>
                 <span className="visit-tag">{t.visit.tagWalkIn}</span>
               </div>
