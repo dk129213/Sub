@@ -33,7 +33,8 @@ const POSITIONS = [
     'pomocni-kuhar' => 'Pomoćni kuhar / Assistant cook',
 ];
 
-function fail(int $status, string $message): never
+/** Always exits. Typed void rather than never so the file parses on PHP 8.0. */
+function fail(int $status, string $message): void
 {
     http_response_code($status);
     echo json_encode(['ok' => false, 'error' => $message], JSON_UNESCAPED_UNICODE);
