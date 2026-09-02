@@ -78,10 +78,8 @@ const TRANSLATIONS = {
       lead: 'In Srebreno, a quiet bay just east of Dubrovnik, we cook the way our grandmothers did, and the way travelers wished they could.',
       p1: 'Our kitchen runs all day: pizza baked to order, tagliatelle in truffle sauce, grilled squid and fish and chips, burgers on brioche buns, ćevapi with warm flat bread.',
       p2: 'Breakfast is served until 11:30. The cakes and desserts are made in house.',
-      stat1Num: '12', stat1Lbl: 'Years on the bay',
-      stat2Num: '81', stat2Lbl: 'Dishes on the menu',
-      stat3Num: GOOGLE_RATING + '★', stat3Lbl: GOOGLE_REVIEWS + ' Google reviews',
-      stampEst: 'Established', stampSince: 'Since 2014',
+      stat1Num: '81', stat1Lbl: 'Dishes on the menu',
+      stat2Num: GOOGLE_RATING + '★', stat2Lbl: GOOGLE_REVIEWS + ' Google reviews',
       imgAlt: 'Dining room at Sub Gourmet, Srebreno',
     },
     menu: {
@@ -166,10 +164,8 @@ const TRANSLATIONS = {
       lead: 'U Srebrenom, tihoj uvali istočno od Dubrovnika, kuhamo kao što su naše bake, i kako su putnici poželjeli da znaju.',
       p1: 'Naša kuhinja radi cijeli dan: pizza pečena po narudžbi, tagliatelle u umaku od tartufa, lignje sa žara i fish and chips, burgeri u brioche pecivu, ćevapi s toplom lepinjom.',
       p2: 'Doručak se poslužuje do 11:30. Kolači i deserti su domaći.',
-      stat1Num: '12', stat1Lbl: 'Godina u uvali',
-      stat2Num: '81', stat2Lbl: 'Jela na jelovniku',
-      stat3Num: GOOGLE_RATING + '★', stat3Lbl: GOOGLE_REVIEWS + ' Google recenzija',
-      stampEst: 'Osnovano', stampSince: 'Od 2014.',
+      stat1Num: '81', stat1Lbl: 'Jela na jelovniku',
+      stat2Num: GOOGLE_RATING + '★', stat2Lbl: GOOGLE_REVIEWS + ' Google recenzija',
       imgAlt: 'Blagovaonica Sub Gourmeta u Srebrenom',
     },
     menu: {
@@ -354,10 +350,6 @@ function About({ t }) {
         <div className="about-grid">
           <div className="about-img reveal">
             <Picture name={ABOUT_IMAGE} alt={t.about.imgAlt} srcW={1800} sizes="(max-width: 960px) 92vw, 40vw" />
-            <div className="stamp">
-              <span className="small">{t.about.stampEst}</span>
-              {t.about.stampSince}
-            </div>
           </div>
           <div className="reveal">
             <div className="section-head" style={{marginBottom: 32}}>
@@ -377,10 +369,6 @@ function About({ t }) {
               <div className="about-stat">
                 <div className="num">{t.about.stat2Num}</div>
                 <div className="lbl">{t.about.stat2Lbl}</div>
-              </div>
-              <div className="about-stat">
-                <div className="num">{t.about.stat3Num}</div>
-                <div className="lbl">{t.about.stat3Lbl}</div>
               </div>
             </div>
           </div>
