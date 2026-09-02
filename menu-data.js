@@ -527,4 +527,6 @@ const MENU_DATA = [{
     price: '5.60'
   }]
 }];
-window.MENU_DATA = MENU_DATA;
+
+// Also read under Node when tools/prerender.js renders the pages.
+(typeof window !== 'undefined' ? window : globalThis).MENU_DATA = MENU_DATA;

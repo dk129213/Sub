@@ -11,7 +11,6 @@ var ENDPOINT = 'apply.php';
 
 var EMAIL = 'info@subgourmet.hr';
 var MAX_CV_BYTES = 5 * 1024 * 1024;
-var LANG_KEY = 'subgourmet-lang';   // shared with the main site
 
 var T = {
   hr: {
@@ -70,27 +69,14 @@ var T = {
   }
 };
 
-var lang = 'hr';
+/*
+ * The page is served per language: /careers.html is Croatian, /en/careers.html
+ * English, each with its text already in the HTML. This only needs to know
+ * which one it is, so the form's messages match.
+ */
+var lang = (typeof window !== 'undefined' && window.SITE_LANG === 'en') ? 'en' : 'hr';
 
 function t(key) { return (T[lang] && T[lang][key]) || T.hr[key] || key; }
-
-function applyLang(next) {
-  lang = (next === 'en') ? 'en' : 'hr';
-  document.documentElement.lang = lang;
-  document.querySelectorAll('[data-i18n]').forEach(function (el) {
-    var key = el.getAttribute('data-i18n');
-    if (T[lang][key] !== undefined) el.textContent = T[lang][key];
-  });
-  document.querySelectorAll('.lang-toggle button').forEach(function (b) {
-    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
-  });
-  // The file label is dynamic: keep the chosen filename, else re-translate.
-  var drop = document.getElementById('fileDrop');
-  if (drop && !drop.classList.contains('has-file')) {
-    document.getElementById('fileLabel').textContent = t('cvHint');
-  }
-  try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
-}
 
 // ─────────────── validation ───────────────
 function fieldOf(input) { return input.closest('.field'); }
@@ -135,12 +121,8 @@ function requiredInputs(form) {
 
 // ─────────────── boot ───────────────
 document.addEventListener('DOMContentLoaded', function () {
-  var stored = 'hr';
-  try { stored = localStorage.getItem(LANG_KEY) || 'hr'; } catch (e) {}
-  applyLang(stored);
-
-  document.querySelectorAll('.lang-toggle button').forEach(function (b) {
-    b.addEventListener('click', function () { applyLang(b.getAttribute('data-lang')); });
+  document.querySelectorAll('.lang-toggle .lang-btn').forEach(function (a) {
+    a.classList.toggle('active', a.getAttribute('data-lang') === lang);
   });
 
   var yearEl = document.getElementById('year');

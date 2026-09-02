@@ -192,4 +192,5 @@ const MENU_DATA = [
   },
 ];
 
-window.MENU_DATA = MENU_DATA;
+// Also read under Node when tools/prerender.js renders the pages.
+(typeof window !== 'undefined' ? window : globalThis).MENU_DATA = MENU_DATA;

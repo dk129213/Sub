@@ -109,3 +109,9 @@ function checkGallery() {
 }
 
 checkGallery();
+
+// index.html and careers.html are generated from the .template.html files and
+// the compiled JS. Editing a .jsx without re-running this leaves the shipped
+// HTML showing the old content, which is easy to miss.
+console.log();
+console.log('next: node tools/prerender.js   (regenerates index.html, en/, careers pages, sitemap)');

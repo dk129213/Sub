@@ -1,20 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://subgourmet.hr/</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+      <xhtml:link rel="alternate" hreflang="hr" href="https://subgourmet.hr/" />
+      <xhtml:link rel="alternate" hreflang="en" href="https://subgourmet.hr/en/" />
+      <xhtml:link rel="alternate" hreflang="x-default" href="https://subgourmet.hr/" />
     <image:image>
       <image:loc>https://subgourmet.hr/images/p1.jpg</image:loc>
       <image:title>Sub Gourmet dining room, Srebreno</image:title>
     </image:image>
   </url>
   <url>
+    <loc>https://subgourmet.hr/en/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+      <xhtml:link rel="alternate" hreflang="hr" href="https://subgourmet.hr/" />
+      <xhtml:link rel="alternate" hreflang="en" href="https://subgourmet.hr/en/" />
+      <xhtml:link rel="alternate" hreflang="x-default" href="https://subgourmet.hr/" />
+  </url>
+  <url>
     <loc>https://subgourmet.hr/careers.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="hr" href="https://subgourmet.hr/careers.html" />
+      <xhtml:link rel="alternate" hreflang="en" href="https://subgourmet.hr/en/careers.html" />
+      <xhtml:link rel="alternate" hreflang="x-default" href="https://subgourmet.hr/careers.html" />
+  </url>
+  <url>
+    <loc>https://subgourmet.hr/en/careers.html</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="hr" href="https://subgourmet.hr/careers.html" />
+      <xhtml:link rel="alternate" hreflang="en" href="https://subgourmet.hr/en/careers.html" />
+      <xhtml:link rel="alternate" hreflang="x-default" href="https://subgourmet.hr/careers.html" />
   </url>
 </urlset>

@@ -2,7 +2,30 @@ const {
   useState,
   useEffect
 } = React;
-const MENU = window.MENU_DATA;
+
+// Runs in the browser and, at build time, under Node for prerendering.
+const SITE = typeof window !== 'undefined' ? window : globalThis;
+const MENU = SITE.MENU_DATA;
+
+/*
+ * Language comes from the URL, not from localStorage: "/" is Croatian and
+ * "/en/" is English, each prerendered as its own HTML file. One language per
+ * URL is what lets search engines index both - a single URL that swaps text
+ * with JavaScript only ever gets indexed once.
+ */
+const LANG = SITE.SITE_LANG === 'en' ? 'en' : 'hr';
+// Relative so the pair works from a subdirectory too (e.g. GitHub Pages).
+const LANG_HREF = LANG === 'en' ? {
+  en: './',
+  hr: '../'
+} : {
+  en: 'en/',
+  hr: './'
+};
+// /en/ sits one level down, so its images live a directory up. This has to be
+// applied by the app itself, not patched into the HTML afterwards: React
+// re-renders on the client and would overwrite any post-processed paths.
+const ASSETS = LANG === 'en' ? '../' : '';
 const HERO_IMAGE = 'p1';
 const ABOUT_IMAGE = 'p2';
 const PHONE_E164 = '+38520642111';
@@ -44,7 +67,7 @@ function Picture({
   priority
 }) {
   const ws = widthsFor(srcW, extra);
-  const set = ext => ws.map(w => `images/opt/${name}-${w}.${ext} ${w}w`).join(', ');
+  const set = ext => ws.map(w => `${ASSETS}images/opt/${name}-${w}.${ext} ${w}w`).join(', ');
   return /*#__PURE__*/React.createElement("picture", null, /*#__PURE__*/React.createElement("source", {
     type: "image/avif",
     srcSet: set('avif'),
@@ -54,7 +77,7 @@ function Picture({
     srcSet: set('webp'),
     sizes: sizes
   }), /*#__PURE__*/React.createElement("img", {
-    src: `images/${name}.jpg`,
+    src: `${ASSETS}images/${name}.jpg`,
     alt: alt,
     className: className,
     width: width,
@@ -262,31 +285,10 @@ const TRANSLATIONS = {
     }
   }
 };
-function useLang() {
-  const [lang, setLangState] = useState(() => {
-    try {
-      const stored = localStorage.getItem('subgourmet-lang');
-      if (stored === 'en' || stored === 'hr') return stored;
-      const browser = (navigator.language || '').toLowerCase();
-      return browser.startsWith('hr') ? 'hr' : 'en';
-    } catch (e) {
-      return 'en';
-    }
-  });
-  const setLang = l => {
-    setLangState(l);
-    try {
-      localStorage.setItem('subgourmet-lang', l);
-    } catch (e) {}
-  };
-  useEffect(() => {
-    document.documentElement.setAttribute('lang', TRANSLATIONS[lang].htmlLang);
-    document.title = TRANSLATIONS[lang].pageTitle;
-    const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute('content', TRANSLATIONS[lang].pageDesc);
-  }, [lang]);
-  return [lang, setLang];
-}
+
+// The served HTML already carries the right lang, title and description for
+// this URL, so there is nothing left to set at runtime.
+
 function Logo() {
   return /*#__PURE__*/React.createElement("span", {
     className: "nav-logo",
@@ -297,34 +299,34 @@ function Logo() {
     }
   });
 }
+
+// Links, not buttons: each language is a real page, so switching is navigation.
 function LangToggle({
-  lang,
-  setLang
+  lang
 }) {
   return /*#__PURE__*/React.createElement("div", {
     className: "lang-toggle",
     role: "group",
     "aria-label": "Language"
-  }, /*#__PURE__*/React.createElement("button", {
-    type: "button",
+  }, /*#__PURE__*/React.createElement("a", {
     className: 'lang-btn' + (lang === 'en' ? ' active' : ''),
-    onClick: () => setLang('en'),
-    "aria-pressed": lang === 'en'
+    href: LANG_HREF.en,
+    hrefLang: "en",
+    "aria-current": lang === 'en' ? 'page' : undefined
   }, "EN"), /*#__PURE__*/React.createElement("span", {
     className: "lang-sep",
     "aria-hidden": "true"
-  }, "\xB7"), /*#__PURE__*/React.createElement("button", {
-    type: "button",
+  }, "\xB7"), /*#__PURE__*/React.createElement("a", {
     className: 'lang-btn' + (lang === 'hr' ? ' active' : ''),
-    onClick: () => setLang('hr'),
-    "aria-pressed": lang === 'hr'
+    href: LANG_HREF.hr,
+    hrefLang: "hr",
+    "aria-current": lang === 'hr' ? 'page' : undefined
   }, "HR"));
 }
 function Nav({
   scrolled,
   dark,
   lang,
-  setLang,
   t
 }) {
   const cls = ['nav'];
@@ -351,8 +353,7 @@ function Nav({
   }, t.nav.join)), /*#__PURE__*/React.createElement("div", {
     className: "nav-right"
   }, /*#__PURE__*/React.createElement(LangToggle, {
-    lang: lang,
-    setLang: setLang
+    lang: lang
   })), /*#__PURE__*/React.createElement("button", {
     className: "nav-menu-btn",
     onClick: () => {
@@ -1073,7 +1074,7 @@ function Footer({
 function App() {
   const [scrolled, setScrolled] = useState(false);
   const [overDark, setOverDark] = useState(true);
-  const [lang, setLang] = useLang();
+  const lang = LANG;
   const t = TRANSLATIONS[lang];
   useEffect(() => {
     const onScroll = () => {
@@ -1111,7 +1112,6 @@ function App() {
     scrolled: scrolled,
     dark: overDark,
     lang: lang,
-    setLang: setLang,
     t: t
   }), /*#__PURE__*/React.createElement(Hero, {
     t: t
@@ -1130,4 +1130,12 @@ function App() {
     t: t
   }));
 }
-ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
+if (typeof module !== 'undefined' && module.exports) {
+  // Required by tools/prerender.js under Node - do not mount.
+  module.exports = {
+    App,
+    TRANSLATIONS
+  };
+} else {
+  ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
+}
