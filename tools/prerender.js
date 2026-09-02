@@ -28,8 +28,10 @@ const SITE = 'https://subgourmet.hr';
 
 /** '' for the site root, 'en' for the English copy. */
 const LANGS = [
-  { code: 'hr', dir: '', prefix: '', htmlLang: 'hr' },
-  { code: 'en', dir: 'en', prefix: '../', htmlLang: 'en' },
+  { code: 'hr', dir: '', prefix: '', htmlLang: 'hr',
+    careersDir: 'careers', careersPrefix: '../', careersUrl: `${SITE}/careers/` },
+  { code: 'en', dir: 'en', prefix: '../', htmlLang: 'en',
+    careersDir: 'en/careers', careersPrefix: '../../', careersUrl: `${SITE}/en/careers/` },
 ];
 
 function renderLang(code) {
@@ -114,7 +116,7 @@ function buildPage({ code, dir, prefix, htmlLang }, template, translations) {
   return html;
 }
 
-const template = fs.readFileSync(path.join(ROOT, 'index.template.html'), 'utf8');
+const template = fs.readFileSync(path.join(ROOT, 'src', 'index.template.html'), 'utf8');
 globalThis.SITE_LANG = 'hr';
 globalThis.React = React;
 globalThis.ReactDOM = { createRoot: () => ({ render() {} }) };
@@ -170,10 +172,10 @@ function reprefixAssets(html, prefix) {
   );
 }
 
-function buildCareers({ code, dir, prefix, htmlLang }, template, T) {
+function buildCareers({ code, careersDir, careersPrefix, careersUrl, htmlLang }, template, T) {
   const strings = T[code];
   const meta = CAREERS_META[code];
-  let html = reprefixAssets(template, prefix);
+  let html = reprefixAssets(template, careersPrefix);
 
   // Swap every translatable string for this language.
   html = html.replace(
@@ -182,7 +184,7 @@ function buildCareers({ code, dir, prefix, htmlLang }, template, T) {
       strings[key] === undefined ? whole : open + strings[key] + close
   );
 
-  const base = `${SITE}/${dir ? dir + '/' : ''}careers.html`;
+  const base = careersUrl;
   html = html
     .replace(/<html lang="[^"]*">/, `<html lang="${htmlLang}">`)
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${meta.title}</title>`)
@@ -194,30 +196,34 @@ function buildCareers({ code, dir, prefix, htmlLang }, template, T) {
     .replace(/(<meta property="og:locale:alternate" content=")[^"]*(")/, `$1${code === 'hr' ? 'en_GB' : 'hr_HR'}$2`)
     // reprefix has already put "../" before the placeholder; swallow it, since
     // these hrefs are written relative to the page's own directory.
-    .replace(/(?:\.\.\/)?__EN_HREF__/, code === 'en' ? './careers.html' : 'en/careers.html')
-    .replace(/(?:\.\.\/)?__HR_HREF__/, code === 'en' ? '../careers.html' : './careers.html');
+    // From /careers/ the English copy is ../en/careers/; from /en/careers/ the
+    // Croatian one is two levels up.
+    .replace(/(?:\.\.\/)*__EN_HREF__/, code === 'en' ? './' : '../en/careers/')
+    .replace(/(?:\.\.\/)*__HR_HREF__/, code === 'en' ? '../../careers/' : './');
 
   const hreflang = [
-    `<link rel="alternate" hreflang="hr" href="${SITE}/careers.html" />`,
-    `<link rel="alternate" hreflang="en" href="${SITE}/en/careers.html" />`,
-    `<link rel="alternate" hreflang="x-default" href="${SITE}/careers.html" />`,
+    `<link rel="alternate" hreflang="hr" href="${SITE}/careers/" />`,
+    `<link rel="alternate" hreflang="en" href="${SITE}/en/careers/" />`,
+    `<link rel="alternate" hreflang="x-default" href="${SITE}/careers/" />`,
   ].join('\n');
   html = html.replace(/<link rel="canonical"[^>]*\/>/, (m) => m + '\n' + hreflang);
 
   html = html.replace(/(\s*)<script src="([^"]*)careers\.js"/,
-    `$1<script>window.SITE_LANG = ${JSON.stringify(code)};</script>$1<script src="$2careers.js"`);
+    `$1<script>window.SITE_LANG = ${JSON.stringify(code)};` +
+    `window.APPLY_URL = ${JSON.stringify(careersPrefix + 'apply.php')};</script>` +
+    `$1<script src="$2careers.js"`);
 
   return html;
 }
 
-const careersTemplate = fs.readFileSync(path.join(ROOT, 'careers.template.html'), 'utf8');
+const careersTemplate = fs.readFileSync(path.join(ROOT, 'src', 'careers.template.html'), 'utf8');
 const careersT = careersStrings();
 
 for (const lang of LANGS) {
   const html = buildCareers(lang, careersTemplate, careersT);
-  const outDir = path.join(ROOT, lang.dir);
+  const outDir = path.join(ROOT, lang.careersDir);
   fs.mkdirSync(outDir, { recursive: true });
-  const out = path.join(outDir, 'careers.html');
+  const out = path.join(outDir, 'index.html');
   fs.writeFileSync(out, html);
   console.log('prerendered ' + path.relative(ROOT, out).split(path.sep).join('/') + '  (' + lang.code + ')');
 }
@@ -232,7 +238,7 @@ const today = new Date().toISOString().slice(0, 10);
 const PAIRS = [
   { hr: `${SITE}/`, en: `${SITE}/en/`, priority: '1.0', freq: 'monthly',
     image: `${SITE}/images/p1.jpg`, title: 'Sub Gourmet dining room, Srebreno' },
-  { hr: `${SITE}/careers.html`, en: `${SITE}/en/careers.html`, priority: '0.6', freq: 'yearly' },
+  { hr: `${SITE}/careers/`, en: `${SITE}/en/careers/`, priority: '0.6', freq: 'yearly' },
 ];
 
 const urls = [];

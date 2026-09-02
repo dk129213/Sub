@@ -9,7 +9,6 @@ Disallow: /tools/
 Disallow: /.claude/
 
 # Build sources for the generated pages - not pages themselves.
-Disallow: /index.template.html
-Disallow: /careers.template.html
+Disallow: /src/
 
 Sitemap: https://subgourmet.hr/sitemap.xml

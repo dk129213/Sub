@@ -7,7 +7,10 @@
  * To use a hosted form service instead (Formspree, Web3Forms), point ENDPOINT
  * at its URL; the field names below are sent as-is.
  */
-var ENDPOINT = 'apply.php';
+// The page can sit at /careers/ or /en/careers/, so the path back up to
+// apply.php differs. tools/prerender.js injects the right one; the fallback
+// only matters if this file is opened directly from the site root.
+var ENDPOINT = (typeof window !== 'undefined' && window.APPLY_URL) || 'apply.php';
 
 var EMAIL = 'info@subgourmet.hr';
 var MAX_CV_BYTES = 5 * 1024 * 1024;

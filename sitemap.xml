@@ -25,21 +25,21 @@
       <xhtml:link rel="alternate" hreflang="x-default" href="https://subgourmet.hr/" />
   </url>
   <url>
-    <loc>https://subgourmet.hr/careers.html</loc>
+    <loc>https://subgourmet.hr/careers/</loc>
     <lastmod>2026-09-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
-      <xhtml:link rel="alternate" hreflang="hr" href="https://subgourmet.hr/careers.html" />
-      <xhtml:link rel="alternate" hreflang="en" href="https://subgourmet.hr/en/careers.html" />
-      <xhtml:link rel="alternate" hreflang="x-default" href="https://subgourmet.hr/careers.html" />
+      <xhtml:link rel="alternate" hreflang="hr" href="https://subgourmet.hr/careers/" />
+      <xhtml:link rel="alternate" hreflang="en" href="https://subgourmet.hr/en/careers/" />
+      <xhtml:link rel="alternate" hreflang="x-default" href="https://subgourmet.hr/careers/" />
   </url>
   <url>
-    <loc>https://subgourmet.hr/en/careers.html</loc>
+    <loc>https://subgourmet.hr/en/careers/</loc>
     <lastmod>2026-09-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
-      <xhtml:link rel="alternate" hreflang="hr" href="https://subgourmet.hr/careers.html" />
-      <xhtml:link rel="alternate" hreflang="en" href="https://subgourmet.hr/en/careers.html" />
-      <xhtml:link rel="alternate" hreflang="x-default" href="https://subgourmet.hr/careers.html" />
+      <xhtml:link rel="alternate" hreflang="hr" href="https://subgourmet.hr/careers/" />
+      <xhtml:link rel="alternate" hreflang="en" href="https://subgourmet.hr/en/careers/" />
+      <xhtml:link rel="alternate" hreflang="x-default" href="https://subgourmet.hr/careers/" />
   </url>
 </urlset>

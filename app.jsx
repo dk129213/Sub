@@ -25,7 +25,7 @@ const INSTAGRAM_URL = 'https://www.instagram.com/subcaffegourmet/';
 const FACEBOOK_URL = 'https://www.facebook.com/subcaffegourmet';
 const SOCIAL_HANDLE = '@subcaffegourmet';
 const EMAIL = 'info@subgourmet.hr';
-const CAREERS_URL = 'careers.html';
+const CAREERS_URL = 'careers/';   // folder + index.html, so the URL has no .html
 
 // Google Maps listing, checked 2026-08-31. Note the other platforms differ a
 // lot (Facebook 4.5/16, TripAdvisor ~3.2/29), so the source is stated in the
