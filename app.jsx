@@ -65,11 +65,9 @@ const TRANSLATIONS = {
       h1Bot: ['Gourm', 'e', 't'],
       tag: 'Mediterranean flavors, Adriatic soul, where the coast meets the table, slowly, the way it should.',
       viewMenu: 'View Menu',
-      today: 'Today',
-      todayValue: 'Open until 9 PM',
-      reviewed: 'Reviewed',
-      reviewedValue: GOOGLE_REVIEWS + ' Google reviews',
-      perPerson: 'Per person',
+      hours: 'Hours',
+      hoursDaily: 'Every day · 09:00–21:00',
+      hoursBreakfast: 'Breakfast · 09:00–11:30',
       scroll: 'Scroll',
     },
     about: {
@@ -126,7 +124,6 @@ const TRANSLATIONS = {
       whatsapp: 'WhatsApp',
       atTable: 'At the Table',
       tagTakeaway: 'Takeaway',
-      tagDelivery: 'Delivery',
       tagVegetarian: 'Vegetarian options',
       tagWalkIn: 'Walk-ins welcome',
       perPerson: 'Per Person',
@@ -156,11 +153,9 @@ const TRANSLATIONS = {
       h1Bot: ['Gourm', 'e', 't'],
       tag: 'Mediteranski okusi, jadranska duša, gdje se obala susreće sa stolom, polako, onako kako treba.',
       viewMenu: 'Pogledajte meni',
-      today: 'Danas',
-      todayValue: 'Otvoreno do 21h',
-      reviewed: 'Ocjenjeno',
-      reviewedValue: GOOGLE_REVIEWS + ' Google recenzija',
-      perPerson: 'Po osobi',
+      hours: 'Radno vrijeme',
+      hoursDaily: 'Svaki dan · 09:00–21:00',
+      hoursBreakfast: 'Doručak · 09:00–11:30',
       scroll: 'Pomakni',
     },
     about: {
@@ -212,12 +207,11 @@ const TRANSLATIONS = {
       addressLocated: 'Restoran u trgovačkom centru Sub City, 1. kat',
       hours: 'Radno vrijeme',
       hoursValue: 'Otvoreno svaki dan · do 21h',
-      hoursSmall: 'Doručak posluženo 09:00 – 11:30',
+      hoursSmall: 'Doručak poslužujemo 09:00 – 11:30',
       phone: 'Telefon',
       whatsapp: 'WhatsApp',
       atTable: 'Za stolom',
       tagTakeaway: 'Hrana za van',
-      tagDelivery: 'Dostava',
       tagVegetarian: 'Vegetarijanske opcije',
       tagWalkIn: 'Dobrodošli i bez rezervacije',
       perPerson: 'Po osobi',
@@ -338,16 +332,9 @@ function Hero({ t }) {
           </div>
           <div className="hero-meta">
             <div className="hero-meta-item">
-              <span className="hero-meta-label">{t.hero.today}</span>
-              <span className="hero-meta-value"><span className="gold">●</span> {t.hero.todayValue}</span>
-            </div>
-            <div className="hero-meta-item">
-              <span className="hero-meta-label">{t.hero.reviewed}</span>
-              <span className="hero-meta-value"><span className="gold">★</span> {GOOGLE_RATING} <span className="dot">·</span> {t.hero.reviewedValue}</span>
-            </div>
-            <div className="hero-meta-item">
-              <span className="hero-meta-label">{t.hero.perPerson}</span>
-              <span className="hero-meta-value">10€ – 15€</span>
+              <span className="hero-meta-label">{t.hero.hours}</span>
+              <span className="hero-meta-value"><span className="gold">●</span> {t.hero.hoursDaily}</span>
+              <span className="hero-meta-value">{t.hero.hoursBreakfast}</span>
             </div>
           </div>
         </div>
@@ -461,12 +448,6 @@ function MenuSection({ lang, t }) {
           ))}
         </div>
 
-        <div className="menu-callout reveal">
-          <div>
-            <div className="serif">{t.menu.calloutA}<em>{t.menu.calloutEm}</em></div>
-            <p>{t.menu.calloutBody}</p>
-          </div>
-        </div>
       </div>
     </section>
   );
@@ -486,8 +467,8 @@ const GALLERY = [
   { name: 'f5',  ...P, alt: 'Spaghetti in tomato sauce with fresh basil, served by the window', altHr: 'Špageti u umaku od rajčice sa svježim bosiljkom, posluženi uz prozor' },
   { name: 'f1',  ...L, alt: 'Sub Gourmet pizza with prosciutto, rocket and grana padano', altHr: 'Sub Gourmet pizza s pršutom, rikulom i grana padanom' },
   { name: 'f3',  ...L, alt: 'Omelette served with green salad and tomato', altHr: 'Omlet poslužen sa zelenom salatom i rajčicom' },
-  { name: 'f10', ...L, alt: 'Tagliatelle in truffle cream sauce with warm flat bread', altHr: 'Tagliatelle u kremastom umaku od tartufa s toplom lepinjom' },
-  { name: 'f15', ...P, alt: 'Spaghetti with tomato sauce twirled on a fork', altHr: 'Špageti s umakom od rajčice namotani na vilicu' },
+  { name: 'f10', w: 1800, h: 1199, alt: 'Tagliatelle in truffle cream sauce with warm flat bread', altHr: 'Tagliatelle u kremastom umaku od tartufa s toplom lepinjom' },
+  { name: 'f15', w: 1199, h: 1800, alt: 'Spaghetti with tomato sauce twirled on a fork', altHr: 'Špageti s umakom od rajčice namotani na vilicu' },
   { name: 'f8',  ...L, alt: 'Omelette with cherry tomatoes and salad on a wooden table', altHr: 'Omlet s cherry rajčicama i salatom na drvenom stolu' },
   { name: 'f4',  ...L, alt: 'Greek salad with feta, olives, cucumber and tomato', altHr: 'Grčka salata s fetom, maslinama, krastavcem i rajčicom' },
   { name: 'f17', ...L, alt: 'Funghi pizza with mushrooms and mozzarella', altHr: 'Funghi pizza s gljivama i mozzarellom' },
@@ -500,8 +481,8 @@ const GALLERY = [
   { name: 'f9',  ...L, alt: 'Ćevapi with flat bread and ajvar', altHr: 'Ćevapi s lepinjom i ajvarom' },
   { name: 'f11', ...P, alt: 'Tagliatelle in truffle sauce with a glass of white wine', altHr: 'Tagliatelle u umaku od tartufa uz čašu bijelog vina' },
   { name: 'f12', ...L, alt: 'Tagliatelle with mushrooms and truffle cream sauce', altHr: 'Tagliatelle s gljivama i kremastim umakom od tartufa' },
-  { name: 'f13', ...L, alt: 'Spring rolls with sweet chilli dip', altHr: 'Proljetne rolice s umakom sweet chilli' },
-  { name: 'f14', ...L, alt: 'Breaded shrimp tails and spring rolls on a slate board', altHr: 'Panirani repovi kozica i proljetne rolice na kamenoj ploči' },
+  { name: 'f13', w: 1799, h: 1200, alt: 'Spring rolls with sweet chilli dip', altHr: 'Proljetne rolice s umakom sweet chilli' },
+  { name: 'f14', w: 1800, h: 1199, alt: 'Breaded shrimp tails and spring rolls on a slate board', altHr: 'Panirani repovi kozica i proljetne rolice na kamenoj ploči' },
   { name: 'f16', ...P, alt: 'Two pizzas seen from above, vegetable and cheese', altHr: 'Dvije pizze odozgo, povrtna i sirna' },
   { name: 'f18', ...L, alt: 'Grilled chicken fillet with grilled Mediterranean vegetables', altHr: 'Pileći file sa žara s mediteranskim povrćem sa žara' },
   { name: 'f19', ...L, alt: 'Beef burger with a fried egg, lettuce and tomato', altHr: 'Burger od junetine s jajem, zelenom salatom i rajčicom' },
@@ -712,7 +693,6 @@ function Visit({ t }) {
               <span className="label">{t.visit.atTable}</span>
               <div className="visit-tags">
                 <span className="visit-tag">{t.visit.tagTakeaway}</span>
-                <span className="visit-tag">{t.visit.tagDelivery}</span>
                 <span className="visit-tag">{t.visit.tagVegetarian}</span>
                 <span className="visit-tag">{t.visit.tagWalkIn}</span>
               </div>

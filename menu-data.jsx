@@ -13,12 +13,11 @@ const MENU_DATA = [
       { hr: 'Omlet', en: 'Omelette', desc: 'Three eggs, salad · Extras 0.90 each: ham, cheese, mushroom, bacon, vegetables', descHr: 'Tri jaja, salata · Dodaci 0,90 svaki: šunka, sir, gljive, panceta, povrće', price: '7.90' },
       { hr: 'Sendvić u lepinji', en: 'Sandwich in a Bun', desc: 'Homemade bun, cream, cheese, ham, tomato, green salad', descHr: 'Domaća lepinja, vrhnje, sir, šunka, rajčica, zelena salata', price: '11.90' },
       { hr: 'Omlet u tortilji', en: 'Omelette in Tortilla', desc: 'Tortilla, two eggs, tomato, cheese, salad', descHr: 'Tortilja, dva jaja, rajčica, sir, salata', price: '8.90' },
-      { hr: 'Palačinke', en: 'Pancakes', desc: 'Two pancakes with marmalade or Nutella', descHr: 'Dvije palačinke s marmeladom ili Nutellom', price: '5.20' },
+      { hr: 'Palačinke', en: 'Pancakes', desc: 'Two pancakes with marmalade or chocolate', descHr: 'Dvije palačinke s marmeladom ili čokoladom', price: '5.20' },
       { hr: 'Dubrovački doručak', en: 'Dubrovnik Breakfast', desc: 'Homemade fritters, prosciutto, cheese, cream, tomato, olives, salad', descHr: 'Domaći uštipci, pršut, sir, kiselo vrhnje, rajčica, masline, salata', price: '12.90' },
       { hr: 'Fitness doručak', en: 'Fitness Breakfast', desc: 'Oat flakes, chia seeds, cream, strawberry puree', descHr: 'Zobene pahuljice, chia sjemenke, mileram, pire od jagode', price: '9.90' },
       { hr: 'Sub Gourmet doručak', en: 'Sub Gourmet Breakfast', desc: 'Two poached eggs, toast, mozzarella, salad', descHr: 'Dva poširana jaja, tost, mozzarella, salata', price: '12.90', signature: true },
       { hr: 'Kajgana', en: 'Scrambled Eggs', desc: 'Three eggs, cheese, cherry tomatoes, salad', descHr: 'Tri jaja, sir, cherry rajčica, salata', price: '9.90' },
-      { hr: 'Ponuda uz doručak (uz nadoplatu)', en: 'Additional Charge with Breakfast', desc: 'Coffee of your choice and fresh orange juice 0.30L', descHr: 'Kava po izboru i cijeđena naranča 0,30L', price: '5.10' },
     ],
   },
   {

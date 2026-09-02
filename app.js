@@ -84,11 +84,9 @@ const TRANSLATIONS = {
       h1Bot: ['Gourm', 'e', 't'],
       tag: 'Mediterranean flavors, Adriatic soul, where the coast meets the table, slowly, the way it should.',
       viewMenu: 'View Menu',
-      today: 'Today',
-      todayValue: 'Open until 9 PM',
-      reviewed: 'Reviewed',
-      reviewedValue: GOOGLE_REVIEWS + ' Google reviews',
-      perPerson: 'Per person',
+      hours: 'Hours',
+      hoursDaily: 'Every day · 09:00–21:00',
+      hoursBreakfast: 'Breakfast · 09:00–11:30',
       scroll: 'Scroll'
     },
     about: {
@@ -149,7 +147,6 @@ const TRANSLATIONS = {
       whatsapp: 'WhatsApp',
       atTable: 'At the Table',
       tagTakeaway: 'Takeaway',
-      tagDelivery: 'Delivery',
       tagVegetarian: 'Vegetarian options',
       tagWalkIn: 'Walk-ins welcome',
       perPerson: 'Per Person',
@@ -188,11 +185,9 @@ const TRANSLATIONS = {
       h1Bot: ['Gourm', 'e', 't'],
       tag: 'Mediteranski okusi, jadranska duša, gdje se obala susreće sa stolom, polako, onako kako treba.',
       viewMenu: 'Pogledajte meni',
-      today: 'Danas',
-      todayValue: 'Otvoreno do 21h',
-      reviewed: 'Ocjenjeno',
-      reviewedValue: GOOGLE_REVIEWS + ' Google recenzija',
-      perPerson: 'Po osobi',
+      hours: 'Radno vrijeme',
+      hoursDaily: 'Svaki dan · 09:00–21:00',
+      hoursBreakfast: 'Doručak · 09:00–11:30',
       scroll: 'Pomakni'
     },
     about: {
@@ -248,12 +243,11 @@ const TRANSLATIONS = {
       addressLocated: 'Restoran u trgovačkom centru Sub City, 1. kat',
       hours: 'Radno vrijeme',
       hoursValue: 'Otvoreno svaki dan · do 21h',
-      hoursSmall: 'Doručak posluženo 09:00 – 11:30',
+      hoursSmall: 'Doručak poslužujemo 09:00 – 11:30',
       phone: 'Telefon',
       whatsapp: 'WhatsApp',
       atTable: 'Za stolom',
       tagTakeaway: 'Hrana za van',
-      tagDelivery: 'Dostava',
       tagVegetarian: 'Vegetarijanske opcije',
       tagWalkIn: 'Dobrodošli i bez rezervacije',
       perPerson: 'Po osobi',
@@ -419,27 +413,13 @@ function Hero({
     className: "hero-meta-item"
   }, /*#__PURE__*/React.createElement("span", {
     className: "hero-meta-label"
-  }, t.hero.today), /*#__PURE__*/React.createElement("span", {
+  }, t.hero.hours), /*#__PURE__*/React.createElement("span", {
     className: "hero-meta-value"
   }, /*#__PURE__*/React.createElement("span", {
     className: "gold"
-  }, "\u25CF"), " ", t.hero.todayValue)), /*#__PURE__*/React.createElement("div", {
-    className: "hero-meta-item"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "hero-meta-label"
-  }, t.hero.reviewed), /*#__PURE__*/React.createElement("span", {
+  }, "\u25CF"), " ", t.hero.hoursDaily), /*#__PURE__*/React.createElement("span", {
     className: "hero-meta-value"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "gold"
-  }, "\u2605"), " ", GOOGLE_RATING, " ", /*#__PURE__*/React.createElement("span", {
-    className: "dot"
-  }, "\xB7"), " ", t.hero.reviewedValue)), /*#__PURE__*/React.createElement("div", {
-    className: "hero-meta-item"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "hero-meta-label"
-  }, t.hero.perPerson), /*#__PURE__*/React.createElement("span", {
-    className: "hero-meta-value"
-  }, "10\u20AC \u2013 15\u20AC"))))), /*#__PURE__*/React.createElement("div", {
+  }, t.hero.hoursBreakfast))))), /*#__PURE__*/React.createElement("div", {
     className: "hero-corner mono"
   }, /*#__PURE__*/React.createElement("span", null, t.hero.scroll), /*#__PURE__*/React.createElement("span", {
     className: "scroll-line"
@@ -561,11 +541,7 @@ function MenuSection({
     className: "menu-item-desc"
   }, itemDesc(item))), /*#__PURE__*/React.createElement("div", {
     className: "menu-item-price"
-  }, item.price, "\u20AC")))), /*#__PURE__*/React.createElement("div", {
-    className: "menu-callout reveal"
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    className: "serif"
-  }, t.menu.calloutA, /*#__PURE__*/React.createElement("em", null, t.menu.calloutEm)), /*#__PURE__*/React.createElement("p", null, t.menu.calloutBody)))));
+  }, item.price, "\u20AC"))))));
 }
 
 // Gallery: 26 photos total. First 9 shown by default; rest revealed by "Show all photos".
@@ -609,12 +585,14 @@ const GALLERY = [
   altHr: 'Omlet poslužen sa zelenom salatom i rajčicom'
 }, {
   name: 'f10',
-  ...L,
+  w: 1800,
+  h: 1199,
   alt: 'Tagliatelle in truffle cream sauce with warm flat bread',
   altHr: 'Tagliatelle u kremastom umaku od tartufa s toplom lepinjom'
 }, {
   name: 'f15',
-  ...P,
+  w: 1199,
+  h: 1800,
   alt: 'Spaghetti with tomato sauce twirled on a fork',
   altHr: 'Špageti s umakom od rajčice namotani na vilicu'
 }, {
@@ -676,12 +654,14 @@ const GALLERY = [
   altHr: 'Tagliatelle s gljivama i kremastim umakom od tartufa'
 }, {
   name: 'f13',
-  ...L,
+  w: 1799,
+  h: 1200,
   alt: 'Spring rolls with sweet chilli dip',
   altHr: 'Proljetne rolice s umakom sweet chilli'
 }, {
   name: 'f14',
-  ...L,
+  w: 1800,
+  h: 1199,
   alt: 'Breaded shrimp tails and spring rolls on a slate board',
   altHr: 'Panirani repovi kozica i proljetne rolice na kamenoj ploči'
 }, {
@@ -970,8 +950,6 @@ function Visit({
   }, /*#__PURE__*/React.createElement("span", {
     className: "visit-tag"
   }, t.visit.tagTakeaway), /*#__PURE__*/React.createElement("span", {
-    className: "visit-tag"
-  }, t.visit.tagDelivery), /*#__PURE__*/React.createElement("span", {
     className: "visit-tag"
   }, t.visit.tagVegetarian), /*#__PURE__*/React.createElement("span", {
     className: "visit-tag"

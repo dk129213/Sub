@@ -34,8 +34,8 @@ const MENU_DATA = [{
   }, {
     hr: 'Palačinke',
     en: 'Pancakes',
-    desc: 'Two pancakes with marmalade or Nutella',
-    descHr: 'Dvije palačinke s marmeladom ili Nutellom',
+    desc: 'Two pancakes with marmalade or chocolate',
+    descHr: 'Dvije palačinke s marmeladom ili čokoladom',
     price: '5.20'
   }, {
     hr: 'Dubrovački doručak',
@@ -62,12 +62,6 @@ const MENU_DATA = [{
     desc: 'Three eggs, cheese, cherry tomatoes, salad',
     descHr: 'Tri jaja, sir, cherry rajčica, salata',
     price: '9.90'
-  }, {
-    hr: 'Ponuda uz doručak (uz nadoplatu)',
-    en: 'Additional Charge with Breakfast',
-    desc: 'Coffee of your choice and fresh orange juice 0.30L',
-    descHr: 'Kava po izboru i cijeđena naranča 0,30L',
-    price: '5.10'
   }]
 }, {
   id: 'appetizers',
