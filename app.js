@@ -6,6 +6,12 @@ const {
 // Runs in the browser and, at build time, under Node for prerendering.
 const SITE = typeof window !== 'undefined' ? window : globalThis;
 const MENU = SITE.MENU_DATA;
+// Anchor-price helpers live with the menu data so the page and the exported
+// price list can never disagree about what the anchor is. Renamed on the way
+// in: menu-data.js declares these at global scope and both files are classic
+// scripts, so reusing the names is a redeclaration that kills the whole file.
+const getAnchor = SITE.anchorOf;
+const formatAnchorDate = SITE.anchorDateLabel;
 
 /*
  * Language comes from the URL, not from localStorage: "/" is Croatian and
@@ -34,6 +40,7 @@ const FACEBOOK_URL = 'https://www.facebook.com/subcaffegourmet';
 const SOCIAL_HANDLE = '@subcaffegourmet';
 const EMAIL = 'info@subgourmet.hr';
 const CAREERS_URL = 'careers/'; // folder + index.html, so the URL has no .html
+const CJENIK_URL = 'cjenik/'; // machine-readable price list + archive
 
 // Google Maps listing, checked 2026-08-31. Note the other platforms differ a
 // lot (Facebook 4.5/16, TripAdvisor ~3.2/29), so the source is stated in the
@@ -101,6 +108,9 @@ const TRANSLATIONS = {
       visit: 'Visit',
       join: 'Join the Team'
     },
+    priceList: 'Price list (CSV)',
+    anchorLabel: 'Price on',
+    priceListNote: 'Each price is shown with the regular price that applied on the stated reference date.',
     hero: {
       eyebrow: 'Srebreno · Dubrovnik Riviera',
       h1Top: 'Sub',
@@ -198,6 +208,9 @@ const TRANSLATIONS = {
       visit: 'Posjetite nas',
       join: 'Postani dio tima'
     },
+    priceList: 'Cjenik (CSV)',
+    anchorLabel: 'Cijena na',
+    priceListNote: 'Uz svaku je cijenu navedena i redovna cijena na navedeni datum.',
     hero: {
       eyebrow: 'Srebreno · Dubrovačka rivijera',
       h1Top: 'Sub',
@@ -466,6 +479,22 @@ function About({
     className: "lbl"
   }, t.about.stat2Lbl)))))));
 }
+
+/*
+ * The regular price that applied on the reference day, shown beside the current
+ * price as NN 101/2026 requires. The ministry asks for the bare date as the
+ * label, so no "sidrena cijena" wording. It is shown even when it matches the
+ * current price, which is the case for every item here today.
+ */
+function AnchorPrice({
+  item,
+  inline
+}) {
+  const a = getAnchor(item);
+  return /*#__PURE__*/React.createElement("span", {
+    className: 'anchor-price' + (inline ? ' inline' : '')
+  }, TRANSLATIONS[LANG].anchorLabel, " ", formatAnchorDate(a.date, LANG), ": ", a.price, "\u20AC");
+}
 function MenuSection({
   lang,
   t
@@ -522,9 +551,26 @@ function MenuSection({
     className: "menu-item-name"
   }, item[primaryLang]), item.desc && /*#__PURE__*/React.createElement("div", {
     className: "menu-item-desc"
-  }, itemDesc(item))), /*#__PURE__*/React.createElement("div", {
+  }, itemDesc(item)), item.extras && /*#__PURE__*/React.createElement("ul", {
+    className: "menu-item-extras"
+  }, item.extras.map((ex, k) => /*#__PURE__*/React.createElement("li", {
+    key: k
+  }, ex[primaryLang], " ", /*#__PURE__*/React.createElement("span", {
+    className: "extra-price"
+  }, ex.price, "\u20AC"), /*#__PURE__*/React.createElement(AnchorPrice, {
+    item: ex,
+    inline: true
+  }))))), /*#__PURE__*/React.createElement("div", {
     className: "menu-item-price"
-  }, item.price, "\u20AC"))))));
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "price-now"
+  }, item.price, "\u20AC"), /*#__PURE__*/React.createElement(AnchorPrice, {
+    item: item
+  }))))), /*#__PURE__*/React.createElement("p", {
+    className: "menu-pricenote"
+  }, t.priceListNote, " ", /*#__PURE__*/React.createElement("a", {
+    href: CJENIK_URL
+  }, t.priceList))));
 }
 
 // Gallery: 26 photos total. First 9 shown by default; rest revealed by "Show all photos".
@@ -1000,7 +1046,9 @@ function Footer({
     href: "#visit"
   }, t.footer.lFindUs)), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
     href: CAREERS_URL
-  }, t.nav.join)))), /*#__PURE__*/React.createElement("div", {
+  }, t.nav.join)), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: CJENIK_URL
+  }, t.priceList)))), /*#__PURE__*/React.createElement("div", {
     className: "foot-col"
   }, /*#__PURE__*/React.createElement("h5", null, t.footer.contact), /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
     href: "tel:+38520642111"

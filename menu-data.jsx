@@ -1,6 +1,20 @@
 // Sub Gourmet menu, transcribed from the restaurant's own menu boards published
 // at maison.hr (/sgmenu/ and /breakfast/), checked 2026-08-31. Prices in euros.
 // Keep this file in step with the printed menu.
+//
+// ANCHOR PRICES (dodatna / "sidrena" cijena) - NN 101/2026, in force 1.10.2026.
+// Every consumer price must be shown alongside the regular price that applied on
+// the reference day. The anchor is a frozen historical fact: it is set once and
+// must NEVER be updated when the current price changes.
+//
+//   - anchorPrice defaults to price, because no price has moved since the
+//     reference date. THE MOMENT YOU CHANGE A PRICE, set anchorPrice explicitly
+//     on that item to what it was on the reference date, or the anchor silently
+//     follows the new price and the listing stops being lawful.
+//   - anchorDate defaults to ANCHOR_DATE. Items first listed after that day
+//     carry their own first-listed price and date, so set both on those.
+const ANCHOR_DATE = '2026-09-10';
+
 const MENU_DATA = [
   {
     id: 'breakfast',
@@ -10,7 +24,14 @@ const MENU_DATA = [
     hoursHr: '09:00 – 11:30 · Ponedjeljak do nedjelje',
     items: [
       { hr: 'Slavonski doručak', en: 'Slavonic Breakfast', desc: 'Two sunny side up eggs, sausage, salad, mustard', descHr: 'Dva jaja na oko, kobasica, panceta, salata, senf', price: '11.90' },
-      { hr: 'Omlet', en: 'Omelette', desc: 'Three eggs, salad · Extras 0.90 each: ham, cheese, mushroom, bacon, vegetables', descHr: 'Tri jaja, salata · Dodaci 0,90 svaki: šunka, sir, gljive, panceta, povrće', price: '7.90' },
+      { hr: 'Omlet', en: 'Omelette', desc: 'Three eggs, salad', descHr: 'Tri jaja, salata', price: '7.90',
+        extras: [
+          { hr: 'Šunka', en: 'Ham', price: '0.90' },
+          { hr: 'Sir', en: 'Cheese', price: '0.90' },
+          { hr: 'Gljive', en: 'Mushroom', price: '0.90' },
+          { hr: 'Panceta', en: 'Bacon', price: '0.90' },
+          { hr: 'Povrće', en: 'Vegetables', price: '0.90' },
+        ] },
       { hr: 'Sendvić u lepinji', en: 'Sandwich in a Bun', desc: 'Homemade bun, cream, cheese, ham, tomato, green salad', descHr: 'Domaća lepinja, vrhnje, sir, šunka, rajčica, zelena salata', price: '11.90' },
       { hr: 'Omlet u tortilji', en: 'Omelette in Tortilla', desc: 'Tortilla, two eggs, tomato, cheese, salad', descHr: 'Tortilja, dva jaja, rajčica, sir, salata', price: '8.90' },
       { hr: 'Palačinke', en: 'Pancakes', desc: 'Two pancakes with marmalade or chocolate', descHr: 'Dvije palačinke s marmeladom ili čokoladom', price: '5.20' },
@@ -192,5 +213,35 @@ const MENU_DATA = [
   },
 ];
 
+/** The anchor as displayed and exported. Falls back to the unchanged price. */
+function anchorOf(item) {
+  return {
+    price: item.anchorPrice || item.price,
+    date: item.anchorDate || ANCHOR_DATE,
+  };
+}
+
+/*
+ * The ministry asks the label to carry the reference date and nothing else -
+ * no "sidrena" or "dodatna cijena" wording.
+ *
+ * Croatian keeps the numeric form (10.9.2026.). English spells the month out,
+ * because 10.9.2026 reads as 9 October to anyone used to month-first dates,
+ * and an ambiguous reference date defeats the purpose of showing one.
+ */
+const EN_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+function anchorDateLabel(iso, lang) {
+  const [y, m, d] = iso.split('-');
+  return lang === 'en'
+    ? `${Number(d)} ${EN_MONTHS[Number(m) - 1]} ${y}`
+    : `${Number(d)}.${Number(m)}.${y}.`;
+}
+
 // Also read under Node when tools/prerender.js renders the pages.
-(typeof window !== 'undefined' ? window : globalThis).MENU_DATA = MENU_DATA;
+const GLOBAL = (typeof window !== 'undefined' ? window : globalThis);
+GLOBAL.MENU_DATA = MENU_DATA;
+GLOBAL.ANCHOR_DATE = ANCHOR_DATE;
+GLOBAL.anchorOf = anchorOf;
+GLOBAL.anchorDateLabel = anchorDateLabel;

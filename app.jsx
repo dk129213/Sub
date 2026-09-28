@@ -3,6 +3,12 @@ const { useState, useEffect } = React;
 // Runs in the browser and, at build time, under Node for prerendering.
 const SITE = (typeof window !== 'undefined' ? window : globalThis);
 const MENU = SITE.MENU_DATA;
+// Anchor-price helpers live with the menu data so the page and the exported
+// price list can never disagree about what the anchor is. Renamed on the way
+// in: menu-data.js declares these at global scope and both files are classic
+// scripts, so reusing the names is a redeclaration that kills the whole file.
+const getAnchor = SITE.anchorOf;
+const formatAnchorDate = SITE.anchorDateLabel;
 
 /*
  * Language comes from the URL, not from localStorage: "/" is Croatian and
@@ -26,6 +32,7 @@ const FACEBOOK_URL = 'https://www.facebook.com/subcaffegourmet';
 const SOCIAL_HANDLE = '@subcaffegourmet';
 const EMAIL = 'info@subgourmet.hr';
 const CAREERS_URL = 'careers/';   // folder + index.html, so the URL has no .html
+const CJENIK_URL = 'cjenik/';     // machine-readable price list + archive
 
 // Google Maps listing, checked 2026-08-31. Note the other platforms differ a
 // lot (Facebook 4.5/16, TripAdvisor ~3.2/29), so the source is stated in the
@@ -75,6 +82,9 @@ const TRANSLATIONS = {
     pageTitle: 'Sub Gourmet — Restaurant in Srebreno, Dubrovnik Riviera',
     pageDesc: 'All-day restaurant in Srebreno, Zupa Dubrovacka. Breakfast until 11:30, stone-baked pizza, pasta, burgers, grilled squid and cevapi. Open daily until 21:00.',
     nav: { about: 'About', menu: 'Menu', gallery: 'Gallery', visit: 'Visit', join: 'Join the Team' },
+    priceList: 'Price list (CSV)',
+    anchorLabel: 'Price on',
+    priceListNote: 'Each price is shown with the regular price that applied on the stated reference date.',
     hero: {
       eyebrow: 'Srebreno · Dubrovnik Riviera',
       h1Top: 'Sub',
@@ -161,6 +171,9 @@ const TRANSLATIONS = {
     pageTitle: 'Sub Gourmet — Restoran u Srebrenom, Župa Dubrovačka',
     pageDesc: 'Restoran u Srebrenom na Dubrovačkoj rivijeri. Doručak do 11:30, pizza iz peći, tjestenine, burgeri, lignje sa žara i ćevapi. Otvoreno svaki dan do 21:00.',
     nav: { about: 'O nama', menu: 'Meni', gallery: 'Galerija', visit: 'Posjetite nas', join: 'Postani dio tima' },
+    priceList: 'Cjenik (CSV)',
+    anchorLabel: 'Cijena na',
+    priceListNote: 'Uz svaku je cijenu navedena i redovna cijena na navedeni datum.',
     hero: {
       eyebrow: 'Srebreno · Dubrovačka rivijera',
       h1Top: 'Sub',
@@ -376,6 +389,21 @@ function About({ t }) {
   );
 }
 
+/*
+ * The regular price that applied on the reference day, shown beside the current
+ * price as NN 101/2026 requires. The ministry asks for the bare date as the
+ * label, so no "sidrena cijena" wording. It is shown even when it matches the
+ * current price, which is the case for every item here today.
+ */
+function AnchorPrice({ item, inline }) {
+  const a = getAnchor(item);
+  return (
+    <span className={'anchor-price' + (inline ? ' inline' : '')}>
+      {TRANSLATIONS[LANG].anchorLabel} {formatAnchorDate(a.date, LANG)}: {a.price}€
+    </span>
+  );
+}
+
 function MenuSection({ lang, t }) {
   const [active, setActive] = useState('breakfast');
   const current = MENU.find(m => m.id === active);
@@ -428,11 +456,29 @@ function MenuSection({ lang, t }) {
                   {item[primaryLang]}
                 </div>
                 {item.desc && <div className="menu-item-desc">{itemDesc(item)}</div>}
+                {item.extras && (
+                  <ul className="menu-item-extras">
+                    {item.extras.map((ex, k) => (
+                      <li key={k}>
+                        {ex[primaryLang]} <span className="extra-price">{ex.price}€</span>
+                        <AnchorPrice item={ex} inline />
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
-              <div className="menu-item-price">{item.price}€</div>
+              <div className="menu-item-price">
+                <span className="price-now">{item.price}€</span>
+                <AnchorPrice item={item} />
+              </div>
             </div>
           ))}
         </div>
+
+        {/* The published price list has to be reachable from where prices are shown. */}
+        <p className="menu-pricenote">
+          {t.priceListNote} <a href={CJENIK_URL}>{t.priceList}</a>
+        </p>
 
       </div>
     </section>
@@ -739,6 +785,7 @@ function Footer({ t }) {
               <li><a href="#gallery">{t.footer.lGallery}</a></li>
               <li><a href="#visit">{t.footer.lFindUs}</a></li>
               <li><a href={CAREERS_URL}>{t.nav.join}</a></li>
+              <li><a href={CJENIK_URL}>{t.priceList}</a></li>
             </ul>
           </div>
           <div className="foot-col">
